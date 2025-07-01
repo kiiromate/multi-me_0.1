@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
@@ -18,17 +18,39 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-[var(--background-color)]/80 border-b border-[var(--subtle-border-color)]">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "backdrop-blur-md bg-[var(--background-color)]/80 shadow-sm border-b border-[var(--subtle-border-color)]"
+          : "backdrop-blur-sm bg-[var(--background-color)]/60"
+      }`}
+    >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <KazeLogo size={32} />
+              <KazeLogo animated size={32} />
               <span className="text-xl font-bold text-[var(--text-color)] hidden sm:block">KAZE KEZA</span>
             </Link>
           </div>

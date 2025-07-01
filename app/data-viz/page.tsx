@@ -122,12 +122,12 @@ export default function DataVisualizationPage() {
     <div className="relative z-10 min-h-screen">
       {/* Header */}
       <motion.section
-        className="pt-20 pb-16 px-6 content-blur"
+        className="pt-20 pb-16 px-6"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center glass-card p-8 bg-[var(--background-color)]/80 backdrop-blur-md">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Interactive Data
             <br />
@@ -242,14 +242,14 @@ export default function DataVisualizationPage() {
 
       {/* Features Section */}
       <motion.section
-        className="py-16 px-6 content-blur"
+        className="py-16 px-6"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.2 }}
         variants={staggerContainer}
       >
         <div className="max-w-6xl mx-auto">
-          <motion.div className="text-center mb-16" variants={fadeInUp}>
+          <motion.div className="text-center mb-16 glass-card p-8 bg-[var(--background-color)]/80 backdrop-blur-md" variants={fadeInUp}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for Real-World Impact</h2>
             <p className="text-lg text-[var(--secondary-text-color)] max-w-3xl mx-auto">
               Every visualization is crafted with purpose, accessibility, and user experience at its core. These aren't
@@ -298,11 +298,19 @@ export default function DataVisualizationPage() {
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="glass-card p-6 text-center group"
+                className="glass-card p-6 text-center group bg-[var(--background-color)]/80 backdrop-blur-md"
                 variants={fadeInUp}
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <feature.icon className="w-12 h-12 mx-auto mb-4 text-[var(--accent-honey)] group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-[var(--secondary-text-color)] leading-relaxed">{feature.description}</p>\
+                <p className="text-[var(--secondary-text-color)] leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+    </div>
+  )
+}

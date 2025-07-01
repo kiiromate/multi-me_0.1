@@ -8,6 +8,15 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['images.pexels.com', 'via.placeholder.com'],
+  },
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
+  },
+  // Performance optimizations
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 }
 

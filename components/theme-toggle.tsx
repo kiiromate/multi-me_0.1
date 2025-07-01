@@ -2,15 +2,10 @@
 
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/theme-provider" // ← adjust this path if your ThemeProvider lives elsewhere
+import { useTheme } from "@/lib/theme-provider"
 
 /**
  * A small round button that toggles the UI theme.
- *
- * Usage:
- *   import ThemeToggle from "@/components/theme-toggle"
- *   …
- *   <ThemeToggle />
  */
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -39,8 +34,4 @@ export function ThemeToggle() {
   )
 }
 
-/* ———————————————————————————————————————————
-   Provide a default export so it can be imported as:
-     import ThemeToggle from "@/components/theme-toggle"
-   ——————————————————————————————————————————— */
 export default ThemeToggle

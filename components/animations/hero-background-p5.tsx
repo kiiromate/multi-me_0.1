@@ -1,11 +1,13 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useTheme } from "@/lib/theme-provider"
 
 export default function HeroBackgroundP5() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef<number>()
-  const tRef = useRef(400) // Your 't' variable from the sketch
+  const tRef = useRef(400)
+  const { resolvedTheme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -14,7 +16,7 @@ export default function HeroBackgroundP5() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    const frameRate = 24 // Reduced frame rate as specified
+    const frameRate = 30
     let lastTime = 0
 
     const resizeCanvas = () => {
@@ -26,39 +28,34 @@ export default function HeroBackgroundP5() {
     }
 
     const draw = (currentTime: number) => {
-      // Throttle to desired frame rate
       if (currentTime - lastTime < 1000 / frameRate) {
         animationRef.current = requestAnimationFrame(draw)
         return
       }
       lastTime = currentTime
 
-      // Black background for high contrast (as specified in your sketch)
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
+      const isNightMode = resolvedTheme === "dark"
+      
+      // Background with subtle transparency for layering
+      ctx.fillStyle = isNightMode ? "rgba(18, 18, 18, 0.1)" : "rgba(243, 244, 246, 0.1)"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // White stroke, semi-transparent (matching your sketch)
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.4)"
-      ctx.lineWidth = 1
+      // Stroke color based on theme
+      ctx.strokeStyle = isNightMode ? "rgba(255, 255, 255, 0.4)" : "rgba(17, 24, 39, 0.4)"
+      ctx.lineWidth = 1.5
       ctx.lineCap = "round"
 
-      // Center the drawing
       ctx.save()
       ctx.translate(canvas.width / 2, canvas.height / 2)
 
-      const n = 50 // From your sketch
+      const n = 50
       const maxRadius = Math.min(canvas.width, canvas.height) * 0.8
 
       for (let k = 0; k < n; k++) {
         ctx.save()
-        // Add slight rotation to whole pattern over time
         ctx.rotate(((Math.PI * 2) / n) * k + tRef.current * 0.001)
 
-        // Loop to create circles along each arm
         for (let i = 0; i < maxRadius; i += maxRadius / 16) {
-          // The original: circle(i / 2 + t, 0, i)
-          // i/2 + t controls distance from center
-          // i controls the size of circles
           const centerX = i / 2 + tRef.current * (canvas.width / 800)
           const centerY = 0
           const radius = i * 0.3
@@ -72,10 +69,7 @@ export default function HeroBackgroundP5() {
 
       ctx.restore()
 
-      // Update t value (slower animation as specified)
       tRef.current -= 0.5
-
-      // Reset t for continuous animation
       if (tRef.current < -maxRadius * 1.5) {
         tRef.current = canvas.width
       }
@@ -98,12 +92,12 @@ export default function HeroBackgroundP5() {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [])
+  }, [resolvedTheme])
 
   return (
     <canvas
       ref={canvasRef}
-      className="canvas-hero"
+      className="absolute inset-0 w-full h-full -z-5 pointer-events-none"
       style={{
         position: "absolute",
         top: 0,

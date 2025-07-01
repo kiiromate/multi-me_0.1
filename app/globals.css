@@ -71,19 +71,6 @@ body {
   color: var(--background-color);
 }
 
-/* Enhanced content blur overlay styles for better readability */
-.content-blur {
-  backdrop-filter: blur(var(--blur-intensity-main));
-  background: rgba(var(--content-bg-color-rgb), 0.15);
-  border: 1px solid rgba(var(--content-bg-color-rgb), 0.2);
-}
-
-.overlay-blur {
-  backdrop-filter: blur(var(--blur-intensity-overlay));
-  background: rgba(var(--content-bg-color-rgb), 0.25);
-  border: 1px solid rgba(var(--content-bg-color-rgb), 0.3);
-}
-
 /* Accent button styles */
 .accent-button {
   background-color: var(--accent-honey);
@@ -94,6 +81,10 @@ body {
   font-weight: 600;
   transition: all 0.2s ease;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .accent-button:hover {
@@ -152,27 +143,6 @@ p + p {
   margin-top: 1.5rem;
 }
 
-/* Canvas positioning */
-.canvas-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -10;
-  pointer-events: none;
-}
-
-.canvas-hero {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -5;
-  pointer-events: none;
-}
-
 /* Enhanced glass morphism effects with better contrast */
 .glass-card {
   backdrop-filter: blur(var(--blur-intensity-main));
@@ -181,6 +151,7 @@ p + p {
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .glass-card::before {
@@ -193,16 +164,9 @@ p + p {
 }
 
 .glass-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border-color: var(--accent-honey);
   background: rgba(var(--content-bg-color-rgb), 0.25);
-}
-
-/* Mobile navigation styles */
-.mobile-nav {
-  backdrop-filter: blur(var(--blur-intensity-overlay));
-  background: rgba(var(--content-bg-color-rgb), 0.95);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Text shadows for readability over dynamic backgrounds */
@@ -273,26 +237,6 @@ p + p {
     background: rgba(var(--content-bg-color-rgb), 0.4);
     border: 2px solid var(--subtle-border-color);
   }
-}
-
-/* Enhanced readability for content over animated backgrounds */
-.content-overlay {
-  position: relative;
-  z-index: 10;
-}
-
-.content-overlay::before {
-  content: "";
-  position: absolute;
-  inset: -2rem;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(var(--content-bg-color-rgb), 0.3) 0%,
-    rgba(var(--content-bg-color-rgb), 0.1) 70%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: -1;
 }
 
 /* Performance optimizations */
