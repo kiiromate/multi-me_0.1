@@ -43,6 +43,7 @@ export function generateSEO(props: SEOProps = {}): Metadata {
   const seo = { ...defaultSEO, ...props }
 
   return {
+    metadataBase: new URL(seo.url),
     title: {
       default: seo.title,
       template: "%s | KAZE KEZA",
