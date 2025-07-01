@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Your specific color scheme */
+  --background-color: #f3f4f6;
+  --text-color: #111827;
+  --secondary-text-color: #4b5563;
+  --accent-honey: #eba937;
+  --subtle-border-color: #e5e7eb;
+  --content-bg-color-rgb: 243, 244, 246;
+  --blur-intensity-main: 10px;
+  --blur-intensity-overlay: 15px;
+
+  /* Font variables */
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-jetbrains: "JetBrains Mono", "SF Mono", Monaco, "Cascadia Code", monospace;
+}
+
+[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #e5e7eb;
+  --secondary-text-color: #9ca3af;
+  --subtle-border-color: #374151;
+  --content-bg-color-rgb: 18, 18, 18;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--accent-honey);
+  color: var(--background-color);
+}
+
+/* Enhanced content blur overlay styles for better readability */
+.content-blur {
+  backdrop-filter: blur(var(--blur-intensity-main));
+  background: rgba(var(--content-bg-color-rgb), 0.15);
+  border: 1px solid rgba(var(--content-bg-color-rgb), 0.2);
+}
+
+.overlay-blur {
+  backdrop-filter: blur(var(--blur-intensity-overlay));
+  background: rgba(var(--content-bg-color-rgb), 0.25);
+  border: 1px solid rgba(var(--content-bg-color-rgb), 0.3);
+}
+
+/* Accent button styles */
+.accent-button {
+  background-color: var(--accent-honey);
+  color: var(--background-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.accent-button:hover {
+  filter: brightness(90%);
+  transform: translateY(-1px);
+}
+
+.accent-button:active {
+  transform: translateY(0);
+}
+
+/* Accent text */
+.accent-text {
+  color: var(--accent-honey);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent-honey);
+  outline-offset: 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(235, 169, 55, 0.1);
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Typography utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Generous paragraph spacing */
+p + p {
+  margin-top: 1.5rem;
+}
+
+/* Canvas positioning */
+.canvas-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.canvas-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  pointer-events: none;
+}
+
+/* Enhanced glass morphism effects with better contrast */
+.glass-card {
+  backdrop-filter: blur(var(--blur-intensity-main));
+  background: rgba(var(--content-bg-color-rgb), 0.2);
+  border: 1px solid rgba(var(--content-bg-color-rgb), 0.3);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--content-bg-color-rgb), 0.05);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--accent-honey);
+  background: rgba(var(--content-bg-color-rgb), 0.25);
+}
+
+/* Mobile navigation styles */
+.mobile-nav {
+  backdrop-filter: blur(var(--blur-intensity-overlay));
+  background: rgba(var(--content-bg-color-rgb), 0.95);
+}
+
+/* Text shadows for readability over dynamic backgrounds */
+.text-shadow-bg {
+  text-shadow: 2px 2px 4px rgba(var(--content-bg-color-rgb), 0.8);
+}
+
+.text-shadow-subtle {
+  text-shadow: 1px 1px 2px rgba(var(--content-bg-color-rgb), 0.6);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .mobile-nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --text-color: #000000;
+    --secondary-text-color: #333333;
+    --background-color: #ffffff;
+    --subtle-border-color: #666666;
+  }
+
+  [data-theme="dark"] {
+    --text-color: #ffffff;
+    --secondary-text-color: #cccccc;
+    --background-color: #000000;
+    --subtle-border-color: #999999;
+  }
+
+  .glass-card {
+    background: rgba(var(--content-bg-color-rgb), 0.4);
+    border: 2px solid var(--subtle-border-color);
+  }
+}
+
+/* Enhanced readability for content over animated backgrounds */
+.content-overlay {
+  position: relative;
+  z-index: 10;
+}
+
+.content-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -2rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--content-bg-color-rgb), 0.3) 0%,
+    rgba(var(--content-bg-color-rgb), 0.1) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Smooth scrolling for better UX */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
