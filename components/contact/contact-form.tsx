@@ -11,8 +11,6 @@ interface FormData {
   email: string
   company: string
   projectType: string
-  budget: string
-  timeline: string
   message: string
 }
 
@@ -22,8 +20,6 @@ export function ContactForm() {
     email: "",
     company: "",
     projectType: "",
-    budget: "",
-    timeline: "",
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,8 +42,6 @@ export function ContactForm() {
         email: "",
         company: "",
         projectType: "",
-        budget: "",
-        timeline: "",
         message: "",
       })
       setSubmitStatus("idle")
@@ -114,84 +108,41 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium mb-2">
-            Company/Organization
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-            placeholder="Your company name"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="projectType" className="block text-sm font-medium mb-2">
-            Project Type *
-          </label>
-          <select
-            id="projectType"
-            name="projectType"
-            required
-            value={formData.projectType}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-          >
-            <option value="">Select project type</option>
-            <option value="web-development">Web Development</option>
-            <option value="data-visualization">Data Visualization</option>
-            <option value="design-system">Design System</option>
-            <option value="consulting">Consulting</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+      <div>
+        <label htmlFor="company" className="block text-sm font-medium mb-2">
+          Company/Organization
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
+          placeholder="Your company name (optional)"
+        />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="budget" className="block text-sm font-medium mb-2">
-            Budget Range
-          </label>
-          <select
-            id="budget"
-            name="budget"
-            value={formData.budget}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-          >
-            <option value="">Select budget range</option>
-            <option value="under-5k">Under $5,000</option>
-            <option value="5k-15k">$5,000 - $15,000</option>
-            <option value="15k-50k">$15,000 - $50,000</option>
-            <option value="50k-plus">$50,000+</option>
-            <option value="discuss">Let's discuss</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="timeline" className="block text-sm font-medium mb-2">
-            Timeline
-          </label>
-          <select
-            id="timeline"
-            name="timeline"
-            value={formData.timeline}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-          >
-            <option value="">Select timeline</option>
-            <option value="asap">ASAP</option>
-            <option value="1-month">Within 1 month</option>
-            <option value="3-months">Within 3 months</option>
-            <option value="6-months">Within 6 months</option>
-            <option value="flexible">Flexible</option>
-          </select>
-        </div>
+      <div>
+        <label htmlFor="projectType" className="block text-sm font-medium mb-2">
+          What can I help you with? *
+        </label>
+        <select
+          id="projectType"
+          name="projectType"
+          required
+          value={formData.projectType}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
+        >
+          <option value="">Select a topic</option>
+          <option value="web-development">Web Development</option>
+          <option value="data-visualization">Data Visualization</option>
+          <option value="design-system">Design System</option>
+          <option value="consulting">Consulting</option>
+          <option value="collaboration">Collaboration</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
       <div>
