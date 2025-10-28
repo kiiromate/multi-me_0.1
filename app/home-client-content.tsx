@@ -1,26 +1,26 @@
 "use client"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowRight, Download } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import GlassCard from "@/components/ui/glass-card"
 import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
 
-// Sample data - replace with real data
+// TODO: Replace with real data from Sanity CMS
 const featuredProjects = [
   {
-    title: "Data Visualization Dashboard",
-    description: "Interactive dashboard for analyzing complex datasets with real-time updates and beautiful charts.",
+    title: "[PROJECT TITLE 1]",
+    description: "[Add your project description here - what problem did it solve? What technologies did you use?]",
     image: "/placeholder.svg?height=300&width=500",
-    tags: ["React", "D3.js", "TypeScript", "Node.js"],
+    tags: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
   },
   {
-    title: "AI-Powered Analytics Tool",
-    description: "Machine learning application that provides insights and predictions from business data.",
+    title: "[PROJECT TITLE 2]",
+    description: "[Add your project description here - what problem did it solve? What technologies did you use?]",
     image: "/placeholder.svg?height=300&width=500",
-    tags: ["Python", "TensorFlow", "FastAPI", "React"],
+    tags: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com",
   },
@@ -28,24 +28,22 @@ const featuredProjects = [
 
 const recentPosts = [
   {
-    title: "The Future of Data Storytelling",
-    excerpt:
-      "Exploring how interactive visualizations are changing the way we communicate insights and drive decision-making in modern organizations.",
-    slug: "future-of-data-storytelling",
+    title: "[BLOG POST TITLE 1]",
+    excerpt: "[Add a brief excerpt or description of your blog post here - what's it about?]",
+    slug: "blog-post-1",
     publishedAt: "2024-01-15",
-    readTime: "8 min read",
+    readTime: "5 min read",
     mainImage: "/placeholder.svg?height=200&width=400",
-    tags: ["Data Viz", "Storytelling", "Design"],
+    tags: ["[Tag 1]", "[Tag 2]"],
   },
   {
-    title: "Building Sustainable Tech Solutions",
-    excerpt:
-      "How technology can be leveraged to create positive environmental impact while maintaining business growth and innovation.",
-    slug: "sustainable-tech-solutions",
+    title: "[BLOG POST TITLE 2]",
+    excerpt: "[Add a brief excerpt or description of your blog post here - what's it about?]",
+    slug: "blog-post-2",
     publishedAt: "2024-01-10",
-    readTime: "6 min read",
+    readTime: "7 min read",
     mainImage: "/placeholder.svg?height=200&width=400",
-    tags: ["Sustainability", "Technology", "Innovation"],
+    tags: ["[Tag 1]", "[Tag 2]"],
   },
 ]
 
@@ -61,11 +59,12 @@ export default function HomeClientContent() {
           className="space-y-4 sm:space-y-6"
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-color)] leading-tight">
-            Data Storyteller & <span className="text-[var(--accent-honey)]">Creative Technologist</span>
+            [YOUR NAME] <br />
+            <span className="text-[var(--accent-honey)]">[Your Professional Title]</span>
           </h1>
 
           <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed">
-            Transforming complex data into compelling narratives that drive innovation and inspire action.
+            [Your tagline or brief professional summary - who are you and what do you do?]
           </p>
         </motion.div>
 
@@ -87,8 +86,8 @@ export default function HomeClientContent() {
             href="/contact"
             className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
           >
-            <Download size={20} />
-            Download CV
+            Get In Touch
+            <ArrowRight size={20} />
           </Link>
         </motion.div>
       </section>
@@ -104,7 +103,7 @@ export default function HomeClientContent() {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">About Me</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            Passionate about the intersection of data, design, and technology
+            [A brief tagline about what makes you unique]
           </p>
         </motion.div>
 
@@ -117,11 +116,10 @@ export default function HomeClientContent() {
           <GlassCard className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-[var(--text-color)]">Eclectic by Design</h3>
+                <h3 className="text-2xl font-semibold text-[var(--text-color)]">[Section Heading]</h3>
                 <p className="text-[var(--secondary-text-color)] leading-relaxed">
-                  I blend technical expertise with creative vision to build solutions that are both functional and
-                  beautiful. From data visualization to full-stack development, I approach every project with curiosity
-                  and attention to detail.
+                  [Add your personal introduction here - what's your background? What are you passionate about?
+                  What drives your work? This is your chance to connect with visitors on a personal level.]
                 </p>
                 <Link
                   href="/about"
@@ -134,7 +132,9 @@ export default function HomeClientContent() {
               <div className="relative aspect-square rounded-lg overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-honey)]/20 to-transparent" />
                 <div className="w-full h-full bg-[var(--secondary-text-color)]/10 flex items-center justify-center">
-                  <span className="text-[var(--secondary-text-color)]">Profile Image</span>
+                  <span className="text-[var(--secondary-text-color)] text-sm">
+                    [Add Your Profile Photo]
+                  </span>
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function HomeClientContent() {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Featured Projects</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            A selection of my recent work in data visualization and web development
+            [Brief description of your work - what type of projects do you focus on?]
           </p>
         </motion.div>
 
@@ -191,7 +191,7 @@ export default function HomeClientContent() {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Latest Insights</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            Thoughts on data, technology, and the future of digital experiences
+            [What do you write about? Share your expertise and thoughts]
           </p>
         </motion.div>
 

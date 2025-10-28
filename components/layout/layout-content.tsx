@@ -1,18 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
 import type React from "react"
-import { usePathname } from "next/navigation"
 import { AnimatePresence } from "framer-motion"
-import dynamic from "next/dynamic"
 import LoadingAnimation from "@/components/animations/loading-animation"
 import Header from "./header"
 import Footer from "@/components/footer"
-import { useTheme } from "@/lib/theme-provider"
-
-// Dynamically import background animations
-const SpiralBackgroundP5 = dynamic(() => import("@/components/animations/spiral-background-p5"), {
-  ssr: false,
-})
 
 interface LayoutContentProps {
   children: React.ReactNode
@@ -20,11 +12,6 @@ interface LayoutContentProps {
 
 export default function LayoutContent({ children }: LayoutContentProps) {
   const [isLoading, setIsLoading] = useState(true)
-  const { resolvedTheme } = useTheme()
-  const pathname = usePathname()
-
-  // Determine which pages should have the spiral background
-  const showSpiralBackground = pathname !== "/" && !pathname.startsWith("/data-viz")
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
@@ -54,10 +41,8 @@ export default function LayoutContent({ children }: LayoutContentProps) {
           isLoading ? "opacity-0" : "opacity-100"
         }`}
       >
-        {/* Conditional Background Animation */}
-        {showSpiralBackground && !isLoading && (
-          <SpiralBackgroundP5 key={`spiral-${resolvedTheme}`} />
-        )}
+        {/* Simple CSS gradient background - no heavy animations */}
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-[var(--background-color)] via-[var(--background-color)] to-[var(--accent-honey)]/5" />
 
         <Header />
 
