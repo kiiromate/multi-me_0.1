@@ -1,0 +1,120 @@
+{
+  "title": "Building Multi-Me 0.1: A Portfolio Journey",
+  "slug": "building-multi-me-0-1-a-portfolio-journey",
+  "excerpt": "The story behind building a portfolio that celebrates multiple identities—from data storyteller to creative coder. A journey through Next.js, Sanity CMS, and intentional design choices.",
+  "tags": ["Portfolio", "Next.js", "Design", "Process"],
+  "readTime": 8,
+  "featured": true,
+  "mainImageAlt": "Screenshot of the Multi-Me portfolio homepage featuring a p5.js animated hero section with glass morphism design elements",
+  "contentSections": [
+    {
+      "heading": "The Multi-Me Concept",
+      "text": "When I set out to build this portfolio, I knew I didn't want to fit into a single box. I'm a data storyteller, a creative coder, a designer, and a developer. The challenge wasn't just building a portfolio—it was building one that could hold space for all these identities without feeling fragmented.\n\nEnter Multi-Me 0.1—the first iteration of a portfolio that celebrates multiplicity."
+    },
+    {
+      "heading": "Why Start from Scratch?",
+      "text": "I could have used a template, but where's the learning in that? This project became an opportunity to:\n\n- Master Next.js 15 with the App Router and server components\n- Integrate Sanity CMS for flexible content management\n- Implement accessibility from the ground up (WCAG 2.1 AA compliant)\n- Create custom animations using p5.js and Framer Motion\n- Practice sustainable web development with performance optimization"
+    },
+    {
+      "heading": "Technical Decisions",
+      "subsections": [
+        {
+          "subheading": "Next.js 15 + App Router",
+          "text": "The new App Router in Next.js 15 offers powerful patterns for data fetching and rendering. I embraced server components for content-heavy pages while keeping client components for interactive elements like animations."
+        },
+        {
+          "subheading": "Sanity CMS Integration",
+          "text": "Rather than hardcoding content, I integrated Sanity CMS early. This gives me:\n- A clean editing interface at /studio\n- Flexible content schemas for projects, blog posts, and about content\n- Image optimization through Sanity's CDN\n- The ability to update content without redeploying"
+        },
+        {
+          "subheading": "Glass Morphism Design",
+          "text": "I wanted a design that felt modern but not trendy—something that would age well. Glass morphism with subtle backdrop filters and the honey accent color (#EBA937) creates visual interest without overwhelming the content."
+        },
+        {
+          "subheading": "Performance First",
+          "text": "Every animation runs at a capped 30fps. Images are optimized. Components are lazy-loaded. The site respects prefers-reduced-motion for accessibility. These aren't afterthoughts—they're baked into the foundation."
+        }
+      ]
+    },
+    {
+      "heading": "The Build Process",
+      "phases": [
+        {
+          "phase": "Phase 1: Foundation",
+          "items": [
+            "Set up Next.js with TypeScript",
+            "Configure Tailwind CSS with custom theme",
+            "Create base components and layout structure",
+            "Implement dark/light theme switching"
+          ]
+        },
+        {
+          "phase": "Phase 2: Content Infrastructure",
+          "items": [
+            "Design Sanity schemas for projects, posts, and about content",
+            "Build the Studio interface",
+            "Create GROQ queries for data fetching",
+            "Implement image optimization utilities"
+          ]
+        },
+        {
+          "phase": "Phase 3: Page Development",
+          "items": [
+            "Homepage with p5.js hero animation",
+            "Projects showcase with filtering",
+            "Blog with search functionality",
+            "About page with skills and social links",
+            "Contact form with validation"
+          ]
+        },
+        {
+          "phase": "Phase 4: Polish",
+          "items": [
+            "Accessibility audits and fixes",
+            "Performance optimization",
+            "SEO implementation",
+            "Responsive design refinement"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Lessons Learned",
+      "lessons": [
+        {
+          "number": 1,
+          "title": "Server Components Are Powerful",
+          "text": "Fetching data in server components and passing it to client components for interactivity creates a clean separation of concerns."
+        },
+        {
+          "number": 2,
+          "title": "Accessibility Can't Be Bolted On",
+          "text": "Building with accessibility in mind from the start is easier than retrofitting it later. Semantic HTML, ARIA labels, and keyboard navigation should be part of your initial component design."
+        },
+        {
+          "number": 3,
+          "title": "Content Strategy Matters",
+          "text": "Having a CMS doesn't mean you should put everything in it. I kept some content (like navigation) hardcoded for simplicity while using Sanity for dynamic content that changes frequently."
+        },
+        {
+          "number": 4,
+          "title": "Animation Restraint",
+          "text": "Not every element needs to move. Subtle, purposeful animations enhance the experience. Excessive motion distracts from content."
+        },
+        {
+          "number": 5,
+          "title": "Build in Public",
+          "text": "Documenting the process as I build creates accountability and helps others learn from my decisions—both good and bad."
+        }
+      ]
+    },
+    {
+      "heading": "What's Next?",
+      "text": "This is version 0.1—the foundation. Future iterations will include:\n- Interactive data visualizations\n- More creative coding experiments\n- Case studies for featured projects\n- A now page to share what I'm currently working on\n- Enhanced animations and micro-interactions"
+    },
+    {
+      "heading": "Try It Yourself",
+      "text": "The portfolio is live at kazekeza.com, and the code is open source on GitHub. If you're building your own portfolio, I hope this journey inspires you to:\n\n- Build something that represents all of who you are\n- Prioritize accessibility and performance\n- Learn by doing, not just following tutorials\n- Share your process with others\n\nHere's to building in public and celebrating the Multi-Me in all of us."
+    }
+  ]
+}

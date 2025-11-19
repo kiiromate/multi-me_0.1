@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com"
+  
   return {
     rules: {
       userAgent: "*",
       allow: "/",
       disallow: ["/private/", "/admin/"],
     },
-    sitemap: "https://kazekeza.dev/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

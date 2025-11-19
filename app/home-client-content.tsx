@@ -6,48 +6,38 @@ import GlassCard from "@/components/ui/glass-card"
 import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
 
-// TODO: Replace with real data from Sanity CMS
-const featuredProjects = [
-  {
-    title: "[PROJECT TITLE 1]",
-    description: "[Add your project description here - what problem did it solve? What technologies did you use?]",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-  },
-  {
-    title: "[PROJECT TITLE 2]",
-    description: "[Add your project description here - what problem did it solve? What technologies did you use?]",
-    image: "/placeholder.svg?height=300&width=500",
-    tags: ["[Tech 1]", "[Tech 2]", "[Tech 3]"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
-  },
-]
+interface Project {
+  _id: string
+  title: string
+  slug: { current: string }
+  description: string
+  mainImage?: {
+    asset: any
+    alt?: string
+  }
+  tags: string[]
+  liveUrl?: string
+  githubUrl?: string
+}
 
-const recentPosts = [
-  {
-    title: "[BLOG POST TITLE 1]",
-    excerpt: "[Add a brief excerpt or description of your blog post here - what's it about?]",
-    slug: "blog-post-1",
-    publishedAt: "2024-01-15",
-    readTime: "5 min read",
-    mainImage: "/placeholder.svg?height=200&width=400",
-    tags: ["[Tag 1]", "[Tag 2]"],
-  },
-  {
-    title: "[BLOG POST TITLE 2]",
-    excerpt: "[Add a brief excerpt or description of your blog post here - what's it about?]",
-    slug: "blog-post-2",
-    publishedAt: "2024-01-10",
-    readTime: "7 min read",
-    mainImage: "/placeholder.svg?height=200&width=400",
-    tags: ["[Tag 1]", "[Tag 2]"],
-  },
-]
+interface Post {
+  _id: string
+  title: string
+  slug: { current: string }
+  excerpt: string
+  mainImage?: string
+  mainImageAlt?: string
+  tags: string[]
+  publishedAt: string
+  readTime?: number
+}
 
-export default function HomeClientContent() {
+interface HomeClientContentProps {
+  featuredProjects: Project[]
+  featuredPosts: Post[]
+}
+
+export default function HomeClientContent({ featuredProjects, featuredPosts }: HomeClientContentProps) {
   return (
     <div className="space-y-16 sm:space-y-24 py-8 sm:py-16">
       {/* Hero Section */}
@@ -59,12 +49,13 @@ export default function HomeClientContent() {
           className="space-y-4 sm:space-y-6"
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-color)] leading-tight">
-            [YOUR NAME] <br />
-            <span className="text-[var(--accent-honey)]">[Your Professional Title]</span>
+            KAZE KEZA <br />
+            <span className="text-[var(--accent-honey)]">Multi-Me: Data Storyteller & Creative Technologist</span>
           </h1>
 
           <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed">
-            [Your tagline or brief professional summary - who are you and what do you do?]
+            Bridging data, design, and code to craft meaningful digital experiences. 
+            I transform complex information into compelling visual narratives.
           </p>
         </motion.div>
 
@@ -103,7 +94,7 @@ export default function HomeClientContent() {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">About Me</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            [A brief tagline about what makes you unique]
+            A multifaceted creator at the intersection of data, design, and technology
           </p>
         </motion.div>
 
@@ -116,10 +107,11 @@ export default function HomeClientContent() {
           <GlassCard className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-[var(--text-color)]">[Section Heading]</h3>
+                <h3 className="text-2xl font-semibold text-[var(--text-color)]">Multi-Me Philosophy</h3>
                 <p className="text-[var(--secondary-text-color)] leading-relaxed">
-                  [Add your personal introduction here - what's your background? What are you passionate about?
-                  What drives your work? This is your chance to connect with visitors on a personal level.]
+                  I believe in embracing multiple facets of creativity. As a data storyteller, creative technologist, 
+                  and visual designer, I bring diverse perspectives to every project. My work bridges analytical thinking 
+                  with artistic expression, creating experiences that are both meaningful and beautiful.
                 </p>
                 <Link
                   href="/about"
@@ -133,7 +125,7 @@ export default function HomeClientContent() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-honey)]/20 to-transparent" />
                 <div className="w-full h-full bg-[var(--secondary-text-color)]/10 flex items-center justify-center">
                   <span className="text-[var(--secondary-text-color)] text-sm">
-                    [Add Your Profile Photo]
+                    Profile Photo
                   </span>
                 </div>
               </div>
@@ -153,70 +145,107 @@ export default function HomeClientContent() {
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Featured Projects</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            [Brief description of your work - what type of projects do you focus on?]
+            Exploring the intersection of data visualization, creative coding, and interactive experiences
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.title} {...project} index={index} />
-          ))}
-        </div>
+        {featuredProjects.length > 0 ? (
+          <>
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+              {featuredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project._id}
+                  title={project.title}
+                  description={project.description}
+                  image={project.mainImage}
+                  tags={project.tags}
+                  liveUrl={project.liveUrl}
+                  githubUrl={project.githubUrl}
+                  index={index}
+                />
+              ))}
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center"
-        >
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center"
+            >
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
+              >
+                View All Projects
+                <ArrowRight size={18} />
+              </Link>
+            </motion.div>
+          </>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center py-12"
           >
-            View All Projects
-            <ArrowRight size={18} />
-          </Link>
-        </motion.div>
+            <p className="text-[var(--secondary-text-color)] text-lg">
+              Featured projects coming soon. Check back later!
+            </p>
+          </motion.div>
+        )}
       </section>
 
       {/* Recent Blog Posts */}
-      <section className="space-y-8 sm:space-y-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Latest Insights</h2>
-          <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            [What do you write about? Share your expertise and thoughts]
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {recentPosts.map((post, index) => (
-            <BlogCard key={post.slug} {...post} index={index} />
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center"
-        >
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
+      {featuredPosts.length > 0 && (
+        <section className="space-y-8 sm:space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-4"
           >
-            Read All Posts
-            <ArrowRight size={18} />
-          </Link>
-        </motion.div>
-      </section>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Latest Insights</h2>
+            <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
+              Thoughts on data visualization, creative coding, and the art of digital storytelling
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {featuredPosts.map((post, index) => (
+              <BlogCard
+                key={post._id}
+                title={post.title}
+                excerpt={post.excerpt}
+                slug={post.slug.current}
+                publishedAt={post.publishedAt}
+                readTime={post.readTime ? `${post.readTime} min read` : "5 min read"}
+                mainImage={post.mainImage}
+                tags={post.tags}
+                index={index}
+              />
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center"
+          >
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
+            >
+              Read All Posts
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
+        </section>
+      )}
     </div>
   )
 }

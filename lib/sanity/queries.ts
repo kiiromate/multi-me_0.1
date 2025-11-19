@@ -7,8 +7,10 @@ export const projectsQuery = groq`
     title,
     slug,
     description,
-    "mainImage": mainImage.asset->url,
-    "mainImageAlt": mainImage.alt,
+    mainImage {
+      asset->,
+      alt
+    },
     tags,
     status,
     featured,
@@ -25,8 +27,10 @@ export const featuredProjectsQuery = groq`
     title,
     slug,
     description,
-    "mainImage": mainImage.asset->url,
-    "mainImageAlt": mainImage.alt,
+    mainImage {
+      asset->,
+      alt
+    },
     tags,
     status,
     featured,
@@ -44,9 +48,14 @@ export const projectBySlugQuery = groq`
     slug,
     description,
     content,
-    "mainImage": mainImage.asset->url,
-    "mainImageAlt": mainImage.alt,
-    "gallery": gallery[].asset->url,
+    mainImage {
+      asset->,
+      alt
+    },
+    gallery[] {
+      asset->,
+      alt
+    },
     tags,
     status,
     featured,

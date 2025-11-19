@@ -1,11 +1,17 @@
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
+interface SocialLink {
+  platform: string
+  url: string
+}
+
 interface SocialIconsProps {
   className?: string
   size?: "sm" | "md" | "lg"
+  socialLinks?: SocialLink[]
 }
 
-const socialLinks = [
+const defaultSocialLinks = [
   {
     name: "GitHub",
     href: "https://github.com/kazekeza",
@@ -32,6 +38,14 @@ const socialLinks = [
   },
 ]
 
+const iconMap: Record<string, any> = {
+  github: Github,
+  linkedin: Linkedin,
+  email: Mail,
+  twitter: Twitter,
+  mail: Mail,
+}
+
 const sizeClasses = {
   sm: "w-4 h-4",
   md: "w-5 h-5",
@@ -44,18 +58,33 @@ const containerSizeClasses = {
   lg: "w-12 h-12",
 }
 
-export function SocialIcons({ className = "", size = "md" }: SocialIconsProps) {
+export function SocialIcons({ className = "", size = "md", socialLinks }: SocialIconsProps) {
+  // Convert Sanity social links to component format or use defaults
+  const links = socialLinks
+    ? socialLinks.map((link) => {
+        const platformLower = link.platform.toLowerCase()
+        const Icon = iconMap[platformLower] || Github
+        return {
+          name: link.platform,
+          href: link.url,
+          icon: Icon,
+          label: `Visit my ${link.platform} profile`,
+        }
+      })
+    : defaultSocialLinks
+
   return (
     <div className={`flex items-center gap-2 ${className}`} role="list">
-      {socialLinks.map((social) => {
+      {links.map((social) => {
         const Icon = social.icon
+        const isEmail = social.name.toLowerCase() === "email" || social.name.toLowerCase() === "mail"
 
         return (
           <a
             key={social.name}
             href={social.href}
-            target={social.name !== "Email" ? "_blank" : undefined}
-            rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
+            target={!isEmail ? "_blank" : undefined}
+            rel={!isEmail ? "noopener noreferrer" : undefined}
             className={`
               ${containerSizeClasses[size]}
               flex items-center justify-center

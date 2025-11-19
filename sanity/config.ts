@@ -2,13 +2,16 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemas } from './schemas'
+import { getSanityEnv } from '../lib/sanity/env-validation'
+
+const env = getSanityEnv()
 
 export default defineConfig({
   name: 'default',
   title: 'Kaze Keza Portfolio',
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: env.projectId,
+  dataset: env.dataset,
 
   plugins: [structureTool(), visionTool()],
 

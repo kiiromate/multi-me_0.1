@@ -35,7 +35,7 @@ const defaultSEO = {
     "remote developer",
   ],
   image: "/images/og-image.jpg",
-  url: "https://kazekeza.dev",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com",
   type: "website" as const,
 }
 
@@ -117,6 +117,8 @@ export function generateSEO(props: SEOProps = {}): Metadata {
   }
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com"
+
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -124,8 +126,8 @@ export const structuredData = {
   jobTitle: "Creative Technologist",
   description:
     "Creative technologist specializing in data visualization, sustainable web development, and meaningful digital experiences.",
-  url: "https://kazekeza.dev",
-  image: "https://kazekeza.dev/images/kaze-profile.jpg",
+  url: siteUrl,
+  image: `${siteUrl}/images/kaze-profile.jpg`,
   sameAs: ["https://github.com/kazekeza", "https://linkedin.com/in/kazekeza", "https://twitter.com/kazekeza"],
   knowsAbout: [
     "Data Visualization",

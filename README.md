@@ -33,18 +33,49 @@ Following Dieter Rams' principle of "Weniger, aber besser" (Less, but better):
 
 ## 🛠️ Development
 
-```bash
-# Install dependencies
-npm install
+### Initial Setup
 
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Configure Sanity CMS**
+   
+   This portfolio uses Sanity CMS for content management. Follow these steps:
+   
+   - Create a Sanity project at https://sanity.io/manage
+   - Copy your Project ID
+   - Update `.env.local` with your credentials (see `SANITY_ENV_SETUP.md` for detailed instructions)
+   
+   ```env
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   NEXT_PUBLIC_SITE_URL=https://kazekeza.com
+   ```
+
+3. **Test Sanity connection**
+   ```bash
+   npm run test:sanity
+   ```
+
+### Development Commands
+
+```bash
 # Start development server
 npm run dev
+
+# Access Sanity Studio
+# Navigate to http://localhost:3000/studio
 
 # Build for production
 npm run build
 
 # Start production server
 npm start
+
+# Test Sanity connection
+npm run test:sanity
 ```
 
 ## 📁 Project Structure
@@ -111,11 +142,52 @@ Modern glass morphism effects with subtle hover interactions and magnetic cursor
 
 ## 🚀 Deployment
 
-Optimized for Vercel deployment with:
-- Automatic builds on push
-- Edge functions support
-- Analytics integration
-- Performance monitoring
+This portfolio is deployed on **Netlify** at [https://kazekeza.com](https://kazekeza.com)
+
+### Quick Deploy
+
+1. **Connect to Netlify**
+   - Sign up at [netlify.com](https://www.netlify.com/)
+   - Connect your GitHub repository
+   - Build settings are configured in `netlify.toml`
+
+2. **Set Environment Variables**
+   ```
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_SANITY_DATASET=production
+   NEXT_PUBLIC_SITE_URL=https://kazekeza.com
+   ```
+
+3. **Deploy**
+   - Push to main branch for automatic deployment
+   - Or trigger manual deploy in Netlify dashboard
+
+### Deployment Resources
+
+- 📋 **Overview**: See [DEPLOYMENT_SUMMARY.md](./DEPLOYMENT_SUMMARY.md) for deployment overview
+- 📖 **Full Guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete step-by-step instructions
+- ⚡ **Quick Start**: See [.netlify-deploy-quick-start.md](./.netlify-deploy-quick-start.md) for rapid deployment
+- ✅ **Checklist**: Use [.deployment-checklist.md](./.deployment-checklist.md) to verify readiness
+
+### Verify Deployment
+
+After deploying, run the verification script:
+
+```bash
+npm run verify:deployment
+```
+
+This checks:
+- All pages are accessible
+- HTTPS is configured correctly
+- Content loads from Sanity
+- No critical errors
+
+### Continuous Deployment
+
+- **Automatic**: Push to main branch triggers deployment
+- **Preview**: Pull requests get preview deployments
+- **Rollback**: Instant rollback to previous versions in Netlify dashboard
 
 ## 📄 License
 

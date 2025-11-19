@@ -1,0 +1,26 @@
+{
+  "title": "Interactive Data Visualization Dashboard",
+  "slug": "data-visualization-dashboard",
+  "description": "A comprehensive suite of interactive data visualizations that transform complex datasets into accessible, engaging visual stories. Built with performance, accessibility, and responsive design as core principles.",
+  "content": "This project showcases the power of thoughtful data presentation through a collection of interactive charts and visualizations. Each component is designed to handle real-world data scenarios while maintaining smooth performance and accessibility compliance.\n\nThe dashboard features five distinct visualization types:\n\n**Line Charts** - Tracking trends over time with smooth animations and interactive tooltips. Perfect for showing growth patterns, seasonal variations, and temporal data analysis.\n\n**Bar Charts** - Comparing values across categories with both horizontal and vertical orientations. Includes animated transitions and value labels for clear data communication.\n\n**Pie Charts** - Displaying proportional relationships with interactive segments, legends, and percentage breakdowns. Optimized for mobile touch interactions.\n\n**Scatter Plots** - Revealing correlations and patterns in multi-dimensional data. Features trend lines, category grouping, and bubble sizing for additional data dimensions.\n\n**Heatmaps** - Visualizing activity patterns and intensity across two dimensions. Ideal for time-based analysis and identifying peak activity periods.\n\nEvery visualization is built with WCAG 2.1 AA accessibility standards, including keyboard navigation, screen reader support, and colorblind-friendly palettes. The components are fully responsive, adapting seamlessly from mobile to desktop viewports while maintaining 60fps animation performance.",
+  "tags": [
+    "Data Visualization",
+    "React",
+    "TypeScript",
+    "Recharts",
+    "Accessibility",
+    "Interactive Design"
+  ],
+  "status": "live",
+  "featured": true,
+  "year": 2024,
+  "liveUrl": "https://kazekeza.com/data-viz",
+  "order": 2,
+  "mainImageAltText": "Interactive data visualization dashboard showing multiple chart types including line charts, bar charts, pie charts, scatter plots, and heatmaps",
+  "galleryImageAltTexts": [
+    "Line chart showing website traffic growth over 12 months with smooth animations",
+    "Horizontal bar chart displaying technology proficiency levels across different frameworks",
+    "Scatter plot analyzing performance vs load time correlation with trend line",
+    "Heatmap visualizing weekly development activity patterns across weekdays and hours"
+  ]
+}
