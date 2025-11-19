@@ -18,11 +18,28 @@ yarn-error.log*
 
 # env files
 .env*
+.env
 
 # vercel
 .vercel
 
+# netlify
+.netlify
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.env
+
+# deployment docs with secrets
+.deployment-checklist.md
+.deployment-ready.md
+.netlify-deploy-quick-start.md
+DEPLOYMENT.md
+DEPLOYMENT_INDEX.md
+DEPLOYMENT_SUMMARY.md
+DNS_CONFIGURATION.md
+DNS_CONFIGURATION_GUIDE.md
+DNS_SETUP_GUIDE.md
+ENVIRONMENT_VARIABLES.md
+PRODUCTION_VERIFICATION.md
+SANITY_ENV_SETUP.md
