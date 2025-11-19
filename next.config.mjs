@@ -11,8 +11,9 @@ const nextConfig = {
     domains: ['images.pexels.com', 'via.placeholder.com'],
   },
   experimental: {
-    optimizePackageImports: ['framer-motion', 'lucide-react'],
+    optimizePackageImports: ['lucide-react'],
   },
+  transpilePackages: ['framer-motion', 'motion-dom', 'motion-utils'],
   // Performance optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

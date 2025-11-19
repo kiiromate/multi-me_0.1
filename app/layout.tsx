@@ -1,9 +1,10 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/lib/theme-provider"
 import { LayoutContent } from "@/components/layout/layout-content"
+import { SkipToContent } from "@/components/ui/skip-to-content"
 import { generateSEO, structuredData } from "@/lib/seo"
 import { StructuredData } from "@/components/seo/structured-data"
 import { Analytics } from "@vercel/analytics/react"
@@ -28,6 +29,16 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = generateSEO()
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f4f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#121212" },
+  ],
+}
 
 export default async function RootLayout({
   children,
@@ -83,6 +94,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <SkipToContent />
         <StructuredData data={structuredData} />
         <Suspense fallback={<div>Loading...</div>}>
           <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">

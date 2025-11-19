@@ -39,17 +39,16 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
           ? "backdrop-blur-md bg-[var(--background-color)]/80 shadow-sm border-b border-[var(--subtle-border-color)]"
           : "backdrop-blur-sm bg-[var(--background-color)]/60"
-      }`}
+        }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2" aria-label="Home">
               <KazeLogo animated size={32} />
               <span className="text-xl font-bold text-[var(--text-color)] hidden sm:block">KAZE KEZA</span>
             </Link>
@@ -61,11 +60,10 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  pathname === item.href
+                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${pathname === item.href
                     ? "text-[var(--accent-honey)]"
                     : "text-[var(--secondary-text-color)] hover:text-[var(--text-color)]"
-                }`}
+                  }`}
               >
                 {item.name}
                 {pathname === item.href && (
@@ -110,11 +108,10 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
-                      pathname === item.href
+                    className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${pathname === item.href
                         ? "text-[var(--accent-honey)] bg-[var(--accent-honey)]/10"
                         : "text-[var(--secondary-text-color)] hover:text-[var(--text-color)] hover:bg-[var(--text-color)]/5"
-                    }`}
+                      }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}

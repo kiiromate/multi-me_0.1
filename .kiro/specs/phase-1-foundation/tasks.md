@@ -375,21 +375,21 @@
     - Verify no console errors in production
     - _Requirements: 5.1, 5.2, 5.3, 5.4_
 
-- [ ] 11. Performance and accessibility optimization
-  - [ ] 11.1 Run Lighthouse audits
+- [x] 11. Performance and accessibility optimization
+  - [x] 11.1 Run Lighthouse audits
     - Run Lighthouse on all main pages (home, projects, blog, about)
     - Document performance scores
     - Identify any issues below target thresholds
     - _Requirements: 5.5_
   
-  - [ ] 11.2 Optimize performance if needed
+  - [x] 11.2 Optimize performance if needed
     - Optimize images that are too large
     - Implement lazy loading for below-fold images
     - Add preloading for critical resources
     - Minimize layout shifts
     - _Requirements: 5.5, 9.5_
   
-  - [ ] 11.3 Verify accessibility compliance
+  - [x] 11.3 Verify accessibility compliance
     - Run axe DevTools accessibility scan
     - Test keyboard navigation on all pages
     - Verify focus indicators are visible

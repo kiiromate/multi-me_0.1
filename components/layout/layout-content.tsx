@@ -42,16 +42,15 @@ export default function LayoutContent({ children, footerData }: LayoutContentPro
       </AnimatePresence>
 
       <div
-        className={`min-h-screen flex flex-col transition-opacity duration-500 ${
-          isLoading ? "opacity-0" : "opacity-100"
-        }`}
+        className={`min-h-screen flex flex-col transition-opacity duration-500 ${isLoading ? "opacity-0" : "opacity-100"
+          }`}
       >
         {/* Simple CSS gradient background - no heavy animations */}
         <div className="fixed inset-0 -z-10 bg-gradient-to-br from-[var(--background-color)] via-[var(--background-color)] to-[var(--accent-honey)]/5" />
 
         <Header />
 
-        <main className="flex-1 relative z-10">
+        <main id="main-content" className="flex-1 relative z-10">
           {children}
         </main>
 

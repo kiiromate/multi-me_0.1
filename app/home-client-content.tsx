@@ -37,14 +37,14 @@ interface Post {
 interface HomeClientContentProps {
   featuredProjects: Project[]
   featuredPosts: Post[]
-  aboutData?: any
-  capabilities: Capability[]
+  capabilities?: Capability[]
 }
 
 export default function HomeClientContent({ featuredProjects, featuredPosts, aboutData, capabilities }: HomeClientContentProps) {
   // Extract hero content from aboutData if available
   const heroTitle = aboutData?.heroTitle || "KAZE KEZA"
-  const heroSupport = aboutData?.heroSupport || "Multi-Me: Data Storyteller & Creative Technologist"
+  const heroSupport = aboutData?.heroSupport || "Bridging data, design, and code to craft meaningful digital experiences.\nI transform complex information into compelling visual narratives."
+
   return (
     <div className="space-y-16 sm:space-y-24 py-8 sm:py-16">
       {/* Hero Section */}
@@ -109,6 +109,47 @@ export default function HomeClientContent({ featuredProjects, featuredPosts, abo
           </div>
         </section>
       )}
+
+      {/* Fallback to original layout if no capabilities provided */}
+      {(!capabilities || capabilities.length === 0) && (
+        <section className="space-y-8 sm:space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <GlassCard className="max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-[var(--text-color)]">Multi-Me Philosophy</h3>
+                  <p className="text-[var(--secondary-text-color)] leading-relaxed">
+                    I believe in embracing multiple facets of creativity. As a data storyteller, creative technologist,
+                    and visual designer, I bring diverse perspectives to every project. My work bridges analytical thinking
+                    with artistic expression, creating experiences that are both meaningful and beautiful.
+                  </p>
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
+                  >
+                    Learn more about me
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
+                <div className="relative aspect-square rounded-lg overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-honey)]/20 to-transparent" />
+                  <div className="w-full h-full bg-[var(--secondary-text-color)]/10 flex items-center justify-center">
+                    <span className="text-[var(--secondary-text-color)] text-sm">
+                      Profile Photo
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+        </section>
+      )}
+
 
       {/* Featured Projects */}
       <section className="space-y-8 sm:space-y-12">
