@@ -13,6 +13,8 @@
     NODE_VERSION = "18"
     # Disable Next.js telemetry in CI
     NEXT_TELEMETRY_DISABLED = "1"
+    # Allow NEXT_PUBLIC_* env vars in build output (they're meant to be public)
+    SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SANITY_DATASET,NEXT_PUBLIC_SANITY_PROJECT_ID,NEXT_PUBLIC_SITE_URL"
 
 # Force HTTPS redirect
 [[redirects]]
