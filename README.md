@@ -189,6 +189,11 @@ This checks:
 - **Preview**: Pull requests get preview deployments
 - **Rollback**: Instant rollback to previous versions in Netlify dashboard
 
+## 📚 Documentation
+
+- [Content Creation Guide](./CONTENT_GUIDE.md): How to manage projects and blog posts.
+- [Deployment Guide](./DEPLOYMENT.md): Detailed deployment instructions.
+
 ## 📄 License
 
 This project is licensed under the Creative Commons CC0 1.0 Universal License - see the [LICENSE](LICENSE) file for details.
