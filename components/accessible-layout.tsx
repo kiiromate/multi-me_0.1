@@ -1,6 +1,6 @@
 import type React from "react"
 import { Header } from "./header"
-import { Footer } from "./footer"
+import { Footer } from "./layout/footer"
 import { SkipNav } from "./skip-nav"
 
 interface AccessibleLayoutProps {

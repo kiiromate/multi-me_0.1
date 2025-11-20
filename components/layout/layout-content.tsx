@@ -4,13 +4,18 @@ import type React from "react"
 import { AnimatePresence } from "framer-motion"
 import LoadingAnimation from "@/components/animations/loading-animation"
 import Header from "./header"
-import Footer from "@/components/footer"
+import { Footer } from "./footer"
+import type { SocialLinks } from "@/types/sanity"
 
 interface LayoutContentProps {
   children: React.ReactNode
+  footerData?: {
+    oneLiner?: string
+    socialLinks?: SocialLinks
+  }
 }
 
-export default function LayoutContent({ children }: LayoutContentProps) {
+export default function LayoutContent({ children, footerData }: LayoutContentProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleLoadingComplete = () => {
@@ -50,7 +55,10 @@ export default function LayoutContent({ children }: LayoutContentProps) {
           {children}
         </main>
 
-        <Footer />
+        <Footer
+          oneLiner={footerData?.oneLiner}
+          socialLinks={footerData?.socialLinks}
+        />
       </div>
     </>
   )

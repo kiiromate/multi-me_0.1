@@ -1,5 +1,5 @@
-import { ProjectCard } from "./project-card"
-import { BlogCard } from "./blog-card"
+import ProjectCard from "./project-card"
+import BlogCard from "./blog-card"
 import { ContentGrid } from "./content-grid"
 
 // Sample data

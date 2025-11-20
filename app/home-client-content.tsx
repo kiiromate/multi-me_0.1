@@ -5,6 +5,8 @@ import { ArrowRight } from "lucide-react"
 import GlassCard from "@/components/ui/glass-card"
 import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
+import { CapabilitiesGrid } from "@/components/home/capabilities-grid"
+import type { Capability } from "@/types/sanity"
 
 interface Project {
   _id: string
@@ -35,9 +37,14 @@ interface Post {
 interface HomeClientContentProps {
   featuredProjects: Project[]
   featuredPosts: Post[]
+  aboutData?: any
+  capabilities: Capability[]
 }
 
-export default function HomeClientContent({ featuredProjects, featuredPosts }: HomeClientContentProps) {
+export default function HomeClientContent({ featuredProjects, featuredPosts, aboutData, capabilities }: HomeClientContentProps) {
+  // Extract hero content from aboutData if available
+  const heroTitle = aboutData?.heroTitle || "KAZE KEZA"
+  const heroSupport = aboutData?.heroSupport || "Multi-Me: Data Storyteller & Creative Technologist"
   return (
     <div className="space-y-16 sm:space-y-24 py-8 sm:py-16">
       {/* Hero Section */}
@@ -49,13 +56,11 @@ export default function HomeClientContent({ featuredProjects, featuredPosts }: H
           className="space-y-4 sm:space-y-6"
         >
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-color)] leading-tight">
-            KAZE KEZA <br />
-            <span className="text-[var(--accent-honey)]">Multi-Me: Data Storyteller & Creative Technologist</span>
+            {heroTitle}
           </h1>
 
           <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed">
-            Bridging data, design, and code to craft meaningful digital experiences. 
-            I transform complex information into compelling visual narratives.
+            {heroSupport}
           </p>
         </motion.div>
 
@@ -83,56 +88,27 @@ export default function HomeClientContent({ featuredProjects, featuredPosts }: H
         </motion.div>
       </section>
 
-      {/* About Preview */}
-      <section className="space-y-8 sm:space-y-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">About Me</h2>
-          <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            A multifaceted creator at the intersection of data, design, and technology
-          </p>
-        </motion.div>
+      {/* Capabilities Section */}
+      {capabilities && capabilities.length > 0 && (
+        <section className="space-y-8 sm:space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-4"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">What I Do</h2>
+            <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
+              Core capabilities at the intersection of systems thinking, interface design, and data visualization
+            </p>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <GlassCard className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-semibold text-[var(--text-color)]">Multi-Me Philosophy</h3>
-                <p className="text-[var(--secondary-text-color)] leading-relaxed">
-                  I believe in embracing multiple facets of creativity. As a data storyteller, creative technologist, 
-                  and visual designer, I bring diverse perspectives to every project. My work bridges analytical thinking 
-                  with artistic expression, creating experiences that are both meaningful and beautiful.
-                </p>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
-                >
-                  Learn more about me
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-              <div className="relative aspect-square rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-honey)]/20 to-transparent" />
-                <div className="w-full h-full bg-[var(--secondary-text-color)]/10 flex items-center justify-center">
-                  <span className="text-[var(--secondary-text-color)] text-sm">
-                    Profile Photo
-                  </span>
-                </div>
-              </div>
-            </div>
-          </GlassCard>
-        </motion.div>
-      </section>
+          <div className="max-w-6xl mx-auto px-4">
+            <CapabilitiesGrid capabilities={capabilities} />
+          </div>
+        </section>
+      )}
 
       {/* Featured Projects */}
       <section className="space-y-8 sm:space-y-12">

@@ -117,6 +117,21 @@ export const postBySlugQuery = groq`
 export const aboutQuery = groq`
   *[_type == "about"][0] {
     _id,
+    heroTitle,
+    heroSupport,
+    positioning {
+      howIThink,
+      whatIBuild,
+      howIWork
+    },
+    bioVariants {
+      bio50,
+      bio150,
+      bio300,
+      oneLiner
+    },
+    socialLinks,
+    ctaEmail,
     name,
     title,
     bio,
@@ -126,7 +141,16 @@ export const aboutQuery = groq`
     "profileImage": profileImage.asset->url,
     "profileImageAlt": profileImage.alt,
     skills,
-    socialLinks,
     ctaText
+  }
+`
+
+// Capabilities
+export const capabilitiesQuery = groq`
+  *[_type == "capability"] | order(_createdAt asc) {
+    _id,
+    title,
+    description,
+    iconName
   }
 `

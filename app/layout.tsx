@@ -9,6 +9,9 @@ import { StructuredData } from "@/components/seo/structured-data"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from "react"
+import { client } from "@/lib/sanity/client"
+import { aboutQuery } from "@/lib/sanity/queries"
+import { safeFetch } from "@/lib/sanity/error-handling"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,11 +29,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = generateSEO()
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Fetch About data for footer
+  const aboutData: any = await safeFetch(client, aboutQuery, undefined, null)
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
@@ -81,7 +86,14 @@ export default function RootLayout({
         <StructuredData data={structuredData} />
         <Suspense fallback={<div>Loading...</div>}>
           <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-            <LayoutContent>{children}</LayoutContent>
+            <LayoutContent
+              footerData={{
+                oneLiner: aboutData?.bioVariants?.oneLiner,
+                socialLinks: aboutData?.socialLinks
+              }}
+            >
+              {children}
+            </LayoutContent>
           </ThemeProvider>
         </Suspense>
         <Analytics />

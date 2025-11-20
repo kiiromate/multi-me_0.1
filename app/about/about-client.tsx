@@ -1,55 +1,22 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { MapPin, Calendar, Coffee } from "lucide-react"
-import Link from "next/link"
-import { SocialIcons } from "@/components/social-icons"
-import { KazeLogo } from "@/components/kaze-logo"
-import { PortableText } from "@portabletext/react"
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 60 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" },
-}
-
-interface Skill {
-  area: string
-  description: string
-  technologies?: string[]
-}
-
-interface SocialLinks {
-  github?: string
-  linkedin?: string
-  twitter?: string
-  email?: string
-  website?: string
-}
-
-interface AboutData {
-  _id: string
-  name: string
-  title: string
-  bio: any[]
-  location?: string
-  availability?: "available" | "open" | "unavailable"
-  funFact?: string
-  profileImage?: string
-  profileImageAlt?: string
-  skills?: Skill[]
-  socialLinks?: SocialLinks
-  ctaText?: string
-}
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { PortableText } from '@portabletext/react'
+import { BrandLogo } from '@/components/ui/brand-logo'
+import type { About } from '@/types/sanity'
+import { Mail } from 'lucide-react'
 
 interface AboutClientProps {
-  aboutData: AboutData | null
+  aboutData: About | null
 }
 
-// Custom components for PortableText rendering
+// Portable Text components for rich text rendering
 const portableTextComponents = {
   block: {
-    normal: ({ children }: any) => <p className="leading-relaxed mb-6">{children}</p>,
+    normal: ({ children }: any) => <p className="mb-4 leading-relaxed">{children}</p>,
+    h2: ({ children }: any) => <h2 className="text-2xl font-semibold mb-4 mt-8">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-xl font-medium mb-3 mt-6">{children}</h3>,
   },
   marks: {
     strong: ({ children }: any) => <strong className="font-semibold">{children}</strong>,
@@ -59,184 +26,242 @@ const portableTextComponents = {
         href={value.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[var(--accent-honey)] hover:underline"
+        className="text-[#EBA937] hover:underline transition-colors duration-200"
       >
         {children}
       </a>
     ),
   },
+  list: {
+    bullet: ({ children }: any) => <ul className="list-disc list-inside mb-4 space-y-2">{children}</ul>,
+    number: ({ children }: any) => <ol className="list-decimal list-inside mb-4 space-y-2">{children}</ol>,
+  },
 }
 
-const availabilityText = {
-  available: "Available for work",
-  open: "Open to opportunities",
-  unavailable: "Currently unavailable",
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as any }
 }
 
 export function AboutClient({ aboutData }: AboutClientProps) {
-  // Fallback content if no data from Sanity
   if (!aboutData) {
     return (
-      <div className="relative z-10 min-h-screen flex items-center justify-center">
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">About content not found</h1>
-          <p className="text-[var(--secondary-text-color)]">Please add about content in Sanity Studio.</p>
+          <p className="text-muted-foreground">Please add about content in Sanity Studio.</p>
         </div>
       </div>
     )
   }
 
-  // Transform socialLinks object to array format for SocialIcons component
-  const socialLinksArray = aboutData.socialLinks
-    ? Object.entries(aboutData.socialLinks)
-        .filter(([_, url]) => url) // Filter out empty values
-        .map(([platform, url]) => ({
-          platform,
-          url: url as string,
-        }))
-    : undefined
+  const hasPositioning = aboutData.positioning?.howIThink || aboutData.positioning?.whatIBuild || aboutData.positioning?.howIWork
 
   return (
-    <div className="relative z-10 min-h-screen">
-      {/* Enhanced background for better readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--background-color)]/80 via-[var(--background-color)]/60 to-[var(--background-color)]/80 pointer-events-none" />
-
-      <div className="relative z-10">
+    <div className="relative z-10 min-h-screen py-16 px-4">
+      <div className="max-w-6xl mx-auto space-y-16">
         {/* Hero Section */}
         <motion.section
-          className="pt-20 pb-16 px-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          {...fadeInUp}
+          className="text-center space-y-8"
         >
-          <div className="max-w-4xl mx-auto">
-            <div className="grid lg:grid-cols-3 gap-12 items-start">
-              {/* Profile */}
-              <div className="lg:col-span-1">
-                <motion.div
-                  className="glass-card p-8 text-center sticky top-24 bg-[var(--background-color)]/80 backdrop-blur-md"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  <div className="mb-6">
-                    {aboutData.profileImage ? (
-                      <img
-                        src={aboutData.profileImage}
-                        alt={aboutData.profileImageAlt || aboutData.name}
-                        className="w-32 h-32 mx-auto rounded-full object-cover"
-                      />
-                    ) : (
-                      <KazeLogo animated size={128} className="w-32 h-32 mx-auto" />
-                    )}
-                  </div>
-
-                  <h1 className="text-2xl font-bold mb-2">{aboutData.name}</h1>
-                  <p className="text-[var(--secondary-text-color)] mb-4">{aboutData.title}</p>
-
-                  <div className="space-y-3 text-sm text-[var(--secondary-text-color)] mb-6">
-                    {aboutData.location && (
-                      <div className="flex items-center justify-center gap-2">
-                        <MapPin className="w-4 h-4" />
-                        <span>{aboutData.location}</span>
-                      </div>
-                    )}
-                    {aboutData.availability && (
-                      <div className="flex items-center justify-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{availabilityText[aboutData.availability]}</span>
-                      </div>
-                    )}
-                    {aboutData.funFact && (
-                      <div className="flex items-center justify-center gap-2">
-                        <Coffee className="w-4 h-4" />
-                        <span>{aboutData.funFact}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <SocialIcons className="justify-center" socialLinks={socialLinksArray} />
-                </motion.div>
-              </div>
-
-              {/* Content */}
-              <div className="lg:col-span-2 space-y-12">
-                <motion.div
-                  className="glass-card p-8 bg-[var(--background-color)]/80 backdrop-blur-md"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  <h2 className="text-3xl font-bold mb-6">About Me</h2>
-                  <div className="prose prose-lg max-w-none text-[var(--text-color)]">
-                    {aboutData.bio && aboutData.bio.length > 0 ? (
-                      <PortableText value={aboutData.bio} components={portableTextComponents} />
-                    ) : (
-                      <p className="text-[var(--secondary-text-color)]">
-                        Bio content will be added soon. Check back later!
-                      </p>
-                    )}
-                  </div>
-                </motion.div>
-
-                {/* Skills & Expertise */}
-                {aboutData.skills && aboutData.skills.length > 0 && (
-                  <motion.div
-                    className="glass-card p-8 bg-[var(--background-color)]/80 backdrop-blur-md"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                  >
-                    <h3 className="text-xl font-semibold mb-6">What I Do</h3>
-                    <div className="space-y-6">
-                      {aboutData.skills.map((skill, index) => (
-                        <div key={index}>
-                          <h4 className="font-semibold mb-2 text-[var(--accent-honey)]">{skill.area}</h4>
-                          <p className="text-[var(--secondary-text-color)] text-sm mb-2">{skill.description}</p>
-                          {skill.technologies && skill.technologies.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mt-2">
-                              {skill.technologies.map((tech, techIndex) => (
-                                <span
-                                  key={techIndex}
-                                  className="px-2 py-1 bg-[var(--accent-honey)]/10 text-[var(--accent-honey)] rounded text-xs"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-            </div>
+          {/* Brand Logo */}
+          <div className="flex justify-center mb-6">
+            <BrandLogo size={100} animated />
           </div>
-        </motion.section>
 
-        {/* Call to Action */}
-        <motion.section
-          className="py-20 px-6"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
-        >
-          <div className="max-w-4xl mx-auto text-center glass-card p-12 bg-[var(--background-color)]/80 backdrop-blur-md">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Work Together</h2>
-            <p className="text-lg text-[var(--secondary-text-color)] mb-8 leading-relaxed">
-              {aboutData.ctaText ||
-                "Interested in collaborating on meaningful projects? Let's connect and create something impactful together."}
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--accent-honey)] text-[var(--background-color)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/90 transition-all duration-200 hover:scale-105"
+          {/* Hero Title */}
+          <h1
+            className="font-bold leading-tight text-foreground"
+            style={{
+              fontSize: 'clamp(3rem, 5vw + 1rem, 5rem)',
+              fontWeight: 700
+            }}
+          >
+            {aboutData.heroTitle}
+          </h1>
+
+          {/* Hero Support */}
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            {aboutData.heroSupport}
+          </p>
+
+          {/* CTA Button */}
+          {aboutData.ctaEmail && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
-              Get In Touch
-            </Link>
-          </div>
+              <Link
+                href={`mailto:${aboutData.ctaEmail}`}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#EBA937] text-background font-semibold rounded-lg hover:bg-[#EBA937]/90 transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-[#EBA937] focus:outline-none min-h-[44px]"
+              >
+                <Mail size={20} />
+                Get In Touch
+              </Link>
+            </motion.div>
+          )}
         </motion.section>
+
+        {/* 3-Part Narrative (Positioning Framework) */}
+        {hasPositioning && (
+          <section className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2
+                className="font-semibold text-foreground"
+                style={{
+                  fontSize: 'clamp(2rem, 4vw + 0.5rem, 3.5rem)',
+                  fontWeight: 600
+                }}
+              >
+                My Approach
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Part 1: How I Think */}
+              {aboutData.positioning?.howIThink && (
+                <motion.article
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  whileHover={{
+                    borderColor: 'rgba(235, 169, 55, 0.3)',
+                    transition: { duration: 0.2 }
+                  }}
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                >
+                  {/* Noise texture overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none rounded-lg opacity-[0.03] mix-blend-overlay"
+                    style={{
+                      backgroundImage: 'url(/textures/noise.svg)',
+                      backgroundRepeat: 'repeat',
+                      backgroundSize: '200px 200px'
+                    }}
+                  />
+
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">How I Think</h3>
+                    <div className="prose prose-sm max-w-none text-muted-foreground">
+                      <PortableText
+                        value={aboutData.positioning.howIThink}
+                        components={portableTextComponents}
+                      />
+                    </div>
+                  </div>
+                </motion.article>
+              )}
+
+              {/* Part 2: What I Build */}
+              {aboutData.positioning?.whatIBuild && (
+                <motion.article
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  whileHover={{
+                    borderColor: 'rgba(235, 169, 55, 0.3)',
+                    transition: { duration: 0.2 }
+                  }}
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                >
+                  {/* Noise texture overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none rounded-lg opacity-[0.03] mix-blend-overlay"
+                    style={{
+                      backgroundImage: 'url(/textures/noise.svg)',
+                      backgroundRepeat: 'repeat',
+                      backgroundSize: '200px 200px'
+                    }}
+                  />
+
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">What I Build</h3>
+                    <div className="prose prose-sm max-w-none text-muted-foreground">
+                      <PortableText
+                        value={aboutData.positioning.whatIBuild}
+                        components={portableTextComponents}
+                      />
+                    </div>
+                  </div>
+                </motion.article>
+              )}
+
+              {/* Part 3: How I Work */}
+              {aboutData.positioning?.howIWork && (
+                <motion.article
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  whileHover={{
+                    borderColor: 'rgba(235, 169, 55, 0.3)',
+                    transition: { duration: 0.2 }
+                  }}
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                >
+                  {/* Noise texture overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none rounded-lg opacity-[0.03] mix-blend-overlay"
+                    style={{
+                      backgroundImage: 'url(/textures/noise.svg)',
+                      backgroundRepeat: 'repeat',
+                      backgroundSize: '200px 200px'
+                    }}
+                  />
+
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">How I Work</h3>
+                    <div className="prose prose-sm max-w-none text-muted-foreground">
+                      <PortableText
+                        value={aboutData.positioning.howIWork}
+                        components={portableTextComponents}
+                      />
+                    </div>
+                  </div>
+                </motion.article>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Bio Variant (Optional TL;DR) */}
+        {aboutData.bioVariants?.bio150 && (
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden max-w-4xl mx-auto"
+          >
+            {/* Noise texture overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none rounded-lg opacity-[0.03] mix-blend-overlay"
+              style={{
+                backgroundImage: 'url(/textures/noise.svg)',
+                backgroundRepeat: 'repeat',
+                backgroundSize: '200px 200px'
+              }}
+            />
+
+            <div className="relative z-10 text-center">
+              <h3 className="text-xl font-semibold mb-4 text-foreground">TL;DR</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {aboutData.bioVariants.bio150}
+              </p>
+            </div>
+          </motion.section>
+        )}
       </div>
     </div>
   )
