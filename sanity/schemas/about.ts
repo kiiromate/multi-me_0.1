@@ -6,6 +6,73 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'heroTitle',
+      title: 'Hero Title',
+      type: 'string',
+      description: 'Large title displayed in the hero section',
+    }),
+    defineField({
+      name: 'heroSupport',
+      title: 'Hero Support Text',
+      type: 'text',
+      rows: 2,
+      description: 'Supporting text displayed below the hero title',
+    }),
+    defineField({
+      name: 'positioning',
+      title: 'Positioning Framework',
+      type: 'object',
+      description: '3-Part Narrative: How you think, what you build, and how you work',
+      fields: [
+        {
+          name: 'howIThink',
+          title: 'How I Think (Advantage)',
+          type: 'array',
+          of: [{ type: 'block' }],
+          description: 'Your unique perspective and approach to problem-solving',
+        },
+        {
+          name: 'whatIBuild',
+          title: 'What I Build (Operating Model)',
+          type: 'array',
+          of: [{ type: 'block' }],
+          description: 'The types of solutions and systems you create',
+        },
+        {
+          name: 'howIWork',
+          title: 'How I Work (Focus)',
+          type: 'array',
+          of: [{ type: 'block' }],
+          description: 'Your working style, process, and collaboration approach',
+        },
+      ],
+    }),
+    defineField({
+      name: 'bioVariants',
+      title: 'Bio Variants',
+      type: 'object',
+      fields: [
+        {
+          name: 'oneLiner',
+          title: 'One-Liner Bio',
+          type: 'string',
+          description: 'Used for metadata and short intros',
+        },
+        {
+          name: 'short',
+          title: 'Short Bio',
+          type: 'text',
+          rows: 4,
+        },
+        {
+          name: 'full',
+          title: 'Full Bio',
+          type: 'array',
+          of: [{ type: 'block' }],
+        },
+      ],
+    }),
+    defineField({
       name: 'name',
       title: 'Name',
       type: 'string',
@@ -19,10 +86,10 @@ export default defineType({
     }),
     defineField({
       name: 'bio',
-      title: 'Bio',
+      title: 'Legacy Bio (Deprecated)',
       type: 'array',
       of: [{ type: 'block' }],
-      validation: (Rule) => Rule.required(),
+      hidden: true,
     }),
     defineField({
       name: 'location',

@@ -114,6 +114,7 @@ export const postBySlugQuery = groq`
 `
 
 // About
+// About
 export const aboutQuery = groq`
   *[_type == "about"][0] {
     _id,
@@ -134,6 +135,10 @@ export const aboutQuery = groq`
     ctaEmail,
     name,
     title,
+    heroTitle,
+    heroSupport,
+    positioning,
+    bioVariants,
     bio,
     location,
     availability,
@@ -152,5 +157,24 @@ export const capabilitiesQuery = groq`
     title,
     description,
     iconName
+  }
+`
+
+export const projectsByLaneQuery = groq`
+  *[_type == "project" && category == $category] | order(order asc, year desc) {
+    _id,
+    title,
+    slug,
+    description,
+    category,
+    mainImage {
+      asset->,
+      alt
+    },
+    tags,
+    status,
+    year,
+    liveUrl,
+    githubUrl
   }
 `

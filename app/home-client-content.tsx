@@ -6,7 +6,7 @@ import GlassCard from "@/components/ui/glass-card"
 import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
 import { CapabilitiesGrid } from "@/components/home/capabilities-grid"
-import type { Capability } from "@/types/sanity"
+import type { Capability, About } from "@/types/sanity"
 
 interface Project {
   _id: string
@@ -37,6 +37,7 @@ interface Post {
 interface HomeClientContentProps {
   featuredProjects: Project[]
   featuredPosts: Post[]
+  aboutData?: About | null
   capabilities?: Capability[]
 }
 

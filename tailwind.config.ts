@@ -52,6 +52,7 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        honey: "#EBA937",
         "accent-honey": "#EBA937",
         "background-light": "#F3F4F6",
         "text-light": "#111827",

@@ -6,6 +6,25 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'category',
+      title: 'Category Lane',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Commercial', value: 'commercial' },
+          { title: 'Personal', value: 'personal' },
+          { title: 'Experimental', value: 'experimental' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'caseStudy',
+      title: 'Case Study',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',

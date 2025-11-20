@@ -8,6 +8,7 @@
   --text-color: #111827;
   --secondary-text-color: #4b5563;
   --accent-honey: #eba937;
+  --honey: #eba937;
   --subtle-border-color: #e5e7eb;
   --content-bg-color-rgb: 243, 244, 246;
   --blur-intensity-main: 10px;
@@ -141,6 +142,45 @@ body {
 /* Generous paragraph spacing */
 p + p {
   margin-top: 1.5rem;
+}
+
+/* Fluid Typography System - SOTA Standards */
+h1 {
+  font-size: clamp(3rem, 5vw + 1rem, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+/* Noise Texture Utility - Subtle grain for glassmorphism */
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
+  background-repeat: repeat;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* Ensure content stays above noise texture */
+.bg-noise > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* Enhanced glass morphism effects with better contrast */

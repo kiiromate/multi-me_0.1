@@ -28,7 +28,17 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false,
 })
 
-export const metadata: Metadata = generateSEO()
+import { client } from "@/lib/sanity/client"
+import { aboutQuery } from "@/lib/sanity/queries"
+import { About } from "@/types/sanity"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await client.fetch<About>(aboutQuery)
+
+  return generateSEO({
+    description: about?.bioVariants?.oneLiner,
+  })
+}
 
 export const viewport: Viewport = {
   width: "device-width",
