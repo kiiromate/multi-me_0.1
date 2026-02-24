@@ -2,15 +2,7 @@ import { client } from "@/lib/sanity/client"
 import { featuredProjectsQuery, featuredPostsQuery, aboutQuery, capabilitiesQuery } from "@/lib/sanity/queries"
 import { safeFetch } from "@/lib/sanity/error-handling"
 import HomeClientContent from "./home-client-content"
-import dynamic from "next/dynamic"
-
-const HeroCanvas = dynamic(
-  () => import("@/components/animations/hero-animation").then((mod) => mod.HeroAnimation),
-  {
-    ssr: false,
-    loading: () => <div className="fixed inset-0 -z-10 bg-[var(--background-color)]" />,
-  }
-)
+import { HeroCanvasClient } from "@/components/animations/hero-canvas-client"
 
 export default async function HomePage() {
   // Fetch featured projects, posts, about data, and capabilities from Sanity with error handling
@@ -25,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroCanvas />
+      <HeroCanvasClient />
       <HomeClientContent
         featuredProjects={featuredProjects}
         featuredPosts={featuredPosts}

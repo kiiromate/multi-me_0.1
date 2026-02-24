@@ -28,8 +28,6 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false,
 })
 
-import { client } from "@/lib/sanity/client"
-import { aboutQuery } from "@/lib/sanity/queries"
 import { About } from "@/types/sanity"
 
 export async function generateMetadata(): Promise<Metadata> {
