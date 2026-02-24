@@ -293,40 +293,40 @@ export const structure = (S: any) =>
 **File:** `components/ui/brand-logo.tsx`
 
 **Subtasks:**
-- [ ] Create component file with TypeScript
-- [ ] **MANDATORY: Implement using SVG** (not CSS Grid)
-- [ ] Design geometric "X" cross structure:
-  - [ ] Create SVG with viewBox (e.g., `0 0 100 100`)
-  - [ ] Draw "X" cross with thick, architectural lines
-  - [ ] Define stroke width for X (8-12 units in SVG space)
-  - [ ] Position letters K, A, Z, E in negative space gaps
-  - [ ] **CRITICAL: Match letter stroke width to X stroke width exactly**
-  - [ ] Use `<text>` elements with matching `stroke-width` OR custom path-based letters
-- [ ] Implement size variants:
-  - [ ] 'sm': 40px
-  - [ ] 'md': 60px
-  - [ ] 'lg': 80px
-- [ ] Add Framer Motion hover interaction:
-  - [ ] **SPECIFIC: Letters animate outward from center by 2-4px**
-  - [ ] K moves left (-2 to -4px on x-axis)
-  - [ ] A moves up (-2 to -4px on y-axis)
-  - [ ] Z moves down (+2 to +4px on y-axis)
-  - [ ] E moves right (+2 to +4px on x-axis)
-  - [ ] Use `motion.svg`, `motion.text`, or `motion.g`
-  - [ ] Duration: 250ms
-  - [ ] Easing: ease-out
-  - [ ] Use `transform: translate()` only (GPU-accelerated)
-- [ ] Ensure theme compatibility:
-  - [ ] Use `currentColor` for stroke/fill
-  - [ ] Test in both dark and light modes
-- [ ] Add accessibility:
-  - [ ] Wrap SVG with `role="img"`
-  - [ ] Add `aria-label="Kaze Keza Logo"`
-- [ ] Add SVG optimization:
-  - [ ] `shape-rendering="geometricPrecision"` for crisp rendering
-- [ ] Test at all size variants
-- [ ] Verify no layout shift on hover
-- [ ] Verify stroke width consistency across all elements
+- [x] Create component file with TypeScript
+- [x] **MANDATORY: Implement using SVG** (not CSS Grid)
+- [x] Design geometric "X" cross structure:
+  - [x] Create SVG with viewBox (e.g., `0 0 100 100`)
+  - [x] Draw "X" cross with thick, architectural lines
+  - [x] Define stroke width for X (8-12 units in SVG space)
+  - [x] Position letters K, A, Z, E in negative space gaps
+  - [x] **CRITICAL: Match letter stroke width to X stroke width exactly**
+  - [x] Use `<text>` elements with matching `stroke-width` OR custom path-based letters
+- [x] Implement size variants:
+  - [x] 'sm': 40px
+  - [x] 'md': 60px
+  - [x] 'lg': 80px
+- [x] Add Framer Motion hover interaction:
+  - [x] **SPECIFIC: Letters animate outward from center by 2-4px**
+  - [x] K moves left (-2 to -4px on x-axis)
+  - [x] A moves up (-2 to -4px on y-axis)
+  - [x] Z moves down (+2 to +4px on y-axis)
+  - [x] E moves right (+2 to +4px on x-axis)
+  - [x] Use `motion.svg`, `motion.text`, or `motion.g`
+  - [x] Duration: 250ms
+  - [x] Easing: ease-out
+  - [x] Use `transform: translate()` only (GPU-accelerated)
+- [x] Ensure theme compatibility:
+  - [x] Use `currentColor` for stroke/fill
+  - [x] Test in both dark and light modes
+- [x] Add accessibility:
+  - [x] Wrap SVG with `role="img"`
+  - [x] Add `aria-label="Kaze Keza Logo"`
+- [x] Add SVG optimization:
+  - [x] `shape-rendering="geometricPrecision"` for crisp rendering
+- [x] Test at all size variants
+- [x] Verify no layout shift on hover
+- [x] Verify stroke width consistency across all elements
 
 **Props Interface:**
 ```typescript
@@ -353,25 +353,25 @@ interface BrandLogoProps {
 **File:** `components/layout/footer.tsx`
 
 **Subtasks:**
-- [ ] Create component file with TypeScript
-- [ ] Implement layout structure (centered or three-column)
-- [ ] Add one-liner bio section:
-  - [ ] Accept bio text as prop
-  - [ ] Style with muted text color
-- [ ] Add social links section:
-  - [ ] GitHub icon and link
-  - [ ] LinkedIn icon and link
-  - [ ] X/Twitter icon and link
-  - [ ] Implement hover state (transition to honey color)
-  - [ ] Add aria-labels for accessibility
-  - [ ] Set external link attributes: `target="_blank" rel="noopener noreferrer"`
-- [ ] Add copyright section:
-  - [ ] Dynamic year: `new Date().getFullYear()`
-  - [ ] Format: "© 2024 Kaze Keza. All rights reserved."
-- [ ] Style with minimalist design
-- [ ] Add subtle border-top separator
-- [ ] Test keyboard navigation
-- [ ] Verify focus states are visible
+- [x] Create component file with TypeScript
+- [x] Implement layout structure (centered or three-column)
+- [x] Add one-liner bio section:
+  - [x] Accept bio text as prop
+  - [x] Style with muted text color
+- [x] Add social links section:
+  - [x] GitHub icon and link
+  - [x] LinkedIn icon and link
+  - [x] X/Twitter icon and link
+  - [x] Implement hover state (transition to honey color)
+  - [x] Add aria-labels for accessibility
+  - [x] Set external link attributes: `target="_blank" rel="noopener noreferrer"`
+- [x] Add copyright section:
+  - [x] Dynamic year: `new Date().getFullYear()`
+  - [x] Format: "© 2024 Kaze Keza. All rights reserved."
+- [x] Style with minimalist design
+- [x] Add subtle border-top separator
+- [x] Test keyboard navigation
+- [x] Verify focus states are visible
 
 **Props Interface:**
 ```typescript
@@ -400,17 +400,17 @@ interface FooterProps {
 **File:** `public/textures/noise.png` or inline SVG
 
 **Subtasks:**
-- [ ] Generate or source seamless noise texture:
-  - [ ] Size: 512x512px (or smaller if SVG)
-  - [ ] Pattern: Fine grain (1-2px grain size)
-  - [ ] Format: PNG or SVG
-  - [ ] Seamless tileable pattern
-- [ ] Optimize file size:
-  - [ ] Target: < 50KB
-  - [ ] Use PNG compression or SVG optimization
-- [ ] Alternative: Create inline SVG noise filter
-- [ ] Test texture at different opacities (2-4%)
-- [ ] Verify seamless tiling
+- [x] Generate or source seamless noise texture:
+  - [x] Size: 512x512px (or smaller if SVG)
+  - [x] Pattern: Fine grain (1-2px grain size)
+  - [x] Format: PNG or SVG
+  - [x] Seamless tileable pattern
+- [x] Optimize file size:
+  - [x] Target: < 50KB
+  - [x] Use PNG compression or SVG optimization
+- [x] Alternative: Create inline SVG noise filter
+- [x] Test texture at different opacities (2-4%)
+- [x] Verify seamless tiling
 
 **Acceptance Criteria:**
 - Noise texture is created and optimized
@@ -425,37 +425,37 @@ interface FooterProps {
 **File:** `components/home/capabilities-grid.tsx`
 
 **Subtasks:**
-- [ ] Create component file with TypeScript
-- [ ] Implement responsive grid layout:
-  - [ ] Mobile: 1 column (1x6 grid)
-  - [ ] Desktop: 2 columns (2x3 grid)
-  - [ ] Use Tailwind breakpoints: `grid-cols-1 md:grid-cols-2`
-- [ ] Style cells with Bento Box aesthetic:
-  - [ ] Apply glassmorphism: `backdrop-blur-md bg-background/50`
-  - [ ] **Add noise texture overlay at 2-4% opacity**
-  - [ ] Implementation options:
-    - [ ] CSS `background-image` with noise texture
-    - [ ] Pseudo-element `::before` with noise overlay
-    - [ ] SVG filter applied to card
-  - [ ] Blend mode: `overlay` or `soft-light`
-  - [ ] Add subtle border: `border border-border/50`
-  - [ ] Set padding: `p-6`
-  - [ ] Set gap: `gap-4`
-- [ ] Implement cell content:
-  - [ ] Dynamic Lucide icon based on `iconName`
-  - [ ] Title with medium font weight
-  - [ ] Description with muted color (max 2 lines)
-- [ ] Add Framer Motion hover interaction:
-  - [ ] Border glow effect on hover
-  - [ ] Use honey accent at low opacity
-  - [ ] Smooth transition (200ms)
-- [ ] Implement focus states for keyboard navigation:
-  - [ ] Visible focus ring: `ring-2 ring-honey`
-  - [ ] Ensure 44px minimum touch target
-- [ ] Add reduced motion support
-- [ ] Test with sample data
-- [ ] Verify no CLS issues
-- [ ] Verify noise texture is visible but subtle
+- [x] Create component file with TypeScript
+- [x] Implement responsive grid layout:
+  - [x] Mobile: 1 column (1x6 grid)
+  - [x] Desktop: 2 columns (2x3 grid)
+  - [x] Use Tailwind breakpoints: `grid-cols-1 md:grid-cols-2`
+- [x] Style cells with Bento Box aesthetic:
+  - [x] Apply glassmorphism: `backdrop-blur-md bg-background/50`
+  - [x] **Add noise texture overlay at 2-4% opacity**
+  - [x] Implementation options:
+    - [x] CSS `background-image` with noise texture
+    - [x] Pseudo-element `::before` with noise overlay
+    - [x] SVG filter applied to card
+  - [x] Blend mode: `overlay` or `soft-light`
+  - [x] Add subtle border: `border border-border/50`
+  - [x] Set padding: `p-6`
+  - [x] Set gap: `gap-4`
+- [x] Implement cell content:
+  - [x] Dynamic Lucide icon based on `iconName`
+  - [x] Title with medium font weight
+  - [x] Description with muted color (max 2 lines)
+- [x] Add Framer Motion hover interaction:
+  - [x] Border glow effect on hover
+  - [x] Use honey accent at low opacity
+  - [x] Smooth transition (200ms)
+- [x] Implement focus states for keyboard navigation:
+  - [x] Visible focus ring: `ring-2 ring-honey`
+  - [x] Ensure 44px minimum touch target
+- [x] Add reduced motion support
+- [x] Test with sample data
+- [x] Verify no CLS issues
+- [x] Verify noise texture is visible but subtle
 
 **Props Interface:**
 ```typescript
@@ -479,19 +479,19 @@ interface CapabilitiesGridProps {
 ### Task B6: Data Integration
 
 **Subtasks:**
-- [ ] Update homepage to fetch capabilities data:
-  - [ ] Import `capabilitiesQuery` from `lib/sanity/queries.ts`
-  - [ ] Fetch data in server component
-  - [ ] Pass data to `CapabilitiesGrid` component
-- [ ] Update footer to fetch bio data:
-  - [ ] Import `aboutQuery` from `lib/sanity/queries.ts`
-  - [ ] Extract `bioVariants.oneLiner`
-  - [ ] Pass to `Footer` component
-- [ ] Update hero section to use new about fields:
-  - [ ] Fetch `heroTitle` and `heroSupport`
-  - [ ] Render with H1 typography
-- [ ] Test data flow from Sanity to components
-- [ ] Handle loading and error states gracefully
+- [x] Update homepage to fetch capabilities data:
+  - [x] Import `capabilitiesQuery` from `lib/sanity/queries.ts`
+  - [x] Fetch data in server component
+  - [x] Pass data to `CapabilitiesGrid` component
+- [x] Update footer to fetch bio data:
+  - [x] Import `aboutQuery` from `lib/sanity/queries.ts`
+  - [x] Extract `bioVariants.oneLiner`
+  - [x] Pass to `Footer` component
+- [x] Update hero section to use new about fields:
+  - [x] Fetch `heroTitle` and `heroSupport`
+  - [x] Render with H1 typography
+- [x] Test data flow from Sanity to components
+- [x] Handle loading and error states gracefully
 
 **Acceptance Criteria:**
 - All components receive correct data from Sanity
@@ -506,47 +506,47 @@ interface CapabilitiesGridProps {
 **File:** `app/about/page.tsx`
 
 **Subtasks:**
-- [ ] Create About page file with TypeScript
-- [ ] Fetch About data using `aboutQuery`
-- [ ] Implement page structure:
-  - [ ] **Section 1: Hero**
-    - [ ] Display `heroTitle` as H1 with fluid typography
-    - [ ] Display `heroSupport` as supporting text
-    - [ ] Optional: Include Brand Logo component
-    - [ ] CTA: Email button using `ctaEmail`
-  - [ ] **Section 2: 3-Part Narrative (Positioning Framework)**
-    - [ ] **Part 1: How I Think (Advantage)**
-      - [ ] Heading: "How I Think" (H2)
-      - [ ] Content: Render `positioning.howIThink` block content
-      - [ ] Wrap in glassmorphism card with noise texture
-    - [ ] **Part 2: What I Build (Operating Model)**
-      - [ ] Heading: "What I Build" (H2)
-      - [ ] Content: Render `positioning.whatIBuild` block content
-      - [ ] Wrap in glassmorphism card with noise texture
-    - [ ] **Part 3: How I Work (Focus)**
-      - [ ] Heading: "How I Work" (H2)
-      - [ ] Content: Render `positioning.howIWork` block content
-      - [ ] Wrap in glassmorphism card with noise texture
-  - [ ] **Section 3: Bio Variants (Optional)**
-    - [ ] Display one or more bio variants if needed
-    - [ ] Could be "Quick Facts" or "TL;DR" section
-- [ ] Style with consistent visual treatment:
-  - [ ] Vertical flow with generous whitespace
-  - [ ] Each positioning section in glassmorphism card
-  - [ ] Apply noise texture overlay (2-4% opacity)
-  - [ ] Subtle hover effects on cards (border glow or lift)
-  - [ ] Responsive: Single column mobile, potentially multi-column desktop
-- [ ] Implement Portable Text renderer for block content:
-  - [ ] Install/use `@portabletext/react` if not already available
-  - [ ] Configure custom components for headings, lists, links
-  - [ ] Ensure proper typography hierarchy
-- [ ] Add accessibility:
-  - [ ] Semantic HTML: `<section>`, `<article>`, proper heading hierarchy
-  - [ ] Skip links for long content
-  - [ ] Keyboard navigable CTA button
-- [ ] Test with real Sanity data
-- [ ] Verify responsive layout
-- [ ] Ensure no CLS issues
+- [x] Create About page file with TypeScript
+- [x] Fetch About data using `aboutQuery`
+- [x] Implement page structure:
+  - [x] **Section 1: Hero**
+    - [x] Display `heroTitle` as H1 with fluid typography
+    - [x] Display `heroSupport` as supporting text
+    - [x] Optional: Include Brand Logo component
+    - [x] CTA: Email button using `ctaEmail`
+  - [x] **Section 2: 3-Part Narrative (Positioning Framework)**
+    - [x] **Part 1: How I Think (Advantage)**
+      - [x] Heading: "How I Think" (H2)
+      - [x] Content: Render `positioning.howIThink` block content
+      - [x] Wrap in glassmorphism card with noise texture
+    - [x] **Part 2: What I Build (Operating Model)**
+      - [x] Heading: "What I Build" (H2)
+      - [x] Content: Render `positioning.whatIBuild` block content
+      - [x] Wrap in glassmorphism card with noise texture
+    - [x] **Part 3: How I Work (Focus)**
+      - [x] Heading: "How I Work" (H2)
+      - [x] Content: Render `positioning.howIWork` block content
+      - [x] Wrap in glassmorphism card with noise texture
+  - [x] **Section 3: Bio Variants (Optional)**
+    - [x] Display one or more bio variants if needed
+    - [x] Could be "Quick Facts" or "TL;DR" section
+- [x] Style with consistent visual treatment:
+  - [x] Vertical flow with generous whitespace
+  - [x] Each positioning section in glassmorphism card
+  - [x] Apply noise texture overlay (2-4% opacity)
+  - [x] Subtle hover effects on cards (border glow or lift)
+  - [x] Responsive: Single column mobile, potentially multi-column desktop
+- [x] Implement Portable Text renderer for block content:
+  - [x] Install/use `@portabletext/react` if not already available
+  - [x] Configure custom components for headings, lists, links
+  - [x] Ensure proper typography hierarchy
+- [x] Add accessibility:
+  - [x] Semantic HTML: `<section>`, `<article>`, proper heading hierarchy
+  - [x] Skip links for long content
+  - [x] Keyboard navigable CTA button
+- [x] Test with real Sanity data
+- [x] Verify responsive layout
+- [x] Ensure no CLS issues
 
 **Acceptance Criteria:**
 - About page displays all positioning content
@@ -564,39 +564,39 @@ interface CapabilitiesGridProps {
 **File:** `app/not-found.tsx`
 
 **Subtasks:**
-- [ ] Create 404 page file with TypeScript
-- [ ] Design deconstructed Brand Logo:
-  - [ ] Reuse Brand Logo component with `deconstructed` or `broken` prop variant
-  - [ ] OR create separate SVG with fragmented design
-  - [ ] Creative interpretation:
-    - [ ] X cross is broken, fragmented, or separated
-    - [ ] Letters K, A, Z, E are scattered or misaligned
-    - [ ] Letters could be rotated at random angles
-    - [ ] Letters could be displaced from positions
-    - [ ] Letters could be faded or partially transparent
-- [ ] Add subtle animation:
-  - [ ] Use Framer Motion for gentle floating or rotation
-  - [ ] Animate broken logo pieces independently
-  - [ ] Keep animation subtle and non-distracting
-  - [ ] Respect `prefers-reduced-motion`
-- [ ] Implement page content:
-  - [ ] Heading: "404" or "Page Not Found" (H1)
-  - [ ] Subheading: Friendly message (e.g., "This page seems to have wandered off")
-  - [ ] CTA: Link back to homepage with honey accent button
-  - [ ] Optional: Popular links or site navigation
-- [ ] Style with centered layout:
-  - [ ] Deconstructed logo as hero element
-  - [ ] Text below logo
-  - [ ] CTA button with honey accent
-  - [ ] Maintain brand consistency
-- [ ] Ensure accessibility:
-  - [ ] Proper heading hierarchy
-  - [ ] Keyboard navigable CTA
-  - [ ] Screen reader friendly
-- [ ] Test 404 behavior:
-  - [ ] Verify Next.js returns proper HTTP 404 status
-  - [ ] Test by navigating to non-existent route
-- [ ] Maintain playful but professional tone
+- [x] Create 404 page file with TypeScript
+- [x] Design deconstructed Brand Logo:
+  - [x] Reuse Brand Logo component with `deconstructed` or `broken` prop variant
+  - [x] OR create separate SVG with fragmented design
+  - [x] Creative interpretation:
+    - [x] X cross is broken, fragmented, or separated
+    - [x] Letters K, A, Z, E are scattered or misaligned
+    - [x] Letters could be rotated at random angles
+    - [x] Letters could be displaced from positions
+    - [x] Letters could be faded or partially transparent
+- [x] Add subtle animation:
+  - [x] Use Framer Motion for gentle floating or rotation
+  - [x] Animate broken logo pieces independently
+  - [x] Keep animation subtle and non-distracting
+  - [x] Respect `prefers-reduced-motion`
+- [x] Implement page content:
+  - [x] Heading: "404" or "Page Not Found" (H1)
+  - [x] Subheading: Friendly message (e.g., "This page seems to have wandered off")
+  - [x] CTA: Link back to homepage with honey accent button
+  - [x] Optional: Popular links or site navigation
+- [x] Style with centered layout:
+  - [x] Deconstructed logo as hero element
+  - [x] Text below logo
+  - [x] CTA button with honey accent
+  - [x] Maintain brand consistency
+- [x] Ensure accessibility:
+  - [x] Proper heading hierarchy
+  - [x] Keyboard navigable CTA
+  - [x] Screen reader friendly
+- [x] Test 404 behavior:
+  - [x] Verify Next.js returns proper HTTP 404 status
+  - [x] Test by navigating to non-existent route
+- [x] Maintain playful but professional tone
 
 **Acceptance Criteria:**
 - 404 page displays deconstructed Brand Logo
@@ -612,30 +612,30 @@ interface CapabilitiesGridProps {
 ### Task B9: Visual Standards Validation
 
 **Subtasks:**
-- [ ] Run Lighthouse audit:
-  - [ ] Check CLS score (target: < 0.1)
-  - [ ] Check accessibility score (target: 100)
-  - [ ] Check performance score
-- [ ] Test keyboard navigation:
-  - [ ] All interactive elements are reachable
-  - [ ] Focus indicators are visible
-  - [ ] Tab order is logical
-- [ ] Test reduced motion:
-  - [ ] Animations respect `prefers-reduced-motion`
-  - [ ] Functionality remains intact
-- [ ] Test color contrast:
-  - [ ] All text meets WCAG AA standards (4.5:1)
-  - [ ] Test in both dark and light themes
-- [ ] Test touch targets:
-  - [ ] All interactive elements are at least 44x44px
-  - [ ] Adequate spacing between elements
-- [ ] Verify no layout shifts:
-  - [ ] Reserve space for dynamic content
-  - [ ] Use transforms for animations
-- [ ] Test across devices:
-  - [ ] Mobile (320px - 768px)
-  - [ ] Tablet (768px - 1024px)
-  - [ ] Desktop (1024px+)
+- [x] Run Lighthouse audit:
+  - [x] Check CLS score (target: < 0.1)
+  - [x] Check accessibility score (target: 100)
+  - [x] Check performance score
+- [x] Test keyboard navigation:
+  - [x] All interactive elements are reachable
+  - [x] Focus indicators are visible
+  - [x] Tab order is logical
+- [x] Test reduced motion:
+  - [x] Animations respect `prefers-reduced-motion`
+  - [x] Functionality remains intact
+- [x] Test color contrast:
+  - [x] All text meets WCAG AA standards (4.5:1)
+  - [x] Test in both dark and light themes
+- [x] Test touch targets:
+  - [x] All interactive elements are at least 44x44px
+  - [x] Adequate spacing between elements
+- [x] Verify no layout shifts:
+  - [x] Reserve space for dynamic content
+  - [x] Use transforms for animations
+- [x] Test across devices:
+  - [x] Mobile (320px - 768px)
+  - [x] Tablet (768px - 1024px)
+  - [x] Desktop (1024px+)
 
 **Acceptance Criteria:**
 - CLS score < 0.1

@@ -2,11 +2,20 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import dynamic from "next/dynamic"
 import GlassCard from "@/components/ui/glass-card"
 import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
 import { CapabilitiesGrid } from "@/components/home/capabilities-grid"
 import type { Capability, About } from "@/types/sanity"
+
+const HeroCanvas = dynamic(
+  () => import("@/components/animations/hero-animation").then((mod) => mod.HeroAnimation),
+  {
+    ssr: false,
+    loading: () => <div className="fixed inset-0 -z-10 bg-[var(--background-color)]" />,
+  }
+)
 
 interface Project {
   _id: string
@@ -60,7 +69,7 @@ export default function HomeClientContent({ featuredProjects, featuredPosts, abo
             {heroTitle}
           </h1>
 
-          <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed whitespace-pre-line">
             {heroSupport}
           </p>
         </motion.div>
@@ -111,9 +120,22 @@ export default function HomeClientContent({ featuredProjects, featuredPosts, abo
         </section>
       )}
 
-      {/* Fallback to original layout if no capabilities provided */}
+      {/* Fallback to original About Preview if no capabilities provided */}
       {(!capabilities || capabilities.length === 0) && (
         <section className="space-y-8 sm:space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-4"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">About Me</h2>
+            <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
+              A multifaceted creator at the intersection of data, design, and technology
+            </p>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -150,7 +172,6 @@ export default function HomeClientContent({ featuredProjects, featuredPosts, abo
           </motion.div>
         </section>
       )}
-
 
       {/* Featured Projects */}
       <section className="space-y-8 sm:space-y-12">

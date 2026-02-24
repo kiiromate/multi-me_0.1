@@ -1,11 +1,12 @@
-import { HeroSkeleton, FeaturedProjectsSkeleton, BlogPostsSkeleton } from "@/components/loading-skeletons"
+import { BrandLogo } from "@/components/ui/brand-logo"
 
-export default function HomeLoading() {
+export default function Loading() {
   return (
-    <div className="space-y-16 sm:space-y-24 py-8 sm:py-16">
-      <HeroSkeleton />
-      <FeaturedProjectsSkeleton />
-      <BlogPostsSkeleton />
+    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[var(--background-color)]/80 backdrop-blur-md">
+      <BrandLogo size="lg" animated={true} />
+      <p className="mt-6 text-sm font-medium tracking-widest uppercase text-[var(--secondary-text-color)] animate-pulse">
+        Loading
+      </p>
     </div>
   )
 }
