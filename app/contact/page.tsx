@@ -4,8 +4,15 @@ import { motion } from "framer-motion"
 import { Send } from "lucide-react"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
+import { usePathname } from "next/navigation"
+import { getLocaleFromPathname } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 export default function ContactPage() {
+  const pathname = usePathname() || "/"
+  const locale = getLocaleFromPathname(pathname)
+  const messages = getMessages(locale)
+
   return (
     <div className="relative z-10 min-h-screen">
       {/* Enhanced background for better readability */}
@@ -20,10 +27,9 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Let's Work Together</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{messages.contact.heroTitle}</h1>
             <p className="text-xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed">
-              Ready to transform your ideas into compelling digital experiences? I'd love to hear about your project and
-              explore how we can create something meaningful together.
+              {messages.contact.heroBody}
             </p>
           </motion.div>
 
@@ -38,9 +44,9 @@ export default function ContactPage() {
               >
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                   <Send className="w-6 h-6 text-[var(--accent-honey)]" />
-                  Send a Message
+                  {messages.contact.sendMessageTitle}
                 </h2>
-                <ContactForm />
+                <ContactForm locale={locale} />
               </motion.div>
             </div>
 
@@ -52,7 +58,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <ContactInfo />
+                <ContactInfo locale={locale} />
               </motion.div>
             </div>
           </div>

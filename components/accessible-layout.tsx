@@ -23,7 +23,7 @@ export function AccessibleLayout({ children, className = "" }: AccessibleLayoutP
       </main>
 
       {/* Footer */}
-      <Footer className="mt-auto" />
+      <Footer locale="en" className="mt-auto" />
     </div>
   )
 }

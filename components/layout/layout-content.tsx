@@ -6,16 +6,18 @@ import LoadingAnimation from "@/components/animations/loading-animation"
 import Header from "./header"
 import { Footer } from "./footer"
 import type { SocialLinks } from "@/types/sanity"
+import type { AppLocale } from "@/lib/i18n/config"
 
 interface LayoutContentProps {
   children: React.ReactNode
+  locale: AppLocale
   footerData?: {
     oneLiner?: string
     socialLinks?: SocialLinks
   }
 }
 
-export default function LayoutContent({ children, footerData }: LayoutContentProps) {
+export default function LayoutContent({ children, locale, footerData }: LayoutContentProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleLoadingComplete = () => {
@@ -55,6 +57,7 @@ export default function LayoutContent({ children, footerData }: LayoutContentPro
         </main>
 
         <Footer
+          locale={locale}
           oneLiner={footerData?.oneLiner}
           socialLinks={footerData?.socialLinks}
         />

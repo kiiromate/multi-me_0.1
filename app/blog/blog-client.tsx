@@ -5,6 +5,9 @@ import { Calendar, Clock, ArrowRight, Search, Tag } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { format } from "date-fns"
+import { enUS, fr as frLocale } from "date-fns/locale"
+import { AppLocale, localizePath } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -34,10 +37,13 @@ interface Post {
 }
 
 interface BlogClientProps {
+  locale: AppLocale
   posts: Post[]
 }
 
-export function BlogClient({ posts }: BlogClientProps) {
+export function BlogClient({ locale, posts }: BlogClientProps) {
+  const messages = getMessages(locale)
+  const dateLocale = locale === "fr" ? frLocale : enUS
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
@@ -69,11 +75,10 @@ export function BlogClient({ posts }: BlogClientProps) {
       >
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Thoughts &<span className="accent-text"> Insights</span>
+            {messages.blog.titleLead}<span className="accent-text"> {messages.blog.titleAccent}</span>
           </h1>
           <p className="text-xl text-[var(--secondary-text-color)] leading-relaxed mb-8">
-            Exploring the intersection of technology, design, and environmental consciousness. Sharing learnings from
-            the journey of building more sustainable and meaningful digital experiences.
+            {messages.blog.intro}
           </p>
 
           {/* Search */}
@@ -82,7 +87,7 @@ export function BlogClient({ posts }: BlogClientProps) {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--secondary-text-color)] w-5 h-5" />
               <input
                 type="text"
-                placeholder="Search articles..."
+                placeholder={messages.blog.searchPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 bg-[var(--background-color)]/80 border border-[var(--subtle-border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent backdrop-blur-sm"
@@ -100,7 +105,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                       : "bg-[var(--background-color)]/80 text-[var(--text-color)] hover:bg-[var(--accent-honey)]/10 border border-[var(--subtle-border-color)]"
                   }`}
                 >
-                  All
+                  {messages.blog.allFilter}
                 </button>
                 {allTags.map((tag) => (
                   <button
@@ -132,7 +137,7 @@ export function BlogClient({ posts }: BlogClientProps) {
         >
           <div className="max-w-6xl mx-auto">
             <motion.h2 className="text-3xl font-bold mb-12 text-center" variants={fadeInUp}>
-              Featured Articles
+              {messages.blog.featuredArticles}
             </motion.h2>
 
             <div className="grid lg:grid-cols-2 gap-8">
@@ -165,14 +170,14 @@ export function BlogClient({ posts }: BlogClientProps) {
                     <div className="flex items-center gap-4 text-sm text-[var(--secondary-text-color)] mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {format(new Date(post.publishedAt), "MMMM d, yyyy")}
+                        {format(new Date(post.publishedAt), "MMMM d, yyyy", { locale: dateLocale })}
                       </span>
                       {post.readTime && (
                         <>
                           <span>•</span>
                           <span className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
-                            {post.readTime} min read
+                            {post.readTime} {messages.blog.minRead}
                           </span>
                         </>
                       )}
@@ -197,10 +202,10 @@ export function BlogClient({ posts }: BlogClientProps) {
                     </div>
 
                     <Link
-                      href={`/blog/${post.slug.current}`}
+                      href={localizePath(`/blog/${post.slug.current}`, locale)}
                       className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
                     >
-                      Read Full Article
+                      {messages.blog.readFullArticle}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -222,7 +227,7 @@ export function BlogClient({ posts }: BlogClientProps) {
         >
           <div className="max-w-6xl mx-auto">
             <motion.h2 className="text-3xl font-bold mb-12 text-center" variants={fadeInUp}>
-              All Articles
+              {messages.blog.allArticles}
             </motion.h2>
 
             <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer}>
@@ -237,15 +242,15 @@ export function BlogClient({ posts }: BlogClientProps) {
                   <div className="flex items-center gap-4 text-sm text-[var(--secondary-text-color)] mb-4">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {format(new Date(post.publishedAt), "MMM d")}
+                      {format(new Date(post.publishedAt), "MMM d", { locale: dateLocale })}
                     </span>
                     {post.readTime && (
                       <>
                         <span>•</span>
                         <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {post.readTime} min
-                        </span>
+                            <Clock className="w-4 h-4" />
+                            {post.readTime} {messages.blog.minShort}
+                          </span>
                       </>
                     )}
                   </div>
@@ -273,10 +278,10 @@ export function BlogClient({ posts }: BlogClientProps) {
                   </div>
 
                   <Link
-                    href={`/blog/${post.slug.current}`}
+                    href={localizePath(`/blog/${post.slug.current}`, locale)}
                     className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium text-sm"
                   >
-                    Read More
+                    {messages.blog.readMore}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.article>
@@ -295,9 +300,9 @@ export function BlogClient({ posts }: BlogClientProps) {
           transition={{ duration: 0.5 }}
         >
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">No articles found</h3>
+            <h3 className="text-2xl font-bold mb-4">{messages.blog.noArticlesTitle}</h3>
             <p className="text-[var(--secondary-text-color)] mb-6">
-              Try adjusting your search terms or tag filter.
+              {messages.blog.noArticlesBody}
             </p>
             <button
               onClick={() => {
@@ -306,7 +311,7 @@ export function BlogClient({ posts }: BlogClientProps) {
               }}
               className="accent-button"
             >
-              Clear Filters
+              {messages.blog.clearFilters}
             </button>
           </div>
         </motion.section>

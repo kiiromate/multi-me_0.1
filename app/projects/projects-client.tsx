@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import { ExternalLink, Github, Calendar, Tag } from "lucide-react"
 import Link from "next/link"
 import { SanityImage } from "@/components/sanity-image"
+import { AppLocale, localizePath } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -37,14 +39,28 @@ interface Project {
 }
 
 interface ProjectsClientProps {
+  locale: AppLocale
   projects: Project[]
   introText?: string
   ctaText?: string
 }
 
-export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientProps) {
+export function ProjectsClient({ locale, projects, introText, ctaText }: ProjectsClientProps) {
+  const messages = getMessages(locale)
   const featuredProjects = projects.filter((p) => p.featured)
   const otherProjects = projects.filter((p) => !p.featured)
+  const getStatusLabel = (status: Project["status"]) => {
+    switch (status) {
+      case "live":
+        return messages.projects.liveStatus
+      case "in-development":
+        return messages.projects.inDevelopmentStatus
+      case "prototype":
+        return messages.projects.prototypeStatus
+      default:
+        return messages.projects.archivedStatus
+    }
+  }
 
   return (
     <div className="relative z-10 min-h-screen">
@@ -57,10 +73,10 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
       >
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            My <span className="accent-text">Projects</span>
+            <span className="accent-text">{messages.projects.title}</span>
           </h1>
           <p className="text-xl text-[var(--secondary-text-color)] leading-relaxed">
-            {introText || "Exploring the intersection of data, design, and creative technology through meaningful projects."}
+            {introText || messages.projects.intro}
           </p>
         </div>
       </motion.section>
@@ -76,7 +92,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
         >
           <div className="max-w-6xl mx-auto">
             <motion.h2 className="text-3xl font-bold mb-12 text-center" variants={fadeInUp}>
-              Featured Work
+              {messages.projects.featuredWork}
             </motion.h2>
 
             <div className="space-y-16">
@@ -119,7 +135,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
                               : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                         }`}
                       >
-                        {project.status === "live" ? "Live" : project.status === "in-development" ? "In Development" : project.status === "prototype" ? "Prototype" : "Archived"}
+                        {getStatusLabel(project.status)}
                       </span>
                       <span className="flex items-center gap-1 text-[var(--secondary-text-color)]">
                         <Calendar className="w-4 h-4" />
@@ -151,7 +167,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
                           className="accent-button inline-flex items-center gap-2"
                         >
                           <ExternalLink className="w-4 h-4" />
-                          View Live
+                          {messages.projects.viewLive}
                         </a>
                       )}
                       {project.githubUrl && (
@@ -162,7 +178,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
                           className="px-6 py-3 border-2 border-[var(--accent-honey)] text-[var(--accent-honey)] rounded-lg font-semibold hover:bg-[var(--accent-honey)] hover:text-[var(--background-color)] transition-all duration-200 inline-flex items-center gap-2"
                         >
                           <Github className="w-4 h-4" />
-                          Source Code
+                          {messages.projects.sourceCode}
                         </a>
                       )}
                     </div>
@@ -185,7 +201,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
         >
           <div className="max-w-6xl mx-auto">
             <motion.h2 className="text-3xl font-bold mb-12 text-center" variants={fadeInUp}>
-              More Projects
+              {messages.projects.moreProjects}
             </motion.h2>
 
             <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer}>
@@ -227,7 +243,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
                             : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                         }`}
                       >
-                        {project.status === "live" ? "Live" : project.status === "in-development" ? "In Development" : project.status === "prototype" ? "Prototype" : "Archived"}
+                        {getStatusLabel(project.status)}
                       </span>
                       <span className="text-sm text-[var(--secondary-text-color)]">{project.year}</span>
                     </div>
@@ -258,7 +274,7 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
                           rel="noopener noreferrer"
                           className="flex-1 text-center py-2 bg-[var(--accent-honey)] text-[var(--background-color)] rounded font-medium hover:brightness-90 transition-all duration-200 text-sm"
                         >
-                          View Live
+                          {messages.projects.viewLive}
                         </a>
                       )}
                       {project.githubUrl && (
@@ -289,12 +305,12 @@ export function ProjectsClient({ projects, introText, ctaText }: ProjectsClientP
         variants={fadeInUp}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Interested in Working Together?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">{messages.projects.ctaTitle}</h2>
           <p className="text-lg text-[var(--secondary-text-color)] mb-8 leading-relaxed">
-            {ctaText || "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision."}
+            {ctaText || messages.projects.ctaBody}
           </p>
-          <Link href="/contact" className="accent-button text-lg px-8 py-4 inline-flex items-center gap-2">
-            Get In Touch
+          <Link href={localizePath("/contact", locale)} className="accent-button text-lg px-8 py-4 inline-flex items-center gap-2">
+            {messages.projects.ctaButton}
             <ExternalLink className="w-5 h-5" />
           </Link>
         </div>

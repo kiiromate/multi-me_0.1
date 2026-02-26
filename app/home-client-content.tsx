@@ -8,6 +8,8 @@ import ProjectCard from "@/components/project-card"
 import BlogCard from "@/components/blog-card"
 import { CapabilitiesGrid } from "@/components/home/capabilities-grid"
 import type { Capability, About } from "@/types/sanity"
+import { AppLocale, localizePath } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 const HeroCanvas = dynamic(
   () => import("@/components/animations/hero-animation").then((mod) => mod.HeroAnimation),
@@ -44,6 +46,7 @@ interface Post {
 }
 
 interface HomeClientContentProps {
+  locale: AppLocale
   featuredProjects: Project[]
   featuredPosts: Post[]
   aboutData?: About | null
@@ -52,12 +55,15 @@ interface HomeClientContentProps {
 }
 
 export default function HomeClientContent({
+  locale,
   featuredProjects,
   featuredPosts,
   aboutData,
   capabilities,
   onePagerMode = false,
 }: HomeClientContentProps) {
+  const messages = getMessages(locale)
+
   // Extract hero content from aboutData if available
   const heroTitle = aboutData?.heroTitle || "KAZE KEZA"
   const heroSupport = aboutData?.heroSupport || "Bridging data, design, and code to craft meaningful digital experiences.\nI transform complex information into compelling visual narratives."
@@ -98,18 +104,18 @@ export default function HomeClientContent({
             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
             <Link
-              href="/projects"
+              href={localizePath("/projects", locale)}
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--text-color)] text-[var(--background-color)] font-semibold rounded-full hover:scale-105 transition-all duration-200 shadow-sm"
             >
-              View My Work
+              {messages.home.viewMyWork}
               <ArrowRight size={20} />
             </Link>
 
             <Link
-              href="/contact"
+              href={localizePath("/contact", locale)}
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-transparent border border-[var(--subtle-border-color)] text-[var(--secondary-text-color)] font-medium rounded-full hover:bg-[var(--secondary-text-color)]/5 transition-all duration-200"
             >
-              Get In Touch
+              {messages.home.getInTouch}
               <ArrowRight size={20} />
             </Link>
           </motion.div>
@@ -128,8 +134,8 @@ export default function HomeClientContent({
             <GlassCard className="max-w-5xl mx-auto p-8 sm:p-10">
               <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr] items-start">
                 <div className="space-y-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-honey)]">The Human</p>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-color)]">Who I Am</h2>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-honey)]">{messages.home.theHumanKicker}</p>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-color)]">{messages.home.whoIAmTitle}</h2>
                   <p className="text-[var(--secondary-text-color)]">{aboutHeadline}</p>
                 </div>
                 <div className="space-y-6">
@@ -148,17 +154,17 @@ export default function HomeClientContent({
                   )}
                   <div className="flex flex-wrap items-center gap-4">
                     <Link
-                      href="/projects"
+                      href={localizePath("/projects", locale)}
                       className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
                     >
-                      Explore Craft
+                      {messages.home.exploreCraft}
                       <ArrowRight size={16} />
                     </Link>
                     <Link
-                      href="/contact"
+                      href={localizePath("/contact", locale)}
                       className="inline-flex items-center gap-2 text-[var(--secondary-text-color)] hover:text-[var(--text-color)] transition-colors duration-200 font-medium"
                     >
-                      Start a Conversation
+                      {messages.home.startConversation}
                       <ArrowRight size={16} />
                     </Link>
                   </div>
@@ -179,9 +185,9 @@ export default function HomeClientContent({
             transition={{ duration: 0.6 }}
             className="text-center space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">What I Do</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">{messages.home.whatIDo}</h2>
             <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-              Core capabilities at the intersection of systems thinking, interface design, and data visualization
+              {messages.home.capabilitiesSupport}
             </p>
           </motion.div>
 
@@ -200,9 +206,9 @@ export default function HomeClientContent({
           transition={{ duration: 0.6 }}
           className="text-center space-y-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Featured Projects</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">{messages.home.featuredProjects}</h2>
           <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-            Exploring the intersection of data visualization, creative coding, and interactive experiences
+            {messages.home.featuredProjectsSupport}
           </p>
         </motion.div>
 
@@ -231,10 +237,10 @@ export default function HomeClientContent({
               className="text-center"
             >
               <Link
-                href="/projects"
+                href={localizePath("/projects", locale)}
                 className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
               >
-                View All Projects
+                {messages.home.viewAllProjects}
                 <ArrowRight size={18} />
               </Link>
             </motion.div>
@@ -248,7 +254,7 @@ export default function HomeClientContent({
             className="text-center py-12"
           >
             <p className="text-[var(--secondary-text-color)] text-lg">
-              Featured projects coming soon. Check back later!
+              {messages.home.projectsComingSoon}
             </p>
           </motion.div>
         )}
@@ -264,9 +270,9 @@ export default function HomeClientContent({
             transition={{ duration: 0.6 }}
             className="text-center space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">Latest Insights</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">{messages.home.latestInsights}</h2>
             <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-              Thoughts on data visualization, creative coding, and the art of digital storytelling
+              {messages.home.latestInsightsSupport}
             </p>
           </motion.div>
 
@@ -274,6 +280,7 @@ export default function HomeClientContent({
             {featuredPosts.map((post, index) => (
               <BlogCard
                 key={post._id}
+                locale={locale}
                 title={post.title}
                 excerpt={post.excerpt}
                 slug={post.slug.current}
@@ -294,10 +301,10 @@ export default function HomeClientContent({
             className="text-center"
           >
             <Link
-              href="/blog"
+              href={localizePath("/blog", locale)}
               className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
             >
-              Read All Posts
+              {messages.home.readAllPosts}
               <ArrowRight size={18} />
             </Link>
           </motion.div>

@@ -1,7 +1,7 @@
 import Script from "next/script"
 
 interface StructuredDataProps {
-  data: object
+  data: object | object[]
 }
 
 export function StructuredData({ data }: StructuredDataProps) {

@@ -3,13 +3,16 @@ import { featuredProjectsQuery, featuredPostsQuery, aboutQuery, capabilitiesQuer
 import { safeFetch } from "@/lib/sanity/error-handling"
 import HomeClientContent from "./home-client-content"
 import { HeroCanvasClient } from "@/components/animations/hero-canvas-client"
+import { getRequestLocale } from "@/lib/i18n/request-locale"
 
 export default async function HomePage() {
+  const locale = await getRequestLocale()
+
   // Fetch featured projects, posts, and about data used by the Hero + one-pager About section
-  const projects = await safeFetch(client, featuredProjectsQuery, undefined, [])
-  const posts = await safeFetch(client, featuredPostsQuery, undefined, [])
-  const aboutData = await safeFetch(client, aboutQuery, undefined, null)
-  const capabilities = await safeFetch(client, capabilitiesQuery, undefined, [])
+  const projects = await safeFetch(client, featuredProjectsQuery, { locale }, [])
+  const posts = await safeFetch(client, featuredPostsQuery, { locale }, [])
+  const aboutData = await safeFetch(client, aboutQuery, { locale }, null)
+  const capabilities = await safeFetch(client, capabilitiesQuery, { locale }, [])
 
   // Limit to 3 items each for featured content
   const featuredProjects = projects.slice(0, 3)
@@ -19,6 +22,7 @@ export default async function HomePage() {
     <>
       <HeroCanvasClient />
       <HomeClientContent
+        locale={locale}
         featuredProjects={featuredProjects}
         featuredPosts={featuredPosts}
         aboutData={aboutData}

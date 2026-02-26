@@ -4,6 +4,8 @@ import { safeFetch } from "@/lib/sanity/error-handling"
 import { BlogPostClient } from "./blog-post-client"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
+import { getRequestLocale } from "@/lib/i18n/request-locale"
+import { localizePath } from "@/lib/i18n/config"
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -11,7 +13,7 @@ interface BlogPostPageProps {
 
 // Generate static params for all blog posts
 export async function generateStaticParams() {
-  const posts = await safeFetch(client, postsQuery, undefined, [])
+  const posts = await safeFetch(client, postsQuery, { locale: "en" }, [])
   return posts.map((post: any) => ({
     slug: post.slug.current,
   }))
@@ -19,21 +21,31 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const post = await safeFetch(client, postBySlugQuery, { slug: params.slug }, null)
+  const locale = await getRequestLocale()
+  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug: params.slug, locale }, null)
+  const canonical = localizePath(`/blog/${params.slug}`, locale)
 
   if (!post) {
     return {
-      title: "Post Not Found | KAZE KEZA",
+      title: locale === "fr" ? "Article introuvable | KAZE KEZA" : "Post Not Found | KAZE KEZA",
     }
   }
 
   return {
     title: `${post.title} | KAZE KEZA`,
     description: post.excerpt,
+    alternates: {
+      canonical,
+      languages: {
+        en: `/blog/${params.slug}`,
+        fr: `/fr/blog/${params.slug}`,
+      },
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
       publishedTime: post.publishedAt,
       authors: ["KAZE KEZA"],
       images: post.mainImage ? [{ url: post.mainImage, alt: post.mainImageAlt || post.title }] : [],
@@ -48,11 +60,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await safeFetch(client, postBySlugQuery, { slug: params.slug }, null)
+  const locale = await getRequestLocale()
+  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug: params.slug, locale }, null)
 
   if (!post) {
     notFound()
   }
 
-  return <BlogPostClient post={post} slug={params.slug} />
+  return <BlogPostClient locale={locale} post={post} slug={params.slug} />
 }

@@ -14,6 +14,9 @@ import { client } from "@/lib/sanity/client"
 import { aboutQuery } from "@/lib/sanity/queries"
 import { safeFetch } from "@/lib/sanity/error-handling"
 import { AmbientBackground } from "@/components/ui/ambient-background"
+import { getRequestLocale } from "@/lib/i18n/request-locale"
+import { getMessages } from "@/lib/i18n/messages"
+import { localizePath } from "@/lib/i18n/config"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -23,10 +26,19 @@ const outfit = Outfit({
 })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const about: any = await safeFetch(client, aboutQuery, undefined, null)
+  const locale = await getRequestLocale()
+  const about: any = await safeFetch(client, aboutQuery, { locale }, null)
+  const canonical = localizePath("/", locale)
+  const localeCode = locale === "fr" ? "fr_FR" : "en_US"
 
   return generateSEO({
     description: about?.bioVariants?.oneLiner,
+    locale: localeCode,
+    canonicalPath: canonical,
+    alternates: {
+      en: "/",
+      fr: "/fr",
+    },
   })
 }
 
@@ -45,10 +57,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getRequestLocale()
+  const messages = getMessages(locale)
   // Fetch About data for footer
-  const aboutData: any = await safeFetch(client, aboutQuery, undefined, null)
+  const aboutData: any = await safeFetch(client, aboutQuery, { locale }, null)
   return (
-    <html lang="en" suppressHydrationWarning className={`${outfit.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${outfit.variable}`}>
       <head>
         {/* Preload critical resources */}
         <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -97,9 +111,10 @@ export default async function RootLayout({
         <SkipToContent />
         <AmbientBackground />
         <StructuredData data={structuredData} />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>{messages.common.loading}</div>}>
           <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
             <LayoutContent
+              locale={locale}
               footerData={{
                 oneLiner: aboutData?.bioVariants?.oneLiner,
                 socialLinks: aboutData?.socialLinks

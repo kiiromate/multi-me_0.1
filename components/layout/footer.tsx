@@ -4,18 +4,22 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 import type { SocialLinks } from '@/types/sanity'
+import type { AppLocale } from '@/lib/i18n/config'
+import { getMessages } from '@/lib/i18n/messages'
 
 interface FooterProps {
+  locale: AppLocale
   oneLiner?: string
   socialLinks?: SocialLinks
   className?: string
 }
 
-export function Footer({ oneLiner, socialLinks, className = '' }: FooterProps) {
+export function Footer({ locale, oneLiner, socialLinks, className = '' }: FooterProps) {
   const currentYear = new Date().getFullYear()
+  const messages = getMessages(locale)
 
   // Default one-liner if not provided
-  const displayOneLiner = oneLiner || 'Systems thinker crafting meaningful digital experiences.'
+  const displayOneLiner = oneLiner || messages.footer.defaultOneLiner
 
   return (
     <footer className={`border-t border-border/50 py-12 md:py-16 ${className}`}>
@@ -83,7 +87,7 @@ export function Footer({ oneLiner, socialLinks, className = '' }: FooterProps) {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm text-muted-foreground"
           >
-            © {currentYear} Kaze Keza. All rights reserved.
+            © {currentYear} Kaze Keza. {messages.footer.rightsReserved}
           </motion.p>
         </div>
       </div>

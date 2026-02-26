@@ -4,8 +4,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import GlassCard from "./ui/glass-card"
+import { AppLocale, localizePath } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 interface BlogCardProps {
+  locale?: AppLocale
   title: string
   excerpt: string
   slug: string
@@ -17,6 +20,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({
+  locale = "en",
   title,
   excerpt,
   slug,
@@ -26,7 +30,8 @@ export default function BlogCard({
   tags = [],
   index = 0,
 }: BlogCardProps) {
-  const formattedDate = new Date(publishedAt).toLocaleDateString("en-US", {
+  const messages = getMessages(locale)
+  const formattedDate = new Date(publishedAt).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -44,7 +49,7 @@ export default function BlogCard({
       }}
       className="group"
     >
-      <Link href={`/blog/${slug}`}>
+      <Link href={localizePath(`/blog/${slug}`, locale)}>
         <GlassCard hover className="h-full cursor-pointer">
           <div className="space-y-4">
             {/* Featured Image */}
@@ -107,7 +112,7 @@ export default function BlogCard({
 
               {/* Read More */}
               <div className="flex items-center gap-2 text-sm font-medium text-[var(--accent-honey)] group-hover:gap-3 transition-all duration-200 pt-2">
-                <span>Read more</span>
+                <span>{messages.blog.readMore}</span>
                 <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
               </div>
             </div>

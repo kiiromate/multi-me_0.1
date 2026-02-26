@@ -3,11 +3,13 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
-import { BrandLogo } from '@/components/ui/brand-logo'
 import type { About } from '@/types/sanity'
 import { Mail } from 'lucide-react'
+import type { AppLocale } from '@/lib/i18n/config'
+import { getMessages } from '@/lib/i18n/messages'
 
 interface AboutClientProps {
+  locale: AppLocale
   aboutData: About | null
 }
 
@@ -44,13 +46,15 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as any }
 }
 
-export function AboutClient({ aboutData }: AboutClientProps) {
+export function AboutClient({ locale, aboutData }: AboutClientProps) {
+  const messages = getMessages(locale)
+
   if (!aboutData) {
     return (
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">About content not found</h1>
-          <p className="text-muted-foreground">Please add about content in Sanity Studio.</p>
+          <h1 className="text-4xl font-bold mb-4">{messages.about.missingTitle}</h1>
+          <p className="text-muted-foreground">{messages.about.missingBody}</p>
         </div>
       </div>
     )
@@ -92,7 +96,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#EBA937] text-background font-semibold rounded-lg hover:bg-[#EBA937]/90 transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-[#EBA937] focus:outline-none min-h-[44px]"
               >
                 <Mail size={20} />
-                Get In Touch
+                {messages.about.getInTouch}
               </Link>
             </motion.div>
           )}
@@ -115,7 +119,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                   fontWeight: 600
                 }}
               >
-                My Approach
+                {messages.about.approachTitle}
               </h2>
             </motion.div>
 
@@ -136,7 +140,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                   />
 
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-semibold mb-4 text-foreground">How I Think</h3>
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">{messages.about.howIThink}</h3>
                     <div className="prose prose-sm max-w-none text-muted-foreground">
                       <PortableText
                         value={aboutData.positioning.howIThink}
@@ -163,7 +167,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                   />
 
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-semibold mb-4 text-foreground">What I Build</h3>
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">{messages.about.whatIBuild}</h3>
                     <div className="prose prose-sm max-w-none text-muted-foreground">
                       <PortableText
                         value={aboutData.positioning.whatIBuild}
@@ -190,7 +194,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                   />
 
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-semibold mb-4 text-foreground">How I Work</h3>
+                    <h3 className="text-2xl font-semibold mb-4 text-foreground">{messages.about.howIWork}</h3>
                     <div className="prose prose-sm max-w-none text-muted-foreground">
                       <PortableText
                         value={aboutData.positioning.howIWork}
@@ -220,7 +224,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
             />
 
             <div className="relative z-10 text-center">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">TL;DR</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground">{messages.about.tldrTitle}</h3>
               <p className="text-muted-foreground leading-relaxed">
                 {aboutData.bioVariants.bio150}
               </p>

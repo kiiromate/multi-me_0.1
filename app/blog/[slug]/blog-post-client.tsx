@@ -4,11 +4,14 @@ import { motion } from "framer-motion"
 import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react"
 import Link from "next/link"
 import { format } from "date-fns"
+import { enUS, fr as frLocale } from "date-fns/locale"
 import { PortableText } from "@portabletext/react"
 import { ReadingProgress } from "@/components/blog/reading-progress"
 import { SocialShare } from "@/components/blog/social-share"
 import { CodeBlock } from "@/components/blog/code-block"
 import { Blockquote } from "@/components/blog/blockquote"
+import { AppLocale, localizePath } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 interface Post {
   _id: string
@@ -25,6 +28,7 @@ interface Post {
 }
 
 interface BlogPostClientProps {
+  locale: AppLocale
   post: Post
   slug: string
 }
@@ -73,7 +77,10 @@ const portableTextComponents = {
   },
 }
 
-export function BlogPostClient({ post, slug }: BlogPostClientProps) {
+export function BlogPostClient({ locale, post, slug }: BlogPostClientProps) {
+  const messages = getMessages(locale)
+  const dateLocale = locale === "fr" ? frLocale : enUS
+
   return (
     <>
       <ReadingProgress />
@@ -108,26 +115,26 @@ export function BlogPostClient({ post, slug }: BlogPostClientProps) {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <Link
-                  href="/blog"
+                  href={localizePath("/blog", locale)}
                   className="inline-flex items-center gap-2 text-[var(--secondary-text-color)] hover:text-[var(--accent-honey)] transition-colors duration-200 mb-6"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Back to Blog
+                  {messages.blogPost.backToBlog}
                 </Link>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--secondary-text-color)] mb-4">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    {format(new Date(post.publishedAt), "MMMM d, yyyy")}
+                    {format(new Date(post.publishedAt), "MMMM d, yyyy", { locale: dateLocale })}
                   </span>
                   {post.readTime && (
                     <>
                       <span>•</span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {post.readTime} min read
-                      </span>
-                    </>
+                            <Clock className="w-4 h-4" />
+                            {post.readTime} {messages.blog.minRead}
+                          </span>
+                        </>
                   )}
                 </div>
 
@@ -165,7 +172,7 @@ export function BlogPostClient({ post, slug }: BlogPostClientProps) {
               ) : (
                 <div className="text-center py-12">
                   <p className="text-[var(--secondary-text-color)] text-lg">
-                    Content for this post is being prepared. Check back soon!
+                    {messages.blogPost.contentPending}
                   </p>
                 </div>
               )}
@@ -173,7 +180,7 @@ export function BlogPostClient({ post, slug }: BlogPostClientProps) {
 
             {/* Social Share */}
             <div className="mt-12 pt-8 border-t border-[var(--subtle-border-color)]">
-              <SocialShare title={post.title} url={`https://kazekeza.com/blog/${slug}`} />
+              <SocialShare locale={locale} title={post.title} url={`https://kazekeza.com${localizePath(`/blog/${slug}`, locale)}`} />
             </div>
 
             {/* Author Bio */}
@@ -189,10 +196,9 @@ export function BlogPostClient({ post, slug }: BlogPostClientProps) {
                   KK
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">About KAZE KEZA</h3>
+                  <h3 className="text-xl font-semibold mb-2">{messages.blogPost.aboutAuthorTitle}</h3>
                   <p className="text-[var(--secondary-text-color)] leading-relaxed">
-                    Creative technologist passionate about sustainable design, data storytelling, and building
-                    meaningful digital experiences.
+                    {messages.blogPost.aboutAuthorBody}
                   </p>
                 </div>
               </div>
@@ -201,11 +207,11 @@ export function BlogPostClient({ post, slug }: BlogPostClientProps) {
             {/* Back to Blog */}
             <div className="mt-12 text-center">
               <Link
-                href="/blog"
+                href={localizePath("/blog", locale)}
                 className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to All Articles
+                {messages.blogPost.backToAllArticles}
               </Link>
             </div>
           </div>

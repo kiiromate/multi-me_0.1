@@ -2,15 +2,19 @@
 
 import { Twitter, Linkedin, LinkIcon, Mail } from "lucide-react"
 import { useState } from "react"
+import type { AppLocale } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 interface SocialShareProps {
+  locale: AppLocale
   title: string
   url: string
   vertical?: boolean
 }
 
-export function SocialShare({ title, url, vertical = false }: SocialShareProps) {
+export function SocialShare({ locale, title, url, vertical = false }: SocialShareProps) {
   const [copied, setCopied] = useState(false)
+  const messages = getMessages(locale)
 
   const shareLinks = [
     {
@@ -45,7 +49,7 @@ export function SocialShare({ title, url, vertical = false }: SocialShareProps) 
 
   return (
     <div className="glass-card p-4">
-      <h4 className="font-medium mb-4 text-[var(--text-color)]">Share this article</h4>
+      <h4 className="font-medium mb-4 text-[var(--text-color)]">{messages.blogPost.shareTitle}</h4>
       <div className={`flex ${vertical ? "flex-col" : "flex-row"} gap-3`}>
         {shareLinks.map((link) => (
           <a
@@ -77,7 +81,7 @@ export function SocialShare({ title, url, vertical = false }: SocialShareProps) 
           aria-label="Copy link"
         >
           <LinkIcon className="w-5 h-5" />
-          {vertical && <span className="text-sm">{copied ? "Copied!" : "Copy Link"}</span>}
+          {vertical && <span className="text-sm">{copied ? messages.blogPost.copied : messages.blogPost.copyLink}</span>}
         </button>
       </div>
     </div>
