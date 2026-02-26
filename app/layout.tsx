@@ -15,16 +15,12 @@ import { aboutQuery } from "@/lib/sanity/queries"
 import { safeFetch } from "@/lib/sanity/error-handling"
 import { AmbientBackground } from "@/components/ui/ambient-background"
 
-import { Outfit } from "next/font/google"
-
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
   display: "swap",
   preload: true,
 })
-
-import { About } from "@/types/sanity"
 
 export async function generateMetadata(): Promise<Metadata> {
   const about: any = await safeFetch(client, aboutQuery, undefined, null)
