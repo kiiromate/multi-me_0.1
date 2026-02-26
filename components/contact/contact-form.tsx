@@ -5,6 +5,8 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Send, CheckCircle } from "lucide-react"
+import type { AppLocale } from "@/lib/i18n/config"
+import { getMessages } from "@/lib/i18n/messages"
 
 interface FormData {
   name: string
@@ -12,15 +14,22 @@ interface FormData {
   company: string
   projectType: string
   message: string
+  website: string
 }
 
-export function ContactForm() {
+interface ContactFormProps {
+  locale: AppLocale
+}
+
+export function ContactForm({ locale }: ContactFormProps) {
+  const messages = getMessages(locale)
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     company: "",
     projectType: "",
     message: "",
+    website: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
@@ -28,24 +37,44 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus("idle")
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    setIsSubmitting(false)
-    setSubmitStatus("success")
-
-    // Reset form after success
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        projectType: "",
-        message: "",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          locale,
+        }),
       })
-      setSubmitStatus("idle")
-    }, 3000)
+
+      if (!response.ok) {
+        throw new Error(`Submit failed with status ${response.status}`)
+      }
+
+      setSubmitStatus("success")
+
+      // Reset form after success
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          projectType: "",
+          message: "",
+          website: "",
+        })
+        setSubmitStatus("idle")
+      }, 3000)
+    } catch (error) {
+      console.error("Contact form submission failed:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -64,9 +93,9 @@ export function ContactForm() {
         transition={{ duration: 0.5 }}
       >
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+        <h3 className="text-2xl font-bold mb-2">{messages.contact.successTitle}</h3>
         <p className="text-[var(--secondary-text-color)]">
-          Thank you for reaching out. I'll get back to you within 24 hours.
+          {messages.contact.successBody}
         </p>
       </motion.div>
     )
@@ -77,7 +106,7 @@ export function ContactForm() {
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-2">
-            Full Name *
+            {messages.contact.fullName}
           </label>
           <input
             type="text"
@@ -87,13 +116,13 @@ export function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-            placeholder="Your full name"
+            placeholder={messages.contact.namePlaceholder}
           />
         </div>
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-2">
-            Email Address *
+            {messages.contact.emailAddress}
           </label>
           <input
             type="email"
@@ -103,14 +132,14 @@ export function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-            placeholder="your@email.com"
+            placeholder={messages.contact.emailPlaceholder}
           />
         </div>
       </div>
 
       <div>
         <label htmlFor="company" className="block text-sm font-medium mb-2">
-          Company/Organization
+          {messages.contact.company}
         </label>
         <input
           type="text"
@@ -119,13 +148,13 @@ export function ContactForm() {
           value={formData.company}
           onChange={handleChange}
           className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
-          placeholder="Your company name (optional)"
+          placeholder={messages.contact.companyPlaceholder}
         />
       </div>
 
       <div>
         <label htmlFor="projectType" className="block text-sm font-medium mb-2">
-          What can I help you with? *
+          {messages.contact.helpPrompt}
         </label>
         <select
           id="projectType"
@@ -135,19 +164,19 @@ export function ContactForm() {
           onChange={handleChange}
           className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200"
         >
-          <option value="">Select a topic</option>
-          <option value="web-development">Web Development</option>
-          <option value="data-visualization">Data Visualization</option>
-          <option value="design-system">Design System</option>
-          <option value="consulting">Consulting</option>
-          <option value="collaboration">Collaboration</option>
-          <option value="other">Other</option>
+          <option value="">{messages.contact.topicPlaceholder}</option>
+          <option value="web-development">{messages.contact.topicWeb}</option>
+          <option value="data-visualization">{messages.contact.topicDataViz}</option>
+          <option value="design-system">{messages.contact.topicDesignSystem}</option>
+          <option value="consulting">{messages.contact.topicConsulting}</option>
+          <option value="collaboration">{messages.contact.topicCollaboration}</option>
+          <option value="other">{messages.contact.topicOther}</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium mb-2">
-          Project Description *
+          {messages.contact.projectDescription}
         </label>
         <textarea
           id="message"
@@ -157,7 +186,21 @@ export function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           className="w-full px-4 py-3 rounded-lg border border-[var(--subtle-border-color)] bg-[var(--background-color)]/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-honey)] focus:border-transparent transition-all duration-200 resize-none"
-          placeholder="Tell me about your project, goals, and any specific requirements..."
+          placeholder={messages.contact.messagePlaceholder}
+        />
+      </div>
+
+      {/* Honeypot field for spam prevention */}
+      <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.website}
+          onChange={handleChange}
         />
       </div>
 
@@ -171,15 +214,19 @@ export function ContactForm() {
         {isSubmitting ? (
           <>
             <div className="w-5 h-5 border-2 border-[var(--background-color)]/30 border-t-[var(--background-color)] rounded-full animate-spin" />
-            Sending...
+            {messages.contact.sending}
           </>
         ) : (
           <>
             <Send className="w-5 h-5" />
-            Send Message
+            {messages.contact.send}
           </>
         )}
       </motion.button>
+
+      {submitStatus === "error" && (
+        <p className="text-sm text-red-500">{messages.contact.errorBody}</p>
+      )}
     </form>
   )
 }

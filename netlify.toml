@@ -4,10 +4,7 @@
 [build]
   # Build command to run
   command = "npm run build"
-  
-  # Directory to publish (Next.js output)
-  publish = ".next"
-  
+
   # Node.js version
   [build.environment]
     NODE_VERSION = "18"
@@ -15,6 +12,15 @@
     NEXT_TELEMETRY_DISABLED = "1"
     # Allow NEXT_PUBLIC_* env vars in build output (they're meant to be public)
     SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SANITY_DATASET,NEXT_PUBLIC_SANITY_PROJECT_ID,NEXT_PUBLIC_SITE_URL"
+
+[context.production.environment]
+  SITE_INDEXABLE = "true"
+
+[context.deploy-preview.environment]
+  SITE_INDEXABLE = "false"
+
+[context.branch-deploy.environment]
+  SITE_INDEXABLE = "false"
 
 # Force HTTPS redirect
 [[redirects]]
@@ -36,22 +42,17 @@
   status = 301
   force = true
 
-# Next.js App Router SPA fallback
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-
 # Security headers
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-site"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
 # Cache static assets
 [[headers]]
@@ -64,6 +65,5 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Plugin configuration (optional - for future use)
-# [[plugins]]
-#   package = "@netlify/plugin-nextjs"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

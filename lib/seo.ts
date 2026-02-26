@@ -5,7 +5,12 @@ interface SEOProps {
   description?: string
   keywords?: string[]
   image?: string
-  url?: string
+  canonicalPath?: string
+  locale?: "en_US" | "fr_FR"
+  alternates?: {
+    en?: string
+    fr?: string
+  }
   type?: "website" | "article" | "profile"
   publishedTime?: string
   modifiedTime?: string
@@ -14,10 +19,14 @@ interface SEOProps {
   tags?: string[]
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com"
+const isProductionContext = process.env.CONTEXT ? process.env.CONTEXT === "production" : process.env.NODE_ENV === "production"
+const shouldIndex = process.env.SITE_INDEXABLE !== "false" && isProductionContext
+
 const defaultSEO = {
   title: "KAZE KEZA - Creative Technologist & Data Storyteller",
   description:
-    "Creative technologist specializing in data visualization, sustainable web development, and meaningful digital experiences. Clean like code, vibrant like nature, inspired like art.",
+    "Creative technologist specializing in data visualization, sustainable web development, and meaningful digital experiences.",
   keywords: [
     "creative technologist",
     "data visualization",
@@ -28,37 +37,40 @@ const defaultSEO = {
     "React developer",
     "Next.js",
     "TypeScript",
-    "p5.js",
-    "D3.js",
     "portfolio",
-    "freelancer",
-    "remote developer",
   ],
   image: "/images/og-image.jpg",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com",
   type: "website" as const,
+  locale: "en_US" as const,
 }
 
 export function generateSEO(props: SEOProps = {}): Metadata {
   const seo = { ...defaultSEO, ...props }
+  const canonicalPath = seo.canonicalPath || "/"
+  const canonicalUrl = canonicalPath.startsWith("http") ? canonicalPath : `${siteUrl}${canonicalPath}`
 
   return {
-    metadataBase: new URL(seo.url),
+    metadataBase: new URL(siteUrl),
     title: {
       default: seo.title,
       template: "%s | KAZE KEZA",
     },
     description: seo.description,
     keywords: seo.keywords,
-    authors: [{ name: "KAZE KEZA", url: seo.url }],
+    authors: [{ name: "KAZE KEZA", url: siteUrl }],
     creator: "KAZE KEZA",
     publisher: "KAZE KEZA",
-
-    // Open Graph
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        ...(seo.alternates?.en ? { en: seo.alternates.en } : {}),
+        ...(seo.alternates?.fr ? { fr: seo.alternates.fr } : {}),
+      },
+    },
     openGraph: {
       type: seo.type,
-      locale: "en_US",
-      url: seo.url,
+      locale: seo.locale,
+      url: canonicalUrl,
       title: seo.title,
       description: seo.description,
       siteName: "KAZE KEZA Portfolio",
@@ -78,8 +90,6 @@ export function generateSEO(props: SEOProps = {}): Metadata {
         tags: seo.tags,
       }),
     },
-
-    // Twitter
     twitter: {
       card: "summary_large_image",
       title: seo.title,
@@ -87,28 +97,17 @@ export function generateSEO(props: SEOProps = {}): Metadata {
       creator: "@kazekeza",
       images: [seo.image],
     },
-
-    // Additional metadata
     robots: {
-      index: true,
-      follow: true,
+      index: shouldIndex,
+      follow: shouldIndex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: shouldIndex,
+        follow: shouldIndex,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,
       },
     },
-
-    // Verification
-    verification: {
-      google: "your-google-verification-code",
-      yandex: "your-yandex-verification-code",
-      yahoo: "your-yahoo-verification-code",
-    },
-
-    // Additional tags
     other: {
       "theme-color": "#eba937",
       "color-scheme": "light dark",
@@ -117,36 +116,28 @@ export function generateSEO(props: SEOProps = {}): Metadata {
   }
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kazekeza.com"
-
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "KAZE KEZA",
-  jobTitle: "Creative Technologist",
-  description:
-    "Creative technologist specializing in data visualization, sustainable web development, and meaningful digital experiences.",
-  url: siteUrl,
-  image: `${siteUrl}/images/kaze-profile.jpg`,
-  sameAs: ["https://github.com/kazekeza", "https://linkedin.com/in/kazekeza", "https://twitter.com/kazekeza"],
-  knowsAbout: [
-    "Data Visualization",
-    "Web Development",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "p5.js",
-    "D3.js",
-    "Sustainable Technology",
-    "Design Systems",
-  ],
-  worksFor: {
-    "@type": "Organization",
-    name: "Freelance",
+export const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "KAZE KEZA",
+    jobTitle: "Creative Technologist",
+    description:
+      "Creative technologist specializing in data visualization, sustainable web development, and meaningful digital experiences.",
+    url: siteUrl,
+    image: `${siteUrl}/images/kaze-profile.jpg`,
+    sameAs: ["https://github.com/kazekeza", "https://linkedin.com/in/kazekeza", "https://twitter.com/kazekeza"],
   },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Remote",
-    addressCountry: "Global",
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "KAZE KEZA Portfolio",
+    url: siteUrl,
+    inLanguage: ["en", "fr"],
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteUrl}/blog?query={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   },
-}
+]
