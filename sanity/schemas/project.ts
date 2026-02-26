@@ -19,15 +19,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'caseStudy',
-      title: 'Case Study',
-      type: 'array',
-      of: [{ type: 'block' }],
-    }),
-    defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -35,7 +29,7 @@ export default defineType({
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.en',
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
@@ -43,15 +37,60 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      rows: 4,
+      type: 'localeText',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
+      name: 'context',
+      title: 'Context',
+      type: 'localeText',
+    }),
+    defineField({
+      name: 'objective',
+      title: 'Objective',
+      type: 'localeText',
+    }),
+    defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'localeString',
+    }),
+    defineField({
+      name: 'constraints',
+      title: 'Constraints',
+      type: 'localeText',
+    }),
+    defineField({
+      name: 'actions',
+      title: 'Actions',
+      type: 'localeBlock',
+    }),
+    defineField({
+      name: 'outcomes',
+      title: 'Outcomes',
+      type: 'localeBlock',
+    }),
+    defineField({
+      name: 'tools',
+      title: 'Tools',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'lessons',
+      title: 'Lessons',
+      type: 'localeText',
+    }),
+    defineField({
+      name: 'safeProofArtifacts',
+      title: 'Safe Proof Artifacts',
+      type: 'array',
+      of: [{ type: 'localeString' }],
+    }),
+    defineField({
+      name: 'content',
+      title: 'Additional Content (Legacy)',
+      type: 'localeBlock',
     }),
     defineField({
       name: 'mainImage',
@@ -147,7 +186,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       subtitle: 'year',
       media: 'mainImage',
     },

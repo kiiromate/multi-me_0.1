@@ -6,6 +6,26 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'locale',
+      title: 'Locale',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'English', value: 'en' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: 'en',
+    }),
+    defineField({
+      name: 'translationKey',
+      title: 'Translation Key',
+      type: 'string',
+      description: 'Stable key linking EN and FR variants of this post.',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -18,6 +38,20 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { document, getClient } = context as any
+          const locale = document?.locale || 'en'
+          const currentId = (document?._id || '').replace(/^drafts\./, '')
+          const params = {
+            draft: `drafts.${currentId}`,
+            published: currentId,
+            slug,
+            locale,
+          }
+
+          const query = `!defined(*[_type == "post" && slug.current == $slug && coalesce(locale, "en") == $locale && !(_id in [$draft, $published])][0]._id)`
+          return getClient({ apiVersion: '2024-01-01' }).fetch(query, params)
+        },
       },
       validation: (Rule) => Rule.required(),
     }),

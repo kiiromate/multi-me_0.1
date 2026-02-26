@@ -6,6 +6,26 @@ export default defineType({
     type: 'document',
     fields: [
         defineField({
+            name: 'locale',
+            title: 'Locale',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'English', value: 'en' },
+                    { title: 'French', value: 'fr' },
+                ],
+            },
+            validation: (Rule) => Rule.required(),
+            initialValue: 'en',
+        }),
+        defineField({
+            name: 'translationKey',
+            title: 'Translation Key',
+            type: 'string',
+            validation: (Rule) => Rule.required(),
+            description: 'Stable key linking EN and FR variants of the same capability.',
+        }),
+        defineField({
             name: 'title',
             title: 'Title',
             type: 'string',

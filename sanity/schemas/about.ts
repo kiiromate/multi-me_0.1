@@ -6,17 +6,68 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'locale',
+      title: 'Locale',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'English', value: 'en' },
+          { title: 'French', value: 'fr' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: 'en',
+    }),
+    defineField({
       name: 'heroTitle',
       title: 'Hero Title',
-      type: 'string',
+      type: 'localeString',
       description: 'Large title displayed in the hero section',
     }),
     defineField({
       name: 'heroSupport',
       title: 'Hero Support Text',
-      type: 'text',
-      rows: 2,
+      type: 'localeText',
       description: 'Supporting text displayed below the hero title',
+    }),
+    defineField({
+      name: 'proofPoints',
+      title: 'Proof Point Bullets',
+      type: 'array',
+      of: [{ type: 'localeString' }],
+      description: '3 bullet points for the homepage',
+    }),
+    defineField({
+      name: 'howIWork',
+      title: 'How I Work (Framework)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'heading', title: 'Heading', type: 'localeString' },
+            { name: 'description', title: 'Description', type: 'localeText' },
+          ],
+        },
+      ],
+      description: 'The 5-bullet operating model detailed on the homepage',
+    }),
+    defineField({
+      name: 'nowSection',
+      title: 'Now Section',
+      type: 'localeText',
+      description: 'What Kaze is focused on this quarter',
+    }),
+    defineField({
+      name: 'ctaStrip',
+      title: 'Call to Action Strip',
+      type: 'object',
+      fields: [
+        { name: 'primary', title: 'Primary CTA', type: 'localeString' },
+        { name: 'secondary', title: 'Secondary CTA', type: 'localeString' },
+        { name: 'tertiary', title: 'Tertiary CTA', type: 'localeString' },
+      ],
+      description: 'The bottom CTA strip on the homepage',
     }),
     defineField({
       name: 'positioning',
@@ -27,22 +78,19 @@ export default defineType({
         {
           name: 'howIThink',
           title: 'How I Think (Advantage)',
-          type: 'array',
-          of: [{ type: 'block' }],
+          type: 'localeBlock',
           description: 'Your unique perspective and approach to problem-solving',
         },
         {
           name: 'whatIBuild',
           title: 'What I Build (Operating Model)',
-          type: 'array',
-          of: [{ type: 'block' }],
+          type: 'localeBlock',
           description: 'The types of solutions and systems you create',
         },
         {
-          name: 'howIWork',
-          title: 'How I Work (Focus)',
-          type: 'array',
-          of: [{ type: 'block' }],
+          name: 'howIWorkLegacy',
+          title: 'How I Work (Focus) (Legacy)',
+          type: 'localeBlock',
           description: 'Your working style, process, and collaboration approach',
         },
       ],
@@ -55,20 +103,18 @@ export default defineType({
         {
           name: 'oneLiner',
           title: 'One-Liner Bio',
-          type: 'string',
+          type: 'localeString',
           description: 'Used for metadata and short intros',
         },
         {
           name: 'short',
           title: 'Short Bio',
-          type: 'text',
-          rows: 4,
+          type: 'localeText',
         },
         {
           name: 'full',
           title: 'Full Bio',
-          type: 'array',
-          of: [{ type: 'block' }],
+          type: 'localeBlock',
         },
       ],
     }),
@@ -81,20 +127,18 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Professional Title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
     defineField({
       name: 'bio',
       title: 'Legacy Bio (Deprecated)',
-      type: 'array',
-      of: [{ type: 'block' }],
+      type: 'localeBlock',
       hidden: true,
     }),
     defineField({
       name: 'location',
       title: 'Location',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'availability',
@@ -111,7 +155,7 @@ export default defineType({
     defineField({
       name: 'funFact',
       title: 'Fun Fact',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'profileImage',
@@ -139,14 +183,12 @@ export default defineType({
             {
               name: 'area',
               title: 'Skill Area',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
+              type: 'localeString',
             },
             {
               name: 'description',
               title: 'Description',
-              type: 'text',
-              rows: 3,
+              type: 'localeText',
             },
             {
               name: 'technologies',
@@ -171,17 +213,22 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'ctaEmail',
+      title: 'CTA Email',
+      type: 'string',
+      description: 'Primary email used by the About page call-to-action button.',
+    }),
+    defineField({
       name: 'ctaText',
       title: 'Call to Action Text',
-      type: 'text',
-      rows: 3,
+      type: 'localeText',
       description: 'Text for the "Let\'s Work Together" section',
     }),
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'title',
+      subtitle: 'title.en',
       media: 'profileImage',
     },
   },

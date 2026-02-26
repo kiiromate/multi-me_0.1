@@ -53,6 +53,7 @@ export interface SocialLinks {
 export interface About {
   _id: string
   _type: 'about'
+  locale?: 'en' | 'fr'
   name: string
   title: string
   heroTitle?: string
@@ -77,6 +78,8 @@ export type CaseStudy = PortableTextBlock[]
 export interface Project {
   _id: string
   _type: 'project'
+  locale?: 'en' | 'fr'
+  translationKey?: string
   title: string
   slug: { current: string }
   description: string
@@ -104,6 +107,8 @@ export interface Project {
 export interface Capability {
   _id: string
   _type: 'capability'
+  locale?: 'en' | 'fr'
+  translationKey?: string
   title: string
   description: string
   iconName: string
@@ -112,6 +117,8 @@ export interface Capability {
 export interface Post {
   _id: string
   _type: 'post'
+  locale?: 'en' | 'fr'
+  translationKey?: string
   title: string
   slug: { current: string }
   excerpt: string

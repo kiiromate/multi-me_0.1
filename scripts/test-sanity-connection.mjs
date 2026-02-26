@@ -100,10 +100,27 @@ async function testSanityConnection() {
 
     // Step 3: Test dataset access
     console.log('Step 3: Checking dataset access...')
-    const datasets = await client.fetch(`*[_type in ["project", "post", "about"]] | order(_type) {_type}[0...10]`)
+    const datasets = await client.fetch(`*[_type in ["project", "post", "about", "capability"]] | order(_type) {_type, locale}[0...50]`)
     const types = [...new Set(datasets.map(d => d._type))]
     console.log('✅ Dataset accessible')
     console.log(`   Available content types: ${types.length > 0 ? types.join(', ') : 'none yet'}\n`)
+
+    const localeCounts = await client.fetch(`{
+      "aboutEn": count(*[_type == "about" && coalesce(locale, "en") == "en"]),
+      "aboutFr": count(*[_type == "about" && locale == "fr"]),
+      "projectEn": count(*[_type == "project" && coalesce(locale, "en") == "en"]),
+      "projectFr": count(*[_type == "project" && locale == "fr"]),
+      "postEn": count(*[_type == "post" && coalesce(locale, "en") == "en"]),
+      "postFr": count(*[_type == "post" && locale == "fr"]),
+      "capabilityEn": count(*[_type == "capability" && coalesce(locale, "en") == "en"]),
+      "capabilityFr": count(*[_type == "capability" && locale == "fr"])
+    }`)
+
+    console.log('Step 4: Locale coverage snapshot...')
+    console.log(`   about: EN=${localeCounts.aboutEn}, FR=${localeCounts.aboutFr}`)
+    console.log(`   project: EN=${localeCounts.projectEn}, FR=${localeCounts.projectFr}`)
+    console.log(`   post: EN=${localeCounts.postEn}, FR=${localeCounts.postFr}`)
+    console.log(`   capability: EN=${localeCounts.capabilityEn}, FR=${localeCounts.capabilityFr}\n`)
 
     console.log('✨ All tests passed! Sanity CMS is properly configured.\n')
     console.log('Next steps:')

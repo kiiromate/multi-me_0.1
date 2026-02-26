@@ -1,6 +1,8 @@
 // Project Types
 export interface Project {
   _id: string
+  locale?: 'en' | 'fr'
+  translationKey?: string
   title: string
   slug: { current: string }
   description: string
@@ -21,6 +23,8 @@ export interface Project {
 // Blog Post Types
 export interface Post {
   _id: string
+  locale?: 'en' | 'fr'
+  translationKey?: string
   title: string
   slug: { current: string }
   excerpt: string
@@ -36,6 +40,7 @@ export interface Post {
 // About Types
 export interface About {
   _id: string
+  locale?: 'en' | 'fr'
   name: string
   title: string
   bio: any[]

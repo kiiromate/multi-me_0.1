@@ -2,8 +2,10 @@ import { groq } from 'next-sanity'
 
 // Projects
 export const projectsQuery = groq`
-  *[_type == "project"] | order(order asc, year desc) {
+  *[_type == "project" && coalesce(locale, "en") == $locale] | order(order asc, year desc) {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     description,
@@ -22,8 +24,10 @@ export const projectsQuery = groq`
 `
 
 export const featuredProjectsQuery = groq`
-  *[_type == "project" && featured == true] | order(order asc, year desc) {
+  *[_type == "project" && featured == true && coalesce(locale, "en") == $locale] | order(order asc, year desc) {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     description,
@@ -42,8 +46,10 @@ export const featuredProjectsQuery = groq`
 `
 
 export const projectBySlugQuery = groq`
-  *[_type == "project" && slug.current == $slug][0] {
+  *[_type == "project" && slug.current == $slug && coalesce(locale, "en") == $locale][0] {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     description,
@@ -68,8 +74,10 @@ export const projectBySlugQuery = groq`
 
 // Blog Posts
 export const postsQuery = groq`
-  *[_type == "post"] | order(publishedAt desc) {
+  *[_type == "post" && coalesce(locale, "en") == $locale] | order(publishedAt desc) {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     excerpt,
@@ -83,8 +91,10 @@ export const postsQuery = groq`
 `
 
 export const featuredPostsQuery = groq`
-  *[_type == "post" && featured == true] | order(publishedAt desc) {
+  *[_type == "post" && featured == true && coalesce(locale, "en") == $locale] | order(publishedAt desc) {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     excerpt,
@@ -98,8 +108,10 @@ export const featuredPostsQuery = groq`
 `
 
 export const postBySlugQuery = groq`
-  *[_type == "post" && slug.current == $slug][0] {
+  *[_type == "post" && slug.current == $slug && coalesce(locale, "en") == $locale][0] {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     excerpt,
@@ -116,8 +128,9 @@ export const postBySlugQuery = groq`
 // About
 // About
 export const aboutQuery = groq`
-  *[_type == "about"][0] {
+  *[_type == "about" && coalesce(locale, "en") == $locale][0] {
     _id,
+    locale,
     heroTitle,
     heroSupport,
     positioning {
@@ -130,15 +143,13 @@ export const aboutQuery = groq`
       bio150,
       bio300,
       oneLiner
+      short,
+      full
     },
     socialLinks,
     ctaEmail,
     name,
     title,
-    heroTitle,
-    heroSupport,
-    positioning,
-    bioVariants,
     bio,
     location,
     availability,
@@ -152,8 +163,10 @@ export const aboutQuery = groq`
 
 // Capabilities
 export const capabilitiesQuery = groq`
-  *[_type == "capability"] | order(_createdAt asc) {
+  *[_type == "capability" && coalesce(locale, "en") == $locale] | order(_createdAt asc) {
     _id,
+    locale,
+    translationKey,
     title,
     description,
     iconName
@@ -161,8 +174,10 @@ export const capabilitiesQuery = groq`
 `
 
 export const projectsByLaneQuery = groq`
-  *[_type == "project" && category == $category] | order(order asc, year desc) {
+  *[_type == "project" && category == $category && coalesce(locale, "en") == $locale] | order(order asc, year desc) {
     _id,
+    locale,
+    translationKey,
     title,
     slug,
     description,

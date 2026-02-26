@@ -22,9 +22,13 @@ export default defineConfig({
           .items([
             // Singleton for About
             S.listItem()
-              .title('About')
-              .id('about')
-              .child(S.document().schemaType('about').documentId('about')),
+              .title('About (EN)')
+              .id('about-en')
+              .child(S.document().schemaType('about').documentId('about-en')),
+            S.listItem()
+              .title('About (FR)')
+              .id('about-fr')
+              .child(S.document().schemaType('about').documentId('about-fr')),
             // Regular document types
             S.documentTypeListItem('project').title('Projects'),
             S.documentTypeListItem('post').title('Blog Posts'),

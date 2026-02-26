@@ -9,6 +9,8 @@
     "start": "next start",
     "type-check": "tsc --noEmit",
     "test:sanity": "node scripts/test-sanity-connection.mjs",
+    "seed:sanity": "node scripts/seed-sanity-content.mjs",
+    "check:i18n": "node scripts/check-i18n-parity.mjs",
     "verify:deployment": "node scripts/verify-deployment.mjs",
     "analyze:dead": "knip",
     "analyze:fix": "knip --fix",
