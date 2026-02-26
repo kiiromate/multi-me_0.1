@@ -43,3 +43,11 @@ DNS_SETUP_GUIDE.md
 ENVIRONMENT_VARIABLES.md
 PRODUCTION_VERIFICATION.md
 SANITY_ENV_SETUP.md
+
+# Private specs and instructions
+.kiro/
+.agents/
+scripts/*.md
+lib/sanity/*.md
+/*.md
+!/README.md
