@@ -32,36 +32,36 @@ async function seedPhase2() {
         // 1. UPDATE ABOUT
         const existingAbout = await client.fetch(`*[_type == "about"][0]`)
         const aboutUpdates = {
-            heroTitle: 'Simple Tools. Massive Operational Leverage.',
-            heroSupport: 'I connect everyday software to build resilient systems. These simple but genius pipelines scale Program Delivery and Customer Success for growing organizations.',
+            heroTitle: 'Making complex systems simple and reliable.',
+            heroSupport: 'I connect everyday tools to build resilient workflows. I specialize in technical operations, program delivery, and customer success—cutting through noise to create systems that just work.',
             positioning: {
                 howIThink: [
-                    createBlock('A central theme defines my career: bringing clarity to complex environments. I specialize in taking systems that "sort of work" and transforming them into resilient engines of growth.'),
-                    createBlock('I focus on mapping the actual process rather than the theoretical one. Through constraint-driven execution, I implement workflows, quality gates, and operational rhythms that make technology useful.')
+                    createBlock('I focus on operational reality, not theory. My goal is to bring clarity to complex environments by mapping actual workflows and removing friction.'),
+                    createBlock('I believe in constraint-driven execution: doing more with the tools a team already uses rather than instantly buying heavyweight software.')
                 ],
                 whatIBuild: [
-                    createBlock('Delivery Pipeline Discipline: Reduced lead times by wiring mundane workflows into predictable and measurable engines.'),
-                    createBlock('Implementation and Success: Deployed customer operating systems that proactively identify churn risk using basic data triggers.'),
-                    createBlock('Resilient Systems: Modernized core platforms under strict compliance requirements without breaking production environments.')
+                    createBlock('Delivery Pipelines: Predictable and measurable operational engines that reduce lead times.'),
+                    createBlock('Customer Success Frameworks: Proactive onboarding and retention systems driven by clear health metrics.'),
+                    createBlock('Resilient Operations: Safe modernization of core platforms without breaking production workflows.')
                 ],
                 howIWork: [
-                    createListBlock('Audit Before You Build: Map the actual process instead of the theoretical one.'),
-                    createListBlock('Mundane Tools Mastered: Mesh existing generic tools together before buying new software.'),
-                    createListBlock('Standardize the Routine: Playbook the predictable operations so you can focus entirely on the edge cases.'),
-                    createListBlock('Quality Gates: Implement strict checks to protect production environments at all times.'),
-                    createListBlock('Measure What Matters: Focus exclusively on adoption metrics, throughput, and risk identification.'),
+                    createListBlock('Audit Reality: Map the actual process first.'),
+                    createListBlock('Leverage the Mundane: Maximize existing tools before adding new ones.'),
+                    createListBlock('Standardize: Playbook routine operations to focus entirely on edge cases.'),
+                    createListBlock('Protect Production: Implement strict, simple quality gates.'),
+                    createListBlock('Measure Adoption: Focus on practical usage and throughput.'),
                 ]
             },
             bioVariants: {
-                oneLiner: 'Senior Technical Operations & Implementation Strategist connecting the dots between complex systems and human adoption.',
-                short: 'My career is defined by a central theme: bringing clarity to complex environments. From structuring delivery operations to building scalable customer success playbooks, I specialize in taking systems that "sort of work" and transforming them into resilient engines of growth. I don\'t just implement technology; I implement the workflows, quality gates, and operational rhythms that make technology useful.',
+                oneLiner: 'Technical Operations & Implementation Specialist focusing on clear systems and human adoption.',
+                short: 'I specialize in bringing clarity to complex operational environments. From structuring delivery pipelines to building scalable customer success playbooks, I transform messy workflows into resilient, predictable systems using tools teams already know how to use.',
                 full: [
-                    createBlock('My career is defined by a central theme: bringing clarity to complex environments. From structuring delivery operations to building scalable customer success playbooks, I specialize in taking systems that "sort of work" and transforming them into resilient engines of growth. I don\'t just implement technology; I implement the workflows, quality gates, and operational rhythms that make technology useful.'),
-                    createBlock('Whether it\'s deploying a WhatsApp-first operations pipeline or modernizing a legacy CMS under strict constraints, my approach remains consistent: audit the reality, leverage existing tools powerfully, and execute with disciplined governance. I thrive in mission-driven organizations, particularly climate, fintech-for-good, and impact tech, where operational leverage directly translates to increased impact.')
+                    createBlock('I specialize in bringing clarity to complex operational environments. My focus is on structuring delivery pipelines and building scalable customer success playbooks that turn messy workflows into resilient, predictable systems.'),
+                    createBlock('My approach is straightforward: audit the operational reality, leverage existing tools effectively, and execute with disciplined governance. I thrive when helping teams achieve operational leverage without drowning in unnecessary new software.')
                 ]
             },
-            ctaText: "I am currently exploring remote-first opportunities in Program Operations and Implementation/Customer Success. I am open to global roles and willing to relocate for the right mission-aligned organization. Email me directly at jonathan@kazekeza.com.",
-            title: "Senior Technical Operations & Implementation Strategist"
+            ctaText: "I am open to remote-first opportunities in Program Operations and Implementation/Customer Success. Email me at jonathan@kazekeza.com.",
+            title: "Technical Operations Specialist"
         }
 
         if (existingAbout) {

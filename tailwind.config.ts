@@ -69,9 +69,9 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains)", "JetBrains Mono", "monospace"],
-        heading: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
+        sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        mono: ["system-ui", "monospace"],
+        heading: ["var(--font-outfit)", "system-ui", "sans-serif"],
       },
       fontSize: {
         // Modular scale with 1.25 ratio (Major Third)

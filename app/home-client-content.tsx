@@ -48,55 +48,126 @@ interface HomeClientContentProps {
   featuredPosts: Post[]
   aboutData?: About | null
   capabilities?: Capability[]
+  onePagerMode?: boolean
 }
 
-export default function HomeClientContent({ featuredProjects, featuredPosts, aboutData, capabilities }: HomeClientContentProps) {
+export default function HomeClientContent({
+  featuredProjects,
+  featuredPosts,
+  aboutData,
+  capabilities,
+  onePagerMode = false,
+}: HomeClientContentProps) {
   // Extract hero content from aboutData if available
   const heroTitle = aboutData?.heroTitle || "KAZE KEZA"
   const heroSupport = aboutData?.heroSupport || "Bridging data, design, and code to craft meaningful digital experiences.\nI transform complex information into compelling visual narratives."
+  const aboutHeadline = aboutData?.title || "Creative Technologist"
+  const aboutSource =
+    aboutData?.bioVariants?.bio150 ||
+    aboutData?.bioVariants?.short ||
+    aboutData?.bioVariants?.oneLiner ||
+    heroSupport
+  const aboutWords = aboutSource.replace(/\s+/g, " ").trim().split(" ")
+  const aboutSummary = aboutWords.length > 44 ? `${aboutWords.slice(0, 44).join(" ")}...` : aboutSource
+  const skillHighlights = aboutData?.skills?.slice(0, 3) || []
 
   return (
     <div className="space-y-16 sm:space-y-24 py-8 sm:py-16">
       {/* Hero Section */}
-      <section className="text-center space-y-6 sm:space-y-8 py-12 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-4 sm:space-y-6"
-        >
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-color)] leading-tight">
-            {heroTitle}
-          </h1>
-
-          <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed whitespace-pre-line">
-            {heroSupport}
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
-        >
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-honey)] text-[var(--background-color)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/90 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+      <section id="top" className="text-center py-12 sm:py-20 flex justify-center px-4 scroll-mt-28">
+        <GlassCard className="max-w-4xl w-full p-8 sm:p-12 md:p-16 space-y-8 sm:space-y-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="space-y-4 sm:space-y-6"
           >
-            View My Work
-            <ArrowRight size={20} />
-          </Link>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[var(--text-color)] leading-tight tracking-tight text-balance">
+              {heroTitle}
+            </h1>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border border-[var(--accent-honey)] text-[var(--accent-honey)] font-semibold rounded-lg hover:bg-[var(--accent-honey)]/10 transition-all duration-200"
+            <p className="text-lg sm:text-xl lg:text-2xl text-[var(--secondary-text-color)] max-w-3xl mx-auto leading-relaxed whitespace-pre-line text-balance">
+              {heroSupport}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
-            Get In Touch
-            <ArrowRight size={20} />
-          </Link>
-        </motion.div>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--text-color)] text-[var(--background-color)] font-semibold rounded-full hover:scale-105 transition-all duration-200 shadow-sm"
+            >
+              View My Work
+              <ArrowRight size={20} />
+            </Link>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-transparent border border-[var(--subtle-border-color)] text-[var(--secondary-text-color)] font-medium rounded-full hover:bg-[var(--secondary-text-color)]/5 transition-all duration-200"
+            >
+              Get In Touch
+              <ArrowRight size={20} />
+            </Link>
+          </motion.div>
+        </GlassCard>
       </section>
+
+      {/* One-Pager About Section */}
+      {onePagerMode && (
+        <section id="about" className="px-4 scroll-mt-28">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
+            <GlassCard className="max-w-5xl mx-auto p-8 sm:p-10">
+              <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr] items-start">
+                <div className="space-y-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-honey)]">The Human</p>
+                  <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-color)]">Who I Am</h2>
+                  <p className="text-[var(--secondary-text-color)]">{aboutHeadline}</p>
+                </div>
+                <div className="space-y-6">
+                  <p className="text-lg text-[var(--secondary-text-color)] leading-relaxed">{aboutSummary}</p>
+                  {skillHighlights.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {skillHighlights.map((skill) => (
+                        <span
+                          key={skill.area}
+                          className="px-3 py-1 rounded-full border border-[var(--subtle-border-color)] text-sm text-[var(--secondary-text-color)]"
+                        >
+                          {skill.area}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Link
+                      href="/projects"
+                      className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
+                    >
+                      Explore Craft
+                      <ArrowRight size={16} />
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 text-[var(--secondary-text-color)] hover:text-[var(--text-color)] transition-colors duration-200 font-medium"
+                    >
+                      Start a Conversation
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+        </section>
+      )}
 
       {/* Capabilities Section */}
       {capabilities && capabilities.length > 0 && (
@@ -117,59 +188,6 @@ export default function HomeClientContent({ featuredProjects, featuredPosts, abo
           <div className="max-w-6xl mx-auto px-4">
             <CapabilitiesGrid capabilities={capabilities} />
           </div>
-        </section>
-      )}
-
-      {/* Fallback to original About Preview if no capabilities provided */}
-      {(!capabilities || capabilities.length === 0) && (
-        <section className="space-y-8 sm:space-y-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center space-y-4"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-color)]">About Me</h2>
-            <p className="text-lg text-[var(--secondary-text-color)] max-w-2xl mx-auto">
-              A multifaceted creator at the intersection of data, design, and technology
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <GlassCard className="max-w-4xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-semibold text-[var(--text-color)]">Multi-Me Philosophy</h3>
-                  <p className="text-[var(--secondary-text-color)] leading-relaxed">
-                    I believe in embracing multiple facets of creativity. As a data storyteller, creative technologist,
-                    and visual designer, I bring diverse perspectives to every project. My work bridges analytical thinking
-                    with artistic expression, creating experiences that are both meaningful and beautiful.
-                  </p>
-                  <Link
-                    href="/about"
-                    className="inline-flex items-center gap-2 text-[var(--accent-honey)] hover:gap-3 transition-all duration-200 font-medium"
-                  >
-                    Learn more about me
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
-                <div className="relative aspect-square rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-honey)]/20 to-transparent" />
-                  <div className="w-full h-full bg-[var(--secondary-text-color)]/10 flex items-center justify-center">
-                    <span className="text-[var(--secondary-text-color)] text-sm">
-                      Profile Photo
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </GlassCard>
-          </motion.div>
         </section>
       )}
 

@@ -62,14 +62,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
     <div className="relative z-10 min-h-screen py-16 px-4">
       <div className="max-w-6xl mx-auto space-y-16">
         {/* Hero Section */}
-        <motion.section
-          {...fadeInUp}
-          className="text-center space-y-8"
-        >
-          {/* Brand Logo */}
-          <div className="flex justify-center mb-6">
-            <BrandLogo size={100} animated />
-          </div>
+        <div className="text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
 
           {/* Hero Title */}
           <h1
@@ -103,7 +96,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
               </Link>
             </motion.div>
           )}
-        </motion.section>
+        </div>
 
         {/* 3-Part Narrative (Positioning Framework) */}
         {hasPositioning && (
@@ -129,16 +122,8 @@ export function AboutClient({ aboutData }: AboutClientProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Part 1: How I Think */}
               {aboutData.positioning?.howIThink && (
-                <motion.article
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  whileHover={{
-                    borderColor: 'rgba(235, 169, 55, 0.3)',
-                    transition: { duration: 0.2 }
-                  }}
-                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                <article
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden transition-colors hover:border-[#EBA937]/30"
                 >
                   {/* Noise texture overlay */}
                   <div
@@ -159,21 +144,13 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                       />
                     </div>
                   </div>
-                </motion.article>
+                </article>
               )}
 
               {/* Part 2: What I Build */}
               {aboutData.positioning?.whatIBuild && (
-                <motion.article
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  whileHover={{
-                    borderColor: 'rgba(235, 169, 55, 0.3)',
-                    transition: { duration: 0.2 }
-                  }}
-                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                <article
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden transition-colors hover:border-[#EBA937]/30"
                 >
                   {/* Noise texture overlay */}
                   <div
@@ -194,21 +171,13 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                       />
                     </div>
                   </div>
-                </motion.article>
+                </article>
               )}
 
               {/* Part 3: How I Work */}
               {aboutData.positioning?.howIWork && (
-                <motion.article
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  whileHover={{
-                    borderColor: 'rgba(235, 169, 55, 0.3)',
-                    transition: { duration: 0.2 }
-                  }}
-                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden"
+                <article
+                  className="narrative-card relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden transition-colors hover:border-[#EBA937]/30"
                 >
                   {/* Noise texture overlay */}
                   <div
@@ -229,7 +198,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                       />
                     </div>
                   </div>
-                </motion.article>
+                </article>
               )}
             </div>
           </section>
@@ -237,11 +206,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
 
         {/* Bio Variant (Optional TL;DR) */}
         {aboutData.bioVariants?.bio150 && (
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <section
             className="relative p-8 backdrop-blur-md bg-background/50 border border-border/50 rounded-lg overflow-hidden max-w-4xl mx-auto"
           >
             {/* Noise texture overlay */}
@@ -260,7 +225,7 @@ export function AboutClient({ aboutData }: AboutClientProps) {
                 {aboutData.bioVariants.bio150}
               </p>
             </div>
-          </motion.section>
+          </section>
         )}
       </div>
     </div>

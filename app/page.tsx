@@ -5,7 +5,7 @@ import HomeClientContent from "./home-client-content"
 import { HeroCanvasClient } from "@/components/animations/hero-canvas-client"
 
 export default async function HomePage() {
-  // Fetch featured projects, posts, about data, and capabilities from Sanity with error handling
+  // Fetch featured projects, posts, and about data used by the Hero + one-pager About section
   const projects = await safeFetch(client, featuredProjectsQuery, undefined, [])
   const posts = await safeFetch(client, featuredPostsQuery, undefined, [])
   const aboutData = await safeFetch(client, aboutQuery, undefined, null)
@@ -23,6 +23,7 @@ export default async function HomePage() {
         featuredPosts={featuredPosts}
         aboutData={aboutData}
         capabilities={capabilities}
+        onePagerMode
       />
     </>
   )

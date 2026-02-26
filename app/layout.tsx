@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Outfit } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/lib/theme-provider"
 import { LayoutContent } from "@/components/layout/layout-content"
@@ -13,25 +13,21 @@ import { Suspense } from "react"
 import { client } from "@/lib/sanity/client"
 import { aboutQuery } from "@/lib/sanity/queries"
 import { safeFetch } from "@/lib/sanity/error-handling"
+import { AmbientBackground } from "@/components/ui/ambient-background"
 
-const inter = Inter({
+import { Outfit } from "next/font/google"
+
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
   display: "swap",
   preload: true,
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-  preload: false,
 })
 
 import { About } from "@/types/sanity"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const about = await client.fetch<About>(aboutQuery)
+  const about: any = await safeFetch(client, aboutQuery, undefined, null)
 
   return generateSEO({
     description: about?.bioVariants?.oneLiner,
@@ -56,7 +52,7 @@ export default async function RootLayout({
   // Fetch About data for footer
   const aboutData: any = await safeFetch(client, aboutQuery, undefined, null)
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${outfit.variable}`}>
       <head>
         {/* Preload critical resources */}
         <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
@@ -84,7 +80,7 @@ export default async function RootLayout({
               --content-bg-color-rgb: 18, 18, 18;
             }
             body { 
-              font-family: var(--font-inter), system-ui, sans-serif;
+              font-family: var(--font-outfit), system-ui, sans-serif;
               background-color: var(--background-color);
               color: var(--text-color);
               line-height: 1.7;
@@ -103,6 +99,7 @@ export default async function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <SkipToContent />
+        <AmbientBackground />
         <StructuredData data={structuredData} />
         <Suspense fallback={<div>Loading...</div>}>
           <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
+    "sanity/config.ts",
+    "sanity/schemas/**/*.ts",
+    "next.config.mjs",
+    "tailwind.config.ts",
+    "postcss.config.mjs",
+    "scripts/**/*.{ts,js,mjs}"
+  ],
+  "project": ["**/*.{ts,tsx,js,mjs}"],
+  "ignore": ["node_modules/**", ".next/**", "out/**"],
+  "ignoreDependencies": ["eslint", "prettier", "postcss", "autoprefixer", "tailwindcss", "typescript", "@types/node", "@types/react", "@types/react-dom", "dotenv"]
+}

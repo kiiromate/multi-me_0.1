@@ -61,10 +61,10 @@ export default function NotFound() {
           </p>
           <nav className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/about"
+              href="/#about"
               className="text-[#EBA937] hover:underline focus:ring-2 focus:ring-[#EBA937] rounded px-2 py-1 focus:outline-none"
             >
-              About
+              The Human
             </Link>
             <Link
               href="/blog"
