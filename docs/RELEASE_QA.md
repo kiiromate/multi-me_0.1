@@ -15,12 +15,12 @@
 - [x] Locale strategy implemented and documented.
 - [x] EN default + FR routing + UI parity plumbing added across primary pages.
 - [x] Language switch behavior consistent across routes (`/` <-> `/fr` and nested paths).
-- [ ] Missing translation guardrail script implemented and passing (implemented; Sanity network check blocked in this environment).
+- [x] Missing translation guardrail script implemented and passing (`npm run check:i18n`).
 
 ## Phase 3 - Sanity Connectivity and Seeding
-- [x] Sanity env validation verified for local + Netlify (script enhanced; live network validation blocked here).
+- [x] Sanity env validation verified for local + Netlify (`npm run test:sanity` pass).
 - [x] Single idempotent locale-aware seed script implemented (`scripts/seed-sanity-content.mjs`).
-- [ ] EN/FR documents seeded for all required page blocks (script ready; execution blocked by network proxy refusal).
+- [x] EN/FR documents seeded for all required page blocks (`npm run seed:sanity` pass; re-run pass for idempotence).
 - [x] Stable document IDs/slug strategy documented and implemented in seed + schemas.
 
 ## Phase 4 - Security Hardening
@@ -40,14 +40,14 @@
 - [x] `.env.example` updated for local + Netlify usage.
 - [x] README includes sub-20 minute setup runbook.
 - [ ] Commands validated:
-  - [ ] `npm install` (not re-run; existing `node_modules` present)
+  - [x] `npm install` (targeted install commands executed for ESLint gate tooling)
   - [ ] `npm run dev` (not run in this session)
-  - [ ] `npm run type-check` (fails on pre-existing project-wide type issues not introduced by this work)
-  - [ ] `npm run lint` (blocked by interactive Next.js ESLint setup prompt)
-  - [ ] `npm run build` (blocked by environment disk space: `ENOSPC`)
-  - [ ] `npm run test:sanity` (blocked by network proxy refusal)
-  - [ ] `npm run seed:sanity` (blocked by network proxy refusal)
-  - [ ] `npm run check:i18n` (UI keys pass; Sanity parity step blocked by network proxy refusal)
+  - [x] `npm run type-check`
+  - [x] `npm run lint`
+  - [x] `npm run build`
+  - [x] `npm run test:sanity`
+  - [x] `npm run seed:sanity` (twice; idempotence confirmed)
+  - [x] `npm run check:i18n` (UI + Sanity parity passed)
 - [x] Final changelog with verification notes completed (`docs/HARDENING_CHANGELOG.md`).
 
 ## Commit Verification Log
@@ -65,8 +65,8 @@
   - Single idempotent seed runner exists with stable IDs.
   - Parity checker detects missing EN/FR UI keys and Sanity locale gaps.
 - Verification:
-  - `npm run check:i18n` confirms UI key parity pass.
-  - Network blocked live Sanity parity API checks in this environment.
+  - `npm run check:i18n` confirms UI + Sanity parity pass after proxy override.
+  - `npm run seed:sanity` executed twice successfully (idempotent upsert behavior confirmed).
 
 ### `80a6345` - Security + SEO hardening
 - Acceptance criteria:
@@ -74,4 +74,12 @@
   - Netlify headers and preview noindex behavior are configured.
   - Locale-aware canonical, robots, sitemap, and structured data are present.
 - Verification:
-  - `npm run build` could not complete due `ENOSPC` (environment constraint), but static config and route files are in place and type-checked for touched paths.
+  - `npm run build` now passes after disk-space and execution-permission issues were resolved.
+
+## Gate Unblock Reruns (Current Session)
+- `npm run type-check`: pass.
+- `npm run lint`: pass (non-interactive with committed ESLint config).
+- `npm run build`: pass.
+- `npm run test:sanity`: pass.
+- `npm run seed:sanity`: pass (run twice).
+- `npm run check:i18n`: pass.

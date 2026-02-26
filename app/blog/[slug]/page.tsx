@@ -8,7 +8,7 @@ import { getRequestLocale } from "@/lib/i18n/request-locale"
 import { localizePath } from "@/lib/i18n/config"
 
 interface BlogPostPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 // Generate static params for all blog posts
@@ -21,9 +21,10 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params
   const locale = await getRequestLocale()
-  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug: params.slug, locale }, null)
-  const canonical = localizePath(`/blog/${params.slug}`, locale)
+  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug, locale }, null)
+  const canonical = localizePath(`/blog/${slug}`, locale)
 
   if (!post) {
     return {
@@ -37,8 +38,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     alternates: {
       canonical,
       languages: {
-        en: `/blog/${params.slug}`,
-        fr: `/fr/blog/${params.slug}`,
+        en: `/blog/${slug}`,
+        fr: `/fr/blog/${slug}`,
       },
     },
     openGraph: {
@@ -60,12 +61,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params
   const locale = await getRequestLocale()
-  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug: params.slug, locale }, null)
+  const post = await safeFetch<any | null>(client, postBySlugQuery, { slug, locale }, null)
 
   if (!post) {
     notFound()
   }
 
-  return <BlogPostClient locale={locale} post={post} slug={params.slug} />
+  return <BlogPostClient locale={locale} post={post} slug={slug} />
 }

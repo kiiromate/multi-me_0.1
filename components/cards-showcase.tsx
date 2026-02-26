@@ -110,7 +110,14 @@ export default function CardsShowcase() {
 
           <ContentGrid variant="projects">
             {sampleProjects.map((project) => (
-              <ProjectCard key={project.slug} {...project} />
+              <ProjectCard
+                key={project.slug}
+                title={project.title}
+                description={project.description}
+                tags={project.techStack}
+                liveUrl={project.liveUrl}
+                githubUrl={project.githubUrl}
+              />
             ))}
           </ContentGrid>
         </section>

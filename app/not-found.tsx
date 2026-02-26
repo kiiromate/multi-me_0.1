@@ -13,7 +13,7 @@ export default function NotFound() {
       <div className="max-w-2xl mx-auto text-center space-y-12">
         {/* Deconstructed Brand Logo */}
         <div className="flex justify-center">
-          <BrandLogo size={150} deconstructed />
+          <BrandLogo size="lg" />
         </div>
 
         {/* Error Message */}
