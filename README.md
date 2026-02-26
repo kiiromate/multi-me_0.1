@@ -33,7 +33,7 @@ Following Dieter Rams' principle of "Weniger, aber besser" (Less, but better):
 
 ## 🛠️ Development
 
-### Initial Setup
+### 20-Minute Setup Runbook
 
 1. **Install dependencies**
    ```bash
@@ -52,11 +52,25 @@ Following Dieter Rams' principle of "Weniger, aber besser" (Less, but better):
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
    NEXT_PUBLIC_SITE_URL=https://kazekeza.com
+   SANITY_API_TOKEN=your_sanity_write_token
+   CONTACT_WEBHOOK_URL=https://example.com/webhooks/contact
+   CONTACT_WEBHOOK_BEARER_TOKEN=your_server_secret
    ```
 
-3. **Test Sanity connection**
+3. **Test Sanity connection + locale readiness**
    ```bash
    npm run test:sanity
+   ```
+
+4. **Seed baseline EN/FR content (idempotent)**
+   ```bash
+   npm run seed:sanity
+   npm run seed:sanity
+   ```
+
+5. **Validate i18n parity checks**
+   ```bash
+   npm run check:i18n
    ```
 
 ### Development Commands
@@ -71,11 +85,23 @@ npm run dev
 # Build for production
 npm run build
 
+# Type-check
+npm run type-check
+
+# Lint
+npm run lint
+
 # Start production server
 npm start
 
 # Test Sanity connection
 npm run test:sanity
+
+# Seed EN/FR content (safe to re-run)
+npm run seed:sanity
+
+# i18n parity checks (UI keys + Sanity locale parity)
+npm run check:i18n
 ```
 
 ## 📁 Project Structure

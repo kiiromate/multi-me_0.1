@@ -39,3 +39,8 @@
 - `npm run build` passes.
 - `sitemap.xml` and `robots.txt` resolve in dev/prod build.
 
+## Current Run Notes (This Session)
+- `npm run type-check`: failed due pre-existing repo issues unrelated to this hardening pass (`app/not-found.tsx`, `components/cards-showcase.tsx`, `components/ui/calendar.tsx`, missing test globals in `lib/sanity/__tests__/image.test.ts`).
+- `npm run lint`: blocked by interactive Next.js ESLint setup prompt (no committed eslint config in repo yet).
+- `npm run build`: failed due host environment disk exhaustion (`ENOSPC: no space left on device`).
+- `npm run test:sanity`, `npm run seed:sanity`, `npm run check:i18n`: Sanity network calls blocked by proxy refusal (`ECONNREFUSED 127.0.0.1:9`); UI key parity check passed before Sanity step.
