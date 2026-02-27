@@ -27,12 +27,16 @@ const outfit = Outfit({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getRequestLocale()
-  const about: any = await safeFetch(client, aboutQuery, { locale }, null)
+
+  // Provide deterministic fallback in case Sanity fetch fails
+  const fallbackAbout = { bioVariants: { oneLiner: "Creative technologist building reliable digital systems." } }
+  const about: any = await safeFetch(client, aboutQuery, { locale }, fallbackAbout)
+
   const canonical = localizePath("/", locale)
   const localeCode = locale === "fr" ? "fr_FR" : "en_US"
 
   return generateSEO({
-    description: about?.bioVariants?.oneLiner,
+    description: about?.bioVariants?.oneLiner || fallbackAbout.bioVariants.oneLiner,
     locale: localeCode,
     canonicalPath: canonical,
     alternates: {

@@ -31,13 +31,21 @@ export async function safeFetch<T>(
   try {
     const result = await client.fetch(query, params) as T
     return result
-  } catch (error) {
-    // Log error for debugging
-    console.error('Sanity fetch error:', {
-      query,
-      params,
-      error: error instanceof Error ? error.message : String(error),
-    })
+  } catch (error: any) {
+    // Strip sensitive params
+    const safeParams = params ? { ...params } : undefined;
+    if (safeParams && safeParams.token) {
+      safeParams.token = '[REDACTED]';
+    }
+
+    // Log actionable error details without leaking secrets
+    console.error(`[Sanity Fetch Error]`, {
+      message: error?.message || 'Unknown error',
+      statusCode: error?.statusCode || 'N/A',
+      queryTag: safeParams?.queryTag || 'N/A',
+      query: query.slice(0, 100) + '...', // truncate query for cleaner logs
+      safeParams
+    });
 
     // Return fallback value if provided
     if (fallback !== undefined) {

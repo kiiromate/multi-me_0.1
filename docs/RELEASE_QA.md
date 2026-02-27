@@ -78,8 +78,10 @@
 
 ## Gate Unblock Reruns (Current Session)
 - `npm run type-check`: pass.
-- `npm run lint`: pass (non-interactive with committed ESLint config).
+- `npm run lint`: pass.
 - `npm run build`: pass.
 - `npm run test:sanity`: pass.
-- `npm run seed:sanity`: pass (run twice).
+- `npm run seed:sanity`: pass (run twice, idempotence confirmed).
 - `npm run check:i18n`: pass.
+- `/studio`: pass (resolved Code Input plugin by reverting to `text` field).
+- `generateMetadata`: pass (resolved layout fetch null failures).

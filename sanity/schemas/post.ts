@@ -115,8 +115,10 @@ export default defineType({
           ],
         },
         {
-          type: 'code',
-          title: 'Code Block',
+          type: 'text',
+          name: 'codeSnippet',
+          title: 'Code Snippet (Fallback)',
+          description: 'A temporary replacement for code blocks due to a plugin resolution error. Insert your snippet here.'
         },
       ],
       validation: (Rule) => Rule.required(),
