@@ -7,7 +7,7 @@
 
   # Node.js version
   [build.environment]
-    NODE_VERSION = "18"
+    NODE_VERSION = "20"
     # Disable Next.js telemetry in CI
     NEXT_TELEMETRY_DISABLED = "1"
     # Allow NEXT_PUBLIC_* env vars in build output (they're meant to be public)
