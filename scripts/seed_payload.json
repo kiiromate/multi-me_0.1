@@ -1,0 +1,571 @@
+[
+    {
+        "_id": "about",
+        "_type": "about",
+        "locale": "en",
+        "name": "Kaze Keza",
+        "title": {
+            "en": "Operations and Implementation Manager",
+            "fr": "Responsable des Opérations et de l'Implémentation"
+        },
+        "heroTitle": {
+            "en": "Simple Tools. Massive Operational Leverage.",
+            "fr": "Des outils simples. Un levier opérationnel massif."
+        },
+        "heroSupport": {
+            "en": "I build, implement, and run resilient systems that scale Program Delivery and Customer Success for growing organizations.",
+            "fr": "Je conçois, déploie et gère des systèmes résilients qui font évoluer la Livraison de Programmes et le Succès Client."
+        },
+        "proofPoints": [
+            {
+                "en": "Reduced lead times by wiring mundane workflows into predictable engines.",
+                "fr": "Délais réduits en modélisant des flux ordinaires en moteurs prévisibles."
+            },
+            {
+                "en": "Deployed customer OS that proactively identifies churn risk using basic triggers.",
+                "fr": "Déploiement d'OS client identifiant les risques d'attrition via des déclencheurs simples."
+            },
+            {
+                "en": "Modernized core platforms under strict compliance without breaking production.",
+                "fr": "Modernisation de plateformes centrales sous conformité stricte sans perturber la production."
+            }
+        ],
+        "howIWork": [
+            {
+                "heading": {
+                    "en": "Audit Before You Build",
+                    "fr": "Auditer avant de construire"
+                },
+                "description": {
+                    "en": "Map the actual process instead of the theoretical one.",
+                    "fr": "Cartographier le processus réel au lieu du processus théorique."
+                }
+            },
+            {
+                "heading": {
+                    "en": "Mundane Tools Mastered",
+                    "fr": "Maitrise des outils ordinaires"
+                },
+                "description": {
+                    "en": "Mesh existing generic tools together before buying new software.",
+                    "fr": "Combiner les outils génériques existants avant d'acheter de nouveaux logiciels."
+                }
+            },
+            {
+                "heading": {
+                    "en": "Standardize the Routine",
+                    "fr": "Standardiser la routine"
+                },
+                "description": {
+                    "en": "Playbook predictable operations so you can focus entirely on edge cases.",
+                    "fr": "Documenter les opérations prévisibles pour se concentrer sur les cas exceptionnels."
+                }
+            },
+            {
+                "heading": {
+                    "en": "Quality Gates",
+                    "fr": "Portes de qualité"
+                },
+                "description": {
+                    "en": "Implement strict checks to protect production environments at all times.",
+                    "fr": "Mettre en œuvre des vérifications strictes pour protéger la production en permanence."
+                }
+            },
+            {
+                "heading": {
+                    "en": "Measure What Matters",
+                    "fr": "Mesurer l'essentiel"
+                },
+                "description": {
+                    "en": "Focus exclusively on adoption metrics, throughput, and risk identification.",
+                    "fr": "Se concentrer exclusivement sur l'adoption, le rendement et l'identification des risques."
+                }
+            }
+        ],
+        "nowSection": {
+            "en": "This quarter, I am actively exploring remote-first opportunities in Program Operations and Implementation, and refining my frameworks for constraint-driven execution.",
+            "fr": "Ce trimestre, j'explore activement des opportunités 100% à distance en Opérations de Programmes et Implémentation, tout en affinant mes cadres d'exécution sous contraintes."
+        },
+        "ctaStrip": {
+            "primary": {
+                "en": "Connect",
+                "fr": "Me contacter"
+            },
+            "secondary": {
+                "en": "View Work",
+                "fr": "Voir le travail"
+            },
+            "tertiary": {
+                "en": "Request Proof Pack",
+                "fr": "Demander le Proof Pack"
+            }
+        },
+        "positioning": {
+            "howIThink": [
+                {
+                    "_type": "block",
+                    "style": "normal",
+                    "children": [
+                        {
+                            "_type": "span",
+                            "marks": [],
+                            "text": "I believe true operational leverage isn't about buying expensive software. It's about designing tight, predictable workflows using mundane, stable tools."
+                        }
+                    ]
+                }
+            ],
+            "whatIBuild": [
+                {
+                    "_type": "block",
+                    "style": "normal",
+                    "children": [
+                        {
+                            "_type": "span",
+                            "marks": [],
+                            "text": "I build implementation and success pipelines that eliminate redundancies and reduce reporting time by focusing entirely on clear, actionable data."
+                        }
+                    ]
+                }
+            ],
+            "howIWorkLegacy": [
+                {
+                    "_type": "block",
+                    "style": "normal",
+                    "children": [
+                        {
+                            "_type": "span",
+                            "marks": [],
+                            "text": "I operate with strict quality gates and document operations so deeply that standard processes run themselves, allowing me to focus on growth and exceptions."
+                        }
+                    ]
+                }
+            ]
+        },
+        "bioVariants": {
+            "oneLiner": {
+                "en": "Operations and Implementation Manager building resilient workflows from mundane tools.",
+                "fr": "Responsable des Opérations et de l'Implémentation créant des flux résilients avec des outils simples."
+            },
+            "short": {
+                "en": "I build, implement, and run resilient systems that scale Program Delivery and Customer Success for growing organizations.",
+                "fr": "Je conçois, déploie et gère des systèmes résilients qui font évoluer la Livraison de Programmes et le Succès Client."
+            },
+            "full": [
+                {
+                    "_type": "block",
+                    "style": "normal",
+                    "children": [
+                        {
+                            "_type": "span",
+                            "marks": [],
+                            "text": "I am an Operations and Implementation Manager dedicated to translating chaos into clear pipeline discipline. I specialize in the unglamorous but vital reality of making systems work. Rather than reinventing the wheel with unproven, hype-driven tech, I build sustainable customer success and program delivery engines using stable, mundane tools. I focus heavily on adoption and retention."
+                        }
+                    ]
+                }
+            ]
+        },
+        "location": {
+            "en": "Remote (Global)",
+            "fr": "À distance (Mondial)"
+        },
+        "availability": "available",
+        "funFact": {
+            "en": "Avid apiculture student applying hive analytics to complex business operations.",
+            "fr": "Étudiant passionné d'apiculture appliquant l'analytique des ruches aux opérations commerciales complexes."
+        },
+        "skills": [
+            {
+                "area": {
+                    "en": "Program Operations",
+                    "fr": "Opérations de Programmes"
+                },
+                "description": {
+                    "en": "Designing and executing delivery pipelines.",
+                    "fr": "Conception et exécution de pipelines de livraison."
+                },
+                "technologies": [
+                    "Kanban",
+                    "Workflow Automation",
+                    "Notion",
+                    "Airtable"
+                ]
+            },
+            {
+                "area": {
+                    "en": "Customer Success Implementation",
+                    "fr": "Implémentation Succès Client"
+                },
+                "description": {
+                    "en": "Building scalable onboarding and health scoring.",
+                    "fr": "Création d'intégration évolutive et de notation de santé."
+                },
+                "technologies": [
+                    "CRM",
+                    "Spreadsheets",
+                    "Data Triggers"
+                ]
+            }
+        ],
+        "socialLinks": {
+            "linkedin": "https://linkedin.com/in/kazekeza",
+            "email": "jonathan@kazekeza.com"
+        },
+        "ctaEmail": "jonathan@kazekeza.com",
+        "ctaText": {
+            "en": "Ready to build scalable operations? Request my Safe Proof Pack or start a conversation.",
+            "fr": "Prêt à construire des opérations évolutives ? Demandez mon Proof Pack ou démarrons une conversation."
+        }
+    },
+    {
+        "_type": "project",
+        "category": "commercial",
+        "status": "live",
+        "featured": true,
+        "year": 2024,
+        "order": 1,
+        "title": {
+            "en": "WhatsApp-First Customer Ops System for SMBs",
+            "fr": "Opérations client via WhatsApp pour les PME"
+        },
+        "slug": {
+            "current": "whatsapp-first-customer-ops-system-for-smbs"
+        },
+        "description": {
+            "en": "How a basic communication app created clear pipeline visibility and decreased reporting time by 25%.",
+            "fr": "Comment une simple application a structuré la visibilité du pipeline et diminué le temps de reporting de 25%."
+        },
+        "context": {
+            "en": "An SMB struggled with lead leakage and slow response times because of chaotic unstructured communication.",
+            "fr": "Une PME luttait contre la perte de prospects et des temps de réponse lents en raison d'une communication chaotique."
+        },
+        "objective": {
+            "en": "Create a highly disciplined operational pipeline using a tool the team already checks every single day.",
+            "fr": "Créer un pipeline opérationnel hautement discipliné en utilisant un outil que l'équipe consulte tous les jours."
+        },
+        "role": {
+            "en": "Operations Strategist and Architect",
+            "fr": "Stratège et architecte des opérations"
+        },
+        "constraints": {
+            "en": "Zero budget for new enterprise software. The team had high resistance to learning complex new interfaces. Fast implementation was required.",
+            "fr": "Zéro budget pour de nouveaux logiciels. Forte résistance à l'apprentissage de nouvelles interfaces. Implémentation rapide requise."
+        },
+        "actions": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The solution was simple but effective. I standardized WhatsApp Business as the only intake channel. I then wired it to a basic Kanban board using a generic automation platform. This routed incoming messages into automated triage columns and triggered basic follow-up reminders."
+                    }
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The system measurably reduced dropped leads and decreased reporting time by 25%. It created clear pipeline visibility without forcing the team to learn disruptive new software."
+                    }
+                ]
+            }
+        ],
+        "tools": [
+            "WhatsApp Business API",
+            "Generic Workflow Automation",
+            "Basic Kanban Board"
+        ],
+        "lessons": {
+            "en": "Operational leverage rarely requires expensive software. True leverage comes from meshing mundane tools into a clever workflow.",
+            "fr": "Le levier opérationnel nécessite rarement des logiciels coûteux. Le véritable levier provient de la combinaison d'outils simples dans un flux intelligent."
+        },
+        "safeProofArtifacts": [
+            {
+                "en": "Automated triage workflow map",
+                "fr": "Carte du flux de tri automatisé"
+            },
+            {
+                "en": "Sanitized Kanban pipeline structure",
+                "fr": "Structure de pipeline Kanban expurgée"
+            },
+            {
+                "en": "Agent response SLA checklist",
+                "fr": "Liste de contrôle des SLA des agents"
+            }
+        ]
+    },
+    {
+        "_type": "project",
+        "category": "commercial",
+        "status": "live",
+        "featured": true,
+        "year": 2024,
+        "order": 2,
+        "title": {
+            "en": "CMS-Safe Website Modernization Under Hard Constraints",
+            "fr": "Modernisation de site sécurisée pour CMS sous fortes contraintes"
+        },
+        "slug": {
+            "current": "cms-safe-website-modernization-under-hard-constraints"
+        },
+        "description": {
+            "en": "Executing complex interface improvements delivering a 30% operational efficiency increase within hard architectural constraints.",
+            "fr": "Améliorations d'interface complexes offrant une augmentation de 30% de l'efficacité opérationnelle sous de fortes contraintes."
+        },
+        "context": {
+            "en": "A mission-critical online platform required significant interface modernization without risking downtime or breaking existing CMS data structures.",
+            "fr": "Une plateforme critique nécessitait une modernisation de l'interface sans risquer de temps d'arrêt ni de rompre les structures CMS existantes."
+        },
+        "objective": {
+            "en": "Deliver a modernized performant interface while maintaining flawless content delivery for the editorial team.",
+            "fr": "Livrer une interface modernisée tout en maintenant une diffusion de contenu sans faille."
+        },
+        "role": {
+            "en": "Lead Technical Implementer",
+            "fr": "Responsable technique de l'implémentation"
+        },
+        "constraints": {
+            "en": "Strict quality requirements. We had to work with legacy data structures and tolerate zero downtime.",
+            "fr": "Exigences strictes. Travailler avec des structures de données existantes et tolérer un temps d'arrêt nul."
+        },
+        "actions": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The core of the approach was in the governance rather than the code. I established rigorous quality gates before making a single deployment. I implemented updates iteratively by building simple data fetching wrappers."
+                    }
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Successfully modernized the experience and maintained 100 percent uptime during the transition. Operational efficiency improved by 30% without disrupting the content team."
+                    }
+                ]
+            }
+        ],
+        "tools": [
+            "Next.js",
+            "Sanity CMS",
+            "Netlify"
+        ],
+        "lessons": {
+            "en": "Sustainable modernization is about respecting existing architecture. Simple quality gates often outperform complex engineering.",
+            "fr": "La modernisation durable consiste à respecter l'architecture existante. Des portes de qualité simples surpassent souvent."
+        },
+        "safeProofArtifacts": [
+            {
+                "en": "Quality iteration checklist",
+                "fr": "Liste de contrôle d'itération"
+            },
+            {
+                "en": "Fallback component wrapper example",
+                "fr": "Exemple d'enveloppe de composant"
+            },
+            {
+                "en": "Deployment timeline diagram",
+                "fr": "Diagramme de calendrier de déploiement"
+            }
+        ]
+    },
+    {
+        "_type": "project",
+        "category": "commercial",
+        "status": "live",
+        "featured": true,
+        "year": 2023,
+        "order": 3,
+        "title": {
+            "en": "Implementation and Customer Success OS",
+            "fr": "Système d'exploitation d'Implémentation et de Succès Client"
+        },
+        "slug": {
+            "current": "implementation-and-customer-success-os"
+        },
+        "description": {
+            "en": "Standardized playbooks built entirely with generic tools increasing retention via onboarding by 15%.",
+            "fr": "Guides standardisés avec des outils génériques augmentant la rétention via l'intégration de 15%."
+        },
+        "context": {
+            "en": "A growing B2B organization needed a systematic way to onboard users and track account health before active churn occurred.",
+            "fr": "Une organisation B2B avait besoin d'intégrer systémiquement les utilisateurs et de suivre la santé des comptes."
+        },
+        "objective": {
+            "en": "Build a proactive Customer Success operating system using highly flexible and generic tools.",
+            "fr": "Construire un système de succès client proactif via des outils génériques."
+        },
+        "role": {
+            "en": "Implementation and CS Systems Builder",
+            "fr": "Concepteur de systèmes d'implémentation et CS"
+        },
+        "constraints": {
+            "en": "The framework needed immediate adoption by a team with zero prior structured Customer Success experience.",
+            "fr": "Adoption immédiate requise par une équipe sans expérience préalable du succès client."
+        },
+        "actions": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "I avoided heavyweight Success platforms. I developed a standardized onboarding playbook with crisp milestones. I built a simple Health Score framework inside a spreadsheet, driven by product usage data."
+                    }
+                ]
+            }
+        ],
+        "outcomes": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The team transitioned from reactive firefighting to proactive management in just two weeks. The standardized pipeline increased retention via onboarding by 15%."
+                    }
+                ]
+            }
+        ],
+        "tools": [
+            "Basic CRM",
+            "Spreadsheet for Health Scoring",
+            "Shared Documentation Tool"
+        ],
+        "lessons": {
+            "en": "Customer Success is fundamentally an operational discipline. A strong operating rhythm beats complex software.",
+            "fr": "Le succès client est une discipline opérationnelle. Le rythme opérationnel surpasse les logiciels complexes."
+        },
+        "safeProofArtifacts": [
+            {
+                "en": "Milestone onboarding template",
+                "fr": "Modèle d'intégration à jalons"
+            },
+            {
+                "en": "Anonymized spreadsheet health dashboard",
+                "fr": "Tableau de bord de santé de tableur anonymisé"
+            },
+            {
+                "en": "Weekly review agenda format",
+                "fr": "Format d'ordre du jour de réunion hebdomadaire"
+            }
+        ]
+    },
+    {
+        "_type": "capability",
+        "_id": "cap-delivery-en",
+        "locale": "en",
+        "translationKey": "cap-delivery",
+        "title": "Program Delivery",
+        "description": "Architecting predictable execution pipelines through structured operations.",
+        "iconName": "Workflow"
+    },
+    {
+        "_type": "capability",
+        "_id": "cap-delivery-fr",
+        "locale": "fr",
+        "translationKey": "cap-delivery",
+        "title": "Livraison de Programmes",
+        "description": "Architecture de pipelines d'exécution prévisibles via des opérations structurées.",
+        "iconName": "Workflow"
+    },
+    {
+        "_type": "capability",
+        "_id": "cap-cs-en",
+        "locale": "en",
+        "translationKey": "cap-cs",
+        "title": "Implementation & CS",
+        "description": "Building sustainable customer onboarding systems focusing on adoption.",
+        "iconName": "Users"
+    },
+    {
+        "_type": "capability",
+        "_id": "cap-cs-fr",
+        "locale": "fr",
+        "translationKey": "cap-cs",
+        "title": "Implémentation et Succès Client",
+        "description": "Création de systèmes d'intégration client durables axés sur l'adoption.",
+        "iconName": "Users"
+    },
+    {
+        "_type": "post",
+        "_id": "post-bee-en",
+        "locale": "en",
+        "translationKey": "post-bee-cluster",
+        "title": "Metrics that Matter: Borrowing Hive Analytics for Business Operations",
+        "slug": {
+            "current": "metrics-that-matter-hive-analytics"
+        },
+        "excerpt": "A deep dive into how strict, simple quality gates found in apiculture directly translate into highly successful business implementation operations.",
+        "content": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "The Bee Conservation cluster plan will explore deep operational metaphors, tying strict apiculture health metrics to business efficiency and pipeline discipline."
+                    }
+                ]
+            }
+        ],
+        "tags": [
+            "Ops Strategy",
+            "Leverage",
+            "Apiculture Metrics"
+        ],
+        "publishedAt": "2026-02-27T10:00:00Z",
+        "readTime": 5,
+        "featured": true
+    },
+    {
+        "_type": "post",
+        "_id": "post-bee-fr",
+        "locale": "fr",
+        "translationKey": "post-bee-cluster",
+        "title": "Indicateurs Essentiels: Emprunter l'Analytique des Ruches aux Opérations Commerciales",
+        "slug": {
+            "current": "indicateurs-essentiels-analytique-ruches"
+        },
+        "excerpt": "Une plongée dans la façon dont les portes de qualité strictes et simples de l'apiculture se traduisent directement en opérations d'implémentation réussies.",
+        "content": [
+            {
+                "_type": "block",
+                "style": "normal",
+                "children": [
+                    {
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Le plan du cluster de conservation des abeilles explorera de profondes métaphores, reliant les indicateurs de santé en apiculture à l'efficacité au travail."
+                    }
+                ]
+            }
+        ],
+        "tags": [
+            "Stratégie Ops",
+            "Levier",
+            "Apiculture"
+        ],
+        "publishedAt": "2026-02-27T10:00:00Z",
+        "readTime": 5,
+        "featured": true
+    }
+]
