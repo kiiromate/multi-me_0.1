@@ -142,7 +142,7 @@ export const aboutQuery = groq`
       bio50,
       bio150,
       bio300,
-      oneLiner
+      oneLiner,
       short,
       full
     },

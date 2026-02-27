@@ -41,6 +41,7 @@ export async function safeFetch<T>(
     // Log actionable error details without leaking secrets
     console.error(`[Sanity Fetch Error]`, {
       message: error?.message || 'Unknown error',
+      stack: error?.stack,
       statusCode: error?.statusCode || 'N/A',
       queryTag: safeParams?.queryTag || 'N/A',
       query: query.slice(0, 100) + '...', // truncate query for cleaner logs
